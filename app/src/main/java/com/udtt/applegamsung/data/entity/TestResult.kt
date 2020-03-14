@@ -13,8 +13,8 @@ import java.util.*
 @Entity
 @IgnoreExtraProperties
 data class TestResult(
-    val userId: String,
-    val totalScore: Int,
+    val deviceId: String = "",
+    val totalScore: Int = 0,
 
     @ServerTimestamp
     val timeStamp: Date = Date(System.currentTimeMillis())
