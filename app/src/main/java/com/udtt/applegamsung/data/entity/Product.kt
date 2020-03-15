@@ -22,5 +22,5 @@ data class Product(
     var imageByteArray: ByteArray? = null
 
     @Ignore
-    val category: Category.Type = Category.Type.findByIndex(categoryIndex)
+    val categoryType: Category.Type = Category.Type.findByIndex(categoryIndex)
 }
