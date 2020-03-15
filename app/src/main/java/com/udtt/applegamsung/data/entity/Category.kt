@@ -1,8 +1,8 @@
 package com.udtt.applegamsung.data.entity
 
 import androidx.room.Entity
-import androidx.room.Ignore
-import com.google.firebase.firestore.IgnoreExtraProperties
+import androidx.room.PrimaryKey
+import java.util.*
 
 /**
  * Created By Yun Hyeok
@@ -10,18 +10,13 @@ import com.google.firebase.firestore.IgnoreExtraProperties
  */
 
 @Entity
-@IgnoreExtraProperties
 data class Category(
     val name: String = "",
-    val index: Int = -1
+    val index: Int = 0,
+
+    @PrimaryKey
+    val id: String = UUID.randomUUID().toString()
 ) {
-    @Ignore
-    val type: Type
-
-    init {
-        type = Type.findByIndex(index)
-    }
-
     enum class Type(val index: Int, val value: String) {
         MAC(0, "Mac"),
         IPHONE(1, "iPhone"),

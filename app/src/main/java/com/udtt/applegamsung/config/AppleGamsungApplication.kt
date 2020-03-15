@@ -3,6 +3,7 @@ package com.udtt.applegamsung.config
 import android.app.Application
 import com.google.android.gms.ads.MobileAds
 import com.udtt.applegamsung.R
+import com.udtt.applegamsung.config.di.diModules
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -18,6 +19,7 @@ class AppleGamsungApplication : Application() {
 
         startKoin {
             androidContext(this@AppleGamsungApplication)
+            modules(diModules)
         }
 
         MobileAds.initialize(this, getString(R.string.admobSdkId))

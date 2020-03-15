@@ -1,8 +1,12 @@
 package com.udtt.applegamsung.data.entity
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverter
+import androidx.room.TypeConverters
 import com.google.firebase.firestore.IgnoreExtraProperties
 import com.google.firebase.firestore.ServerTimestamp
+import com.udtt.applegamsung.data.util.DateTypeConverter
 import java.util.*
 
 /**
@@ -17,5 +21,8 @@ data class TestResult(
     val totalScore: Int = 0,
 
     @ServerTimestamp
-    val timeStamp: Date = Date(System.currentTimeMillis())
+    val timeStamp: Date = Date(System.currentTimeMillis()),
+
+    @PrimaryKey
+    val id: String = UUID.randomUUID().toString()
 )
