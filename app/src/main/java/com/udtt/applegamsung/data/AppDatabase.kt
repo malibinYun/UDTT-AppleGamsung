@@ -17,4 +17,5 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun productsDao(): ProductsDao
 
     abstract fun testResultsDao(): TestResultsDao
+
 }
