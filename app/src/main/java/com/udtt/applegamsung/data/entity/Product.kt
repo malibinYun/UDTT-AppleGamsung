@@ -26,6 +26,6 @@ data class Product(
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
     var imageByteArray: ByteArray? = null
 
-    @Ignore
-    val categoryType: Category.Type = Category.Type.findByIndex(categoryIndex)
+    val categoryType: Category.Type
+        get() = Category.Type.findByIndex(categoryIndex)
 }
