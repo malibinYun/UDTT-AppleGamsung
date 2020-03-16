@@ -17,12 +17,15 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/admobSdkId" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.CategoryActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity">
+
         </activity>
     </application>
 
