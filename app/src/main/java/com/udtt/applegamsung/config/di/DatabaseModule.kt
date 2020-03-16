@@ -23,18 +23,23 @@ val appDataBaseModule = module {
 }
 
 val localDataSourceModule = module {
-    single<CategoriesDataSource>(named("local")) {
+    single {
         CategoriesLocalDataSource(get(), get<AppDatabase>().categoriesDao())
     }
 }
 
 val remoteDataSourceModule = module {
-    single<CategoriesDataSource>(named("remote")) {
+    single {
         CategoriesRemoteDataSource(FirebaseFirestore.getInstance())
     }
 }
 
 val repositoryModule = module {
-    single { CategoriesRepository(get(named("remote")), get(named("local"))) }
+    single {
+        CategoriesRepository(
+            get<CategoriesRemoteDataSource>(),
+            get<CategoriesLocalDataSource>()
+        )
+    }
 }
 

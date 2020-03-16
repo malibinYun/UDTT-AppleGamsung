@@ -18,6 +18,7 @@ import java.util.*
 @IgnoreExtraProperties
 data class TestResult(
     val deviceId: String = "",
+    val nickname: String = "",
     val totalScore: Int = 0,
 
     @ServerTimestamp
