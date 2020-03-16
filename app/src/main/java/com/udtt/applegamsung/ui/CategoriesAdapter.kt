@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.udtt.applegamsung.data.entity.Category
 import com.udtt.applegamsung.databinding.ItemCategoryBinding
+import com.udtt.applegamsung.util.log
 
 class CategoriesAdapter : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
 
@@ -24,8 +25,9 @@ class CategoriesAdapter : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
     }
 
     fun initCategories(categories: List<Category>) {
-        if (categories.isEmpty()) {
+        if (this.categories.isEmpty()) {
             this.categories.addAll(categories)
+            notifyDataSetChanged()
         }
     }
 

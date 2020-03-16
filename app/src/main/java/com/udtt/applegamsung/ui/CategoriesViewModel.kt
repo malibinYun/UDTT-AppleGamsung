@@ -21,7 +21,7 @@ class CategoriesViewModel(
     private fun loadCategories() {
         _isLoading.value = true
         categoriesRepository.getCategories {
-            _categories.value = it
+            _categories.value = it.sortedBy { it.index }
             _isLoading.value = false
         }
     }

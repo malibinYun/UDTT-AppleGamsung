@@ -73,4 +73,5 @@ dependencies {
     androidTestImplementation "androidx.room:room-testing:2.2.4"
     androidTestImplementation "androidx.test:runner:1.2.0"
     androidTestImplementation "androidx.test:rules:1.2.0"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }

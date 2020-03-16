@@ -1,5 +1,6 @@
 package com.udtt.applegamsung.config.di
 
+import androidx.lifecycle.ViewModelProvider
 import com.udtt.applegamsung.config.ViewModelFactory
 import com.udtt.applegamsung.util.AsyncExecutor
 import org.koin.dsl.module
@@ -14,7 +15,7 @@ val asyncExecutorModule = module {
 }
 
 val viewModelFactoryModule = module {
-    single { ViewModelFactory(get()) }
+    single<ViewModelProvider.Factory> { ViewModelFactory(get()) }
 }
 
 val diModules = listOf(
