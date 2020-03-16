@@ -3,13 +3,13 @@ package com.udtt.applegamsung
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.udtt.applegamsung.data.entity.Category
 import com.udtt.applegamsung.data.entity.Product
 import com.udtt.applegamsung.data.repository.CategoriesRepository
-import com.udtt.applegamsung.databinding.ActivityMainBinding
 import com.udtt.applegamsung.util.log
 import org.koin.android.ext.android.inject
 
@@ -19,9 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
 
         val db = FirebaseFirestore.getInstance()
 
@@ -46,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 //                }
 //            }
 
-        binding.button.setOnClickListener {
+        findViewById<Button>(R.id.button).setOnClickListener {
             tempRepository.getCategories {
                 log("$it")
             }

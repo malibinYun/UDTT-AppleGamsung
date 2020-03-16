@@ -17,7 +17,7 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/admobSdkId" />
 
-        <activity android:name=".ui.CategoryActivity">
+        <activity android:name=".ui.CategoriesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
