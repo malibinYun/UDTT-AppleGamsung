@@ -16,6 +16,7 @@ fun FirebaseFirestore.getCollection(collectionPath: String): Task<QuerySnapshot>
 
 fun QuerySnapshot.toCategories(): List<Category> {
     return this.documents.map {
-        it.toObject(Category::class.java) ?: throw RuntimeException("객체를 변환할 수 없음")
+        val category = it.toObject(Category::class.java) ?: throw RuntimeException("객체를 변환할 수 없음")
+        category.apply { id = it.id }
     }
 }

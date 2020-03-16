@@ -17,7 +17,7 @@ data class Category(
     val index: Int = 0,
 
     @PrimaryKey
-    val id: String = UUID.randomUUID().toString()
+    var id: String = UUID.randomUUID().toString()
 ) {
     val type: Type
         get() = Type.findByIndex(index)
