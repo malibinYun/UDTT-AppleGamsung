@@ -20,8 +20,10 @@ class CategoriesActivity : AppCompatActivity() {
         val categoriesViewModel =
             ViewModelProvider(this, viewModelFactory)[CategoriesViewModel::class.java]
 
-        val categoriesAdapter =
-            CategoriesAdapter()
+        val categoriesAdapter = CategoriesAdapter()
+        categoriesAdapter.setCategoryClickListener {
+
+        }
         binding.categories.adapter = categoriesAdapter
 
         subscribeCategories(categoriesViewModel, categoriesAdapter)
