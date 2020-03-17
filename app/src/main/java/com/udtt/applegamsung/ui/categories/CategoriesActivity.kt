@@ -1,4 +1,4 @@
-package com.udtt.applegamsung.ui
+package com.udtt.applegamsung.ui.categories
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -20,7 +20,8 @@ class CategoriesActivity : AppCompatActivity() {
         val categoriesViewModel =
             ViewModelProvider(this, viewModelFactory)[CategoriesViewModel::class.java]
 
-        val categoriesAdapter = CategoriesAdapter()
+        val categoriesAdapter =
+            CategoriesAdapter()
         binding.categories.adapter = categoriesAdapter
 
         subscribeCategories(categoriesViewModel, categoriesAdapter)

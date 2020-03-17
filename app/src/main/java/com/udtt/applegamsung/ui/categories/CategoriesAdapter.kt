@@ -1,11 +1,10 @@
-package com.udtt.applegamsung.ui
+package com.udtt.applegamsung.ui.categories
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.udtt.applegamsung.data.entity.Category
 import com.udtt.applegamsung.databinding.ItemCategoryBinding
-import com.udtt.applegamsung.util.log
 
 class CategoriesAdapter : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
 

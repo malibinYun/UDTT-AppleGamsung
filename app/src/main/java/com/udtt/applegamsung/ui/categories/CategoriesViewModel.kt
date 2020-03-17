@@ -1,4 +1,4 @@
-package com.udtt.applegamsung.ui
+package com.udtt.applegamsung.ui.categories
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

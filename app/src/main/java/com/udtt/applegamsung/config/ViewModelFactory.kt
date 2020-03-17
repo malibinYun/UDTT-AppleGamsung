@@ -3,7 +3,7 @@ package com.udtt.applegamsung.config
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.udtt.applegamsung.data.repository.CategoriesRepository
-import com.udtt.applegamsung.ui.CategoriesViewModel
+import com.udtt.applegamsung.ui.categories.CategoriesViewModel
 import java.lang.IllegalArgumentException
 
 class ViewModelFactory(
