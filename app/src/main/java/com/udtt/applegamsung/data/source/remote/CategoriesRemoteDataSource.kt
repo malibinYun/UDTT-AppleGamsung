@@ -3,6 +3,7 @@ package com.udtt.applegamsung.data.source.remote
 import com.google.firebase.firestore.FirebaseFirestore
 import com.udtt.applegamsung.data.entity.Category
 import com.udtt.applegamsung.data.source.CategoriesDataSource
+import com.udtt.applegamsung.data.util.CATEGORIES_PATH
 import com.udtt.applegamsung.data.util.getCollection
 import com.udtt.applegamsung.data.util.toCategories
 import com.udtt.applegamsung.util.log
@@ -18,7 +19,7 @@ class CategoriesRemoteDataSource(
 ) : CategoriesDataSource {
 
     override fun getCategories(callback: (categories: List<Category>) -> Unit) {
-        fireStore.getCollection("categories")
+        fireStore.getCollection(CATEGORIES_PATH)
             .addOnSuccessListener { callback(it.toCategories()) }
             .addOnFailureListener { log(it.showStackTrace()) }
     }

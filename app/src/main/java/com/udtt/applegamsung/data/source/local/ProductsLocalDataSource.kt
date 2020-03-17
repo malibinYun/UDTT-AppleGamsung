@@ -15,9 +15,9 @@ class ProductsLocalDataSource(
     private val productsDao: ProductsDao
 ) : ProductsDataSource {
 
-    override fun getProducts(categoryIndex: Int, callback: (products: List<Product>) -> Unit) {
+    override fun getProducts(categoryId: String, callback: (products: List<Product>) -> Unit) {
         asyncExecutor.ioThread.execute {
-            val products = productsDao.getProductsByCategoryIndex(categoryIndex)
+            val products = productsDao.getProductsByCategoryId(categoryId)
             asyncExecutor.mainThread.execute { callback(products) }
         }
     }

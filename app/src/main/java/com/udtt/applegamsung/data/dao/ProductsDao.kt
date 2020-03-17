@@ -13,8 +13,8 @@ import com.udtt.applegamsung.data.entity.Product
 @Dao
 interface ProductsDao {
 
-    @Query("SELECT * FROM product WHERE categoryIndex = :categoryIndex")
-    fun getProductsByCategoryIndex(categoryIndex: Int): List<Product>
+    @Query("SELECT * FROM product WHERE categoryId = :categoryId")
+    fun getProductsByCategoryId(categoryId: String): List<Product>
 
     @Insert
     fun insertProducts(products: List<Product>)

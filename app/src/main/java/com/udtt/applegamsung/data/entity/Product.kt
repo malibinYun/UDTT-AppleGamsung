@@ -18,6 +18,7 @@ data class Product(
     val name: String = "",
     val score: Int = 0,
     val categoryIndex: Int = 0,
+    var categoryId: String = "",
     val imageUrl: String = "",
 
     @PrimaryKey
