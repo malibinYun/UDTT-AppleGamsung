@@ -1,7 +1,6 @@
 package com.udtt.applegamsung.ui.categories
 
 import android.view.LayoutInflater
-import android.view.OrientationEventListener
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

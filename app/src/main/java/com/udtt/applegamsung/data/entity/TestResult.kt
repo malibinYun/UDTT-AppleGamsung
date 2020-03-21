@@ -2,11 +2,8 @@ package com.udtt.applegamsung.data.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverter
-import androidx.room.TypeConverters
 import com.google.firebase.firestore.IgnoreExtraProperties
 import com.google.firebase.firestore.ServerTimestamp
-import com.udtt.applegamsung.data.util.DateTypeConverter
 import java.util.*
 
 /**

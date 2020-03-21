@@ -1,8 +1,7 @@
 package com.udtt.applegamsung.ui.intro
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.udtt.applegamsung.R
+import androidx.appcompat.app.AppCompatActivity
 import com.udtt.applegamsung.databinding.ActivityIntroBinding
 
 class IntroActivity : AppCompatActivity() {

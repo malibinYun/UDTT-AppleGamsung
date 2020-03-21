@@ -5,13 +5,11 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.udtt.applegamsung.data.AppDatabase
 import com.udtt.applegamsung.data.repository.CategoriesRepository
 import com.udtt.applegamsung.data.repository.ProductsRepository
-import com.udtt.applegamsung.data.source.CategoriesDataSource
 import com.udtt.applegamsung.data.source.local.CategoriesLocalDataSource
 import com.udtt.applegamsung.data.source.local.ProductsLocalDataSource
 import com.udtt.applegamsung.data.source.remote.CategoriesRemoteDataSource
 import com.udtt.applegamsung.data.source.remote.ProductsRemoteDataSource
 import org.koin.android.ext.koin.androidContext
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 /**

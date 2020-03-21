@@ -1,9 +1,7 @@
 package com.udtt.applegamsung.data.entity
 
 import androidx.room.Entity
-import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import java.lang.reflect.Type
 import java.util.*
 
 /**
