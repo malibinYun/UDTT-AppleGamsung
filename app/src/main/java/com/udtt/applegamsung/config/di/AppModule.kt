@@ -15,7 +15,7 @@ val asyncExecutorModule = module {
 }
 
 val viewModelFactoryModule = module {
-    single<ViewModelProvider.Factory> { ViewModelFactory(get()) }
+    single<ViewModelProvider.Factory> { ViewModelFactory(get(), get()) }
 }
 
 val diModules = listOf(
