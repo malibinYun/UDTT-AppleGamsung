@@ -1,5 +1,6 @@
 package com.udtt.applegamsung.data.entity
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.firebase.firestore.IgnoreExtraProperties
@@ -19,8 +20,8 @@ data class TestResult(
     val totalScore: Int = 0,
 
     @ServerTimestamp
-    val timeStamp: Date = Date(System.currentTimeMillis())
-) {
+    val timeStamp: Date = Date(System.currentTimeMillis()),
+
     @PrimaryKey
     val id: String = UUID.randomUUID().toString()
-}
+)

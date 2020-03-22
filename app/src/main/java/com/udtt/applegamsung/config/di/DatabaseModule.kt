@@ -6,10 +6,13 @@ import com.udtt.applegamsung.data.AppDatabase
 import com.udtt.applegamsung.data.repository.CategoriesRepository
 import com.udtt.applegamsung.data.repository.DeviceIdRepository
 import com.udtt.applegamsung.data.repository.ProductsRepository
+import com.udtt.applegamsung.data.repository.TestResultsRepository
 import com.udtt.applegamsung.data.source.local.CategoriesLocalDataSource
 import com.udtt.applegamsung.data.source.local.ProductsLocalDataSource
+import com.udtt.applegamsung.data.source.local.TestResultsLocalDataSource
 import com.udtt.applegamsung.data.source.remote.CategoriesRemoteDataSource
 import com.udtt.applegamsung.data.source.remote.ProductsRemoteDataSource
+import com.udtt.applegamsung.data.source.remote.TestResultsRemoteDataSource
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
@@ -27,11 +30,17 @@ val appDataBaseModule = module {
 val localDataSourceModule = module {
     single { CategoriesLocalDataSource(get(), get<AppDatabase>().categoriesDao()) }
     single { ProductsLocalDataSource(get(), get<AppDatabase>().productsDao()) }
+    single { TestResultsLocalDataSource(get(), get<AppDatabase>().testResultsDao()) }
+}
+
+val firestoreModule = module {
+    single { FirebaseFirestore.getInstance() }
 }
 
 val remoteDataSourceModule = module {
-    single { CategoriesRemoteDataSource(FirebaseFirestore.getInstance()) }
-    single { ProductsRemoteDataSource(FirebaseFirestore.getInstance()) }
+    single { CategoriesRemoteDataSource(get()) }
+    single { ProductsRemoteDataSource(get()) }
+    single { TestResultsRemoteDataSource(get()) }
 }
 
 val repositoryModule = module {
@@ -46,6 +55,12 @@ val repositoryModule = module {
         ProductsRepository(
             get<ProductsRemoteDataSource>(),
             get<ProductsLocalDataSource>()
+        )
+    }
+    single {
+        TestResultsRepository(
+            get<TestResultsRemoteDataSource>(),
+            get<TestResultsLocalDataSource>()
         )
     }
 }

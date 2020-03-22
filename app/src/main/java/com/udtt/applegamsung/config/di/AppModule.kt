@@ -23,6 +23,7 @@ val diModules = listOf(
     viewModelFactoryModule,
     appDataBaseModule,
     localDataSourceModule,
+    firestoreModule,
     remoteDataSourceModule,
     repositoryModule
 )

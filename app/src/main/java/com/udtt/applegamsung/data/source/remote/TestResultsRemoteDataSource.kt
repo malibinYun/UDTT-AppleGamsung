@@ -20,8 +20,6 @@ class TestResultsRemoteDataSource(
 
     override fun saveTestResult(testResult: TestResult) {
         val testResults = fireStore.collection(TEST_RESULTS_PATH)
-
-        val testResult = TestResult("deviceId", "Malibin", 100)
         testResults.add(testResult)
     }
 }
