@@ -40,3 +40,4 @@ fun QuerySnapshot.toProductsOf(categoryId: String): List<Product> {
 
 const val CATEGORIES_PATH = "categories"
 const val PRODUCTS_PATH = "products"
+const val TEST_RESULTS_PATH = "testResults"

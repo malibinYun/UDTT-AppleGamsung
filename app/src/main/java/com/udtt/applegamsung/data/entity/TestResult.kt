@@ -19,8 +19,8 @@ data class TestResult(
     val totalScore: Int = 0,
 
     @ServerTimestamp
-    val timeStamp: Date = Date(System.currentTimeMillis()),
-
+    val timeStamp: Date = Date(System.currentTimeMillis())
+) {
     @PrimaryKey
     val id: String = UUID.randomUUID().toString()
-)
+}
