@@ -1,10 +1,12 @@
 package com.udtt.applegamsung.ui.intro
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.ads.AdRequest
 import com.udtt.applegamsung.databinding.ActivityIntroBinding
+import com.udtt.applegamsung.ui.main.MainActivity
 import org.koin.android.ext.android.inject
 
 class IntroActivity : AppCompatActivity() {
@@ -23,9 +25,12 @@ class IntroActivity : AppCompatActivity() {
         val adRequest = AdRequest.Builder().build()
         binding.banner.loadAd(adRequest)
 
-
-        binding.btnStart.setOnClickListener {
-            viewModel.checkDeviceId()
-        }
+        binding.btnStart.setOnClickListener { deployMainActivity() }
     }
+
+    private fun deployMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
+
 }

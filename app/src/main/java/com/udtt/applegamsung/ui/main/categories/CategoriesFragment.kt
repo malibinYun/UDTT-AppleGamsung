@@ -40,4 +40,10 @@ class CategoriesFragment : Fragment() {
             adapter.initCategories(it)
         })
     }
+
+    companion object {
+        private var INSTANCE: CategoriesFragment? = null
+        fun getInstance() = INSTANCE
+            ?: CategoriesFragment().apply { INSTANCE = this }
+    }
 }
