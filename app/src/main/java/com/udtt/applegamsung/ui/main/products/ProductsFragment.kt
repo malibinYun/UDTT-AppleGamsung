@@ -1,4 +1,4 @@
-package com.udtt.applegamsung.ui.main.nickname
+package com.udtt.applegamsung.ui.main.products
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.udtt.applegamsung.databinding.FragmentNicknameBinding
+import com.udtt.applegamsung.databinding.FragmentProductsBinding
 import org.koin.android.ext.android.inject
 
-class NicknameFragment : Fragment() {
+class ProductsFragment : Fragment() {
 
     private val viewModelFactory: ViewModelProvider.Factory by inject()
 
@@ -18,21 +18,14 @@ class NicknameFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentNicknameBinding.inflate(inflater)
-
-        val nicknameViewModel =
-            ViewModelProvider(activity!!, viewModelFactory)[NicknameViewModel::class.java]
-
-        binding.nicknameViewModel = nicknameViewModel
-        binding.lifecycleOwner = activity
-
+        val binding = FragmentProductsBinding.inflate(inflater)
 
         return binding.root
     }
 
     companion object {
-        private var INSTANCE: NicknameFragment? = null
+        private var INSTANCE: ProductsFragment? = null
         fun getInstance() = INSTANCE
-            ?: NicknameFragment().apply { INSTANCE = this }
+            ?: ProductsFragment().apply { INSTANCE = this }
     }
 }
