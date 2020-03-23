@@ -4,14 +4,16 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.udtt.applegamsung.ui.main.categories.CategoriesFragment
+import com.udtt.applegamsung.ui.main.nickname.NicknameFragment
 
 class MainViewPagerAdapter(fragmentActivity: FragmentActivity) :
     FragmentStateAdapter(fragmentActivity) {
 
-    override fun getItemCount(): Int = 1
+    override fun getItemCount(): Int = 2
 
     override fun createFragment(position: Int): Fragment = when (position) {
-        FRAGMENT_NICKNAME -> CategoriesFragment.getInstance()
+        FRAGMENT_NICKNAME -> NicknameFragment.getInstance()
+        FRAGMENT_CATEGORIES -> CategoriesFragment.getInstance()
         else -> throw IllegalArgumentException("존재할 수 없는 위치의 프래그먼트")
     }
 

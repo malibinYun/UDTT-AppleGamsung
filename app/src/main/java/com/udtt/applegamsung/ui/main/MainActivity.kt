@@ -14,5 +14,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.vpMain.adapter = MainViewPagerAdapter(this)
+        binding.vpMain.offscreenPageLimit = 2
     }
 }

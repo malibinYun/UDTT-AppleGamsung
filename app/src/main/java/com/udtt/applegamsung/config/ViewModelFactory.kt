@@ -6,6 +6,7 @@ import com.udtt.applegamsung.data.repository.CategoriesRepository
 import com.udtt.applegamsung.data.repository.DeviceIdRepository
 import com.udtt.applegamsung.ui.main.categories.CategoriesViewModel
 import com.udtt.applegamsung.ui.intro.IntroViewModel
+import com.udtt.applegamsung.ui.main.nickname.NicknameViewModel
 import java.lang.IllegalArgumentException
 
 class ViewModelFactory(
@@ -15,6 +16,8 @@ class ViewModelFactory(
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return when (modelClass) {
+            NicknameViewModel::class.java ->
+                modelClass.getConstructor().newInstance()
 
             IntroViewModel::class.java ->
                 modelClass.getConstructor(DEVICE_ID_REPO).newInstance(deviceIdRepository)

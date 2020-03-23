@@ -8,4 +8,7 @@
     <string name="apple_care">Apple Care</string>
     <string name="do_not_have">없음</string>
     <string name="do_have">있음</string>
+    <string name="nickname_can_use">사용 가능한 닉네임이예요</string>
+    <string name="nickname_must_less_than_15">15자 이하로 작성해주세요.</string>
+    <string name="blank"> </string>
 </resources>
