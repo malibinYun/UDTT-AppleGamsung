@@ -1,21 +1,25 @@
-package com.udtt.applegamsung.ui.categories
+package com.udtt.applegamsung.ui.main.categories
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.udtt.applegamsung.databinding.ActivityCategoriesBinding
+import com.udtt.applegamsung.databinding.FragmentCategoriesBinding
 import org.koin.android.ext.android.inject
 
-class CategoriesActivity : AppCompatActivity() {
+class CategoriesFragment : Fragment() {
 
     private val viewModelFactory: ViewModelProvider.Factory by inject()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        val binding = ActivityCategoriesBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val binding = FragmentCategoriesBinding.inflate(layoutInflater)
 
         val categoriesViewModel =
             ViewModelProvider(this, viewModelFactory)[CategoriesViewModel::class.java]
@@ -27,6 +31,8 @@ class CategoriesActivity : AppCompatActivity() {
         binding.categories.adapter = categoriesAdapter
 
         subscribeCategories(categoriesViewModel, categoriesAdapter)
+
+        return binding.root
     }
 
     private fun subscribeCategories(viewModel: CategoriesViewModel, adapter: CategoriesAdapter) {

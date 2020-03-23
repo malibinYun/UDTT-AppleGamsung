@@ -1,4 +1,4 @@
-package com.udtt.applegamsung.ui.categories
+package com.udtt.applegamsung.ui.main.categories
 
 import android.view.LayoutInflater
 import android.view.View

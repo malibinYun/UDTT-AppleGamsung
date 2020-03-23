@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.categories.CategoriesActivity">
+        tools:context=".ui.main.categories.CategoriesActivity">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="0dp"

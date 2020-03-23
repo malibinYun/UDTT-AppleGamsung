@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.udtt.applegamsung.data.repository.CategoriesRepository
 import com.udtt.applegamsung.data.repository.DeviceIdRepository
-import com.udtt.applegamsung.ui.categories.CategoriesViewModel
+import com.udtt.applegamsung.ui.main.categories.CategoriesViewModel
 import com.udtt.applegamsung.ui.intro.IntroViewModel
 import java.lang.IllegalArgumentException
 
