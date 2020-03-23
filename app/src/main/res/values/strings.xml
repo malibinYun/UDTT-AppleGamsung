@@ -4,4 +4,8 @@
     <string name="to_next">다음으로</string>
     <string name="select_done">선택완료</string>
     <string name="select_products_with_applecare">Apple Care가 등록된\n제품을 선택해주세요.</string>
+    <string name="show_my_apple_power">내 갬성지수 확인하기</string>
+    <string name="apple_care">Apple Care</string>
+    <string name="do_not_have">없음</string>
+    <string name="do_have">있음</string>
 </resources>
