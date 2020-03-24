@@ -10,6 +10,10 @@
         <variable
             name="itemClickListener"
             type="android.view.View.OnClickListener" />
+
+        <variable
+            name="mainViewModel"
+            type="com.udtt.applegamsung.ui.main.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -18,7 +22,7 @@
         android:layout_height="184dp"
         android:layout_margin="4dp"
         android:background="@drawable/round_rectangle_white_4dp"
-        android:onClick="@{itemClickListener}">
+        android:onClick="@{() -> mainViewModel.selectCategory(category.id)}">
 
         <TextView
             android:id="@+id/category_name"

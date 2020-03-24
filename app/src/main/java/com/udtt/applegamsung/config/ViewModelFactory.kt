@@ -5,11 +5,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.udtt.applegamsung.data.repository.CategoriesRepository
 import com.udtt.applegamsung.data.repository.DeviceIdRepository
 import com.udtt.applegamsung.data.repository.ProductsRepository
-import com.udtt.applegamsung.ui.main.categories.CategoriesViewModel
 import com.udtt.applegamsung.ui.intro.IntroViewModel
+import com.udtt.applegamsung.ui.main.MainViewModel
+import com.udtt.applegamsung.ui.main.categories.CategoriesViewModel
 import com.udtt.applegamsung.ui.main.nickname.NicknameViewModel
 import com.udtt.applegamsung.ui.main.products.ProductsViewModel
-import java.lang.IllegalArgumentException
 
 class ViewModelFactory(
     private val deviceIdRepository: DeviceIdRepository,
@@ -19,6 +19,7 @@ class ViewModelFactory(
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return when (modelClass) {
+            MainViewModel::class.java,
             NicknameViewModel::class.java ->
                 modelClass.getConstructor().newInstance()
 
