@@ -1,6 +1,6 @@
 package com.udtt.applegamsung.ui.intro
 
-import com.udtt.applegamsung.data.repository.DeviceIdRepository
+import com.udtt.applegamsung.data.repository.UserIdentifyRepository
 import com.udtt.applegamsung.util.BaseViewModel
 import com.udtt.applegamsung.util.log
 import java.util.*
@@ -11,11 +11,11 @@ import java.util.*
  */
 
 class IntroViewModel(
-    private val deviceIdRepository: DeviceIdRepository
+    private val userIdentifyRepository: UserIdentifyRepository
 ) : BaseViewModel() {
 
     fun checkDeviceId() {
-        val deviceId = deviceIdRepository.getDeviceId()
+        val deviceId = userIdentifyRepository.getDeviceId()
         if (deviceId == null) {
             saveDeviceId(createDeviceId())
         }
@@ -25,7 +25,7 @@ class IntroViewModel(
     private fun createDeviceId(): String = UUID.randomUUID().toString()
 
     private fun saveDeviceId(deviceId: String) {
-        deviceIdRepository.setDeviceId(deviceId)
+        userIdentifyRepository.saveDeviceId(deviceId)
         log("Device Id saved")
     }
 }

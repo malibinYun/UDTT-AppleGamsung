@@ -4,7 +4,7 @@ import androidx.room.Room
 import com.google.firebase.firestore.FirebaseFirestore
 import com.udtt.applegamsung.data.AppDatabase
 import com.udtt.applegamsung.data.repository.CategoriesRepository
-import com.udtt.applegamsung.data.repository.DeviceIdRepository
+import com.udtt.applegamsung.data.repository.UserIdentifyRepository
 import com.udtt.applegamsung.data.repository.ProductsRepository
 import com.udtt.applegamsung.data.repository.TestResultsRepository
 import com.udtt.applegamsung.data.source.local.CategoriesLocalDataSource
@@ -44,7 +44,7 @@ val remoteDataSourceModule = module {
 }
 
 val repositoryModule = module {
-    single { DeviceIdRepository(androidContext()) }
+    single { UserIdentifyRepository(androidContext()) }
     single {
         CategoriesRepository(
             get<CategoriesRemoteDataSource>(),
