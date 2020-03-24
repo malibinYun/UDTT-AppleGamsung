@@ -6,6 +6,10 @@
         <variable
             name="product"
             type="com.udtt.applegamsung.data.entity.Product" />
+
+        <variable
+            name="itemClickListener"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -14,7 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/selector_round_rectangle_white_gray">
+        android:background="@drawable/selector_round_rectangle_white_gray"
+        android:onClick="@{itemClickListener}">
 
         <TextView
             android:id="@+id/product_name"

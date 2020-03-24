@@ -1,5 +1,6 @@
 package com.udtt.applegamsung.ui.main.nickname
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,16 +18,19 @@ class NicknameFragment : Fragment() {
     private lateinit var mainViewModel: MainViewModel
     private lateinit var nicknameViewModel: NicknameViewModel
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        mainViewModel = ViewModelProvider(activity!!, viewModelFactory)[MainViewModel::class.java]
+        nicknameViewModel = ViewModelProvider(this, viewModelFactory)[NicknameViewModel::class.java]
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentNicknameBinding.inflate(inflater)
-
-        mainViewModel = ViewModelProvider(activity!!, viewModelFactory)[MainViewModel::class.java]
-        nicknameViewModel = ViewModelProvider(this, viewModelFactory)[NicknameViewModel::class.java]
-
         initView(binding)
 
         return binding.root
