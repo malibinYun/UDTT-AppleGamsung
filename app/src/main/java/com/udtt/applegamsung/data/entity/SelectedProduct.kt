@@ -10,7 +10,7 @@ data class SelectedProduct(
     @Embedded
     val product: Product,
 
-    val hasAppleCare: Boolean = false,
+    var hasAppleCare: Boolean = false,
 
     @PrimaryKey
     val id: String = UUID.randomUUID().toString()

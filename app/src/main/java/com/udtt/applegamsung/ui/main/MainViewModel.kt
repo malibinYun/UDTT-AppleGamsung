@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.udtt.applegamsung.data.entity.Product
 import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAGMENT_PRODUCTS
-import com.udtt.applegamsung.util.log
 
 /**
  * Created By Yun Hyeok
@@ -40,8 +39,8 @@ class MainViewModel : ViewModel() {
     }
 
     fun handleSelectedProduct(product: Product, isSelected: Boolean) {
-        _selectedProducts.value = createSelectHandledProducts(product, isSelected)
-        log(_selectedProducts.value.toString())
+        val handledProducts = createSelectHandledProducts(product, isSelected)
+        _selectedProducts.value = handledProducts.sortedBy { it.name }
     }
 
     private fun createSelectHandledProducts(product: Product, isSelected: Boolean): List<Product> {
