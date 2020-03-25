@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.udtt.applegamsung.data.entity.Product
+import com.udtt.applegamsung.data.entity.SelectedProduct
 import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAGMENT_PRODUCTS
 
 /**
@@ -48,6 +49,10 @@ class MainViewModel : ViewModel() {
             ?: throw IllegalStateException("List<Product> 가 null일 수 없음")
         return if (isSelected) selectedProducts.apply { add(product) }
         else selectedProducts.apply { remove(product) }
+    }
+
+    fun handleSavedSelectedProducts(savedSelectedProducts: List<SelectedProduct>) {
+
     }
 
 }

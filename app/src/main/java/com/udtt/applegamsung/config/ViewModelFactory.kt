@@ -5,8 +5,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.udtt.applegamsung.data.repository.CategoriesRepository
 import com.udtt.applegamsung.data.repository.UserIdentifyRepository
 import com.udtt.applegamsung.data.repository.ProductsRepository
+import com.udtt.applegamsung.data.repository.SelectedProductsRepository
 import com.udtt.applegamsung.ui.intro.IntroViewModel
 import com.udtt.applegamsung.ui.main.MainViewModel
+import com.udtt.applegamsung.ui.main.applecare.AppleCareCheckViewModel
 import com.udtt.applegamsung.ui.main.categories.CategoriesViewModel
 import com.udtt.applegamsung.ui.main.nickname.NicknameViewModel
 import com.udtt.applegamsung.ui.main.products.ProductsViewModel
@@ -14,7 +16,8 @@ import com.udtt.applegamsung.ui.main.products.ProductsViewModel
 class ViewModelFactory(
     private val userIdentifyRepository: UserIdentifyRepository,
     private val categoriesRepository: CategoriesRepository,
-    private val productsRepository: ProductsRepository
+    private val productsRepository: ProductsRepository,
+    private val selectedProductsRepository: SelectedProductsRepository
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
@@ -32,6 +35,10 @@ class ViewModelFactory(
             ProductsViewModel::class.java ->
                 modelClass.getConstructor(PRODUCTS_REPO).newInstance(productsRepository)
 
+            AppleCareCheckViewModel::class.java ->
+                modelClass.getConstructor(SELECTED_PRODUCTS_REPO)
+                    .newInstance(selectedProductsRepository)
+
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         } as T
     }
@@ -40,5 +47,6 @@ class ViewModelFactory(
         private val DEVICE_ID_REPO = UserIdentifyRepository::class.java
         private val CATEGORIES_REPO = CategoriesRepository::class.java
         private val PRODUCTS_REPO = ProductsRepository::class.java
+        private val SELECTED_PRODUCTS_REPO = SelectedProductsRepository::class.java
     }
 }

@@ -37,11 +37,16 @@ class AppleCareCheckFragment : Fragment(), ProductClickListener {
         val mainViewModel =
             ViewModelProvider(activity!!, viewModelFactory)[MainViewModel::class.java]
 
-        appleCareCheckViewModel = AppleCareCheckViewModel()
+        appleCareCheckViewModel =
+            ViewModelProvider(this, viewModelFactory)[AppleCareCheckViewModel::class.java]
 
         mainViewModel.selectedProducts.observe(this, Observer { products ->
             productsAdapter.initItemsWith(products)
             appleCareCheckViewModel.initSelectedProducts(products)
+        })
+
+        appleCareCheckViewModel.savedSelectedProducts.observe(this, Observer {
+
         })
 
         return binding.root
