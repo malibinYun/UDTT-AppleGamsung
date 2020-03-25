@@ -1,5 +1,6 @@
 package com.udtt.applegamsung.data.entity
 
+import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -13,5 +14,6 @@ data class SelectedProduct(
     var hasAppleCare: Boolean = false,
 
     @PrimaryKey
+    @ColumnInfo(name = "selected_product_id")
     val id: String = UUID.randomUUID().toString()
 )

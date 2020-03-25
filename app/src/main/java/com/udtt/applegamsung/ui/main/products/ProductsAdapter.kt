@@ -3,13 +3,14 @@ package com.udtt.applegamsung.ui.main.products
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.udtt.applegamsung.data.entity.Product
+import com.udtt.applegamsung.data.entity.DisplayedProduct
 import com.udtt.applegamsung.databinding.ItemProductBinding
 
-class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
+class ProductsAdapter : ListAdapter<DisplayedProduct, ProductsAdapter.ViewHolder>(DiffCallBack()) {
 
-    private val products = mutableListOf<Product>()
     private var itemClickListener: ProductClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -18,26 +19,21 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
         return ViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = products.size
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val product = products[position]
-        holder.bind(product)
-    }
+        val displayedProduct = getItem(position)
 
-    fun initItemsWith(items: List<Product>) {
-        products.clear()
-        products.addAll(items)
-        notifyDataSetChanged()
+        holder.bind(displayedProduct)
     }
 
     fun setItemClickListener(listener: ProductClickListener) {
         itemClickListener = listener
     }
 
-    private fun createItemClickListener(product: Product) = View.OnClickListener { view ->
+    private fun createItemClickListener(
+        displayedProduct: DisplayedProduct
+    ) = View.OnClickListener { view ->
         toggleItemIsSelected(view)
-        itemClickListener?.onProductClick(product, view.isSelected)
+        itemClickListener?.onProductClick(displayedProduct, view.isSelected)
     }
 
     private fun toggleItemIsSelected(view: View) {
@@ -47,10 +43,25 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
     inner class ViewHolder(
         private val binding: ItemProductBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(product: Product) {
-            binding.btnProduct.isSelected = false
-            binding.product = product
-            binding.itemClickListener = createItemClickListener(product)
+        fun bind(displayedProduct: DisplayedProduct) {
+            binding.displayedProduct = displayedProduct
+            binding.itemClickListener = createItemClickListener(displayedProduct)
+        }
+    }
+
+    private class DiffCallBack : DiffUtil.ItemCallback<DisplayedProduct>() {
+        override fun areItemsTheSame(
+            oldItem: DisplayedProduct,
+            newItem: DisplayedProduct
+        ): Boolean {
+            return oldItem.product.id == newItem.product.id
+        }
+
+        override fun areContentsTheSame(
+            oldItem: DisplayedProduct,
+            newItem: DisplayedProduct
+        ): Boolean {
+            return oldItem == newItem
         }
     }
 }

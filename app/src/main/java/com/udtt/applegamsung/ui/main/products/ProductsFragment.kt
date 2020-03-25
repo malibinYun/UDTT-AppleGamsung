@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.udtt.applegamsung.data.entity.Product
+import com.udtt.applegamsung.data.entity.DisplayedProduct
 import com.udtt.applegamsung.databinding.FragmentProductsBinding
 import com.udtt.applegamsung.ui.main.MainViewModel
 import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAGMENT_APPLECARE
@@ -46,8 +46,8 @@ class ProductsFragment : Fragment(), ProductClickListener {
         return binding.root
     }
 
-    override fun onProductClick(product: Product, isSelected: Boolean) {
-        mainViewModel.handleSelectedProduct(product, isSelected)
+    override fun onProductClick(displayedProduct: DisplayedProduct, isSelected: Boolean) {
+        //mainViewModel.handleSelectedProduct(displayedProduct, isSelected)
     }
 
     private fun initView(binding: FragmentProductsBinding, productsAdapter: ProductsAdapter) {
@@ -70,8 +70,8 @@ class ProductsFragment : Fragment(), ProductClickListener {
     }
 
     private fun subscribeProducts(productsAdapter: ProductsAdapter) {
-        productsViewModel.products.observe(this, Observer { products ->
-            productsAdapter.initItemsWith(products)
+        productsViewModel.displayedProducts.observe(this, Observer { products ->
+            productsAdapter.submitList(products)
         })
     }
 

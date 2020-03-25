@@ -4,8 +4,8 @@
     <data>
 
         <variable
-            name="product"
-            type="com.udtt.applegamsung.data.entity.Product" />
+            name="displayedProduct"
+            type="com.udtt.applegamsung.data.entity.DisplayedProduct" />
 
         <variable
             name="itemClickListener"
@@ -28,7 +28,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:text="@{product.name}"
+            android:text="@{displayedProduct.product.name}"
             android:textColor="@android:color/black"
             android:textSize="16sp"
             android:textStyle="bold"

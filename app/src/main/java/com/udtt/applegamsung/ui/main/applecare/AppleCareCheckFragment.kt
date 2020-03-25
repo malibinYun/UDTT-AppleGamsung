@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.udtt.applegamsung.data.entity.DisplayedProduct
 import com.udtt.applegamsung.data.entity.Product
 import com.udtt.applegamsung.databinding.FragmentCheckApplecareBinding
 import com.udtt.applegamsung.ui.main.MainViewModel
@@ -41,7 +42,7 @@ class AppleCareCheckFragment : Fragment(), ProductClickListener {
             ViewModelProvider(this, viewModelFactory)[AppleCareCheckViewModel::class.java]
 
         mainViewModel.selectedProducts.observe(this, Observer { products ->
-            productsAdapter.initItemsWith(products)
+            //productsAdapter.initItemsWith(products)
             appleCareCheckViewModel.initSelectedProducts(products)
         })
 
@@ -52,8 +53,8 @@ class AppleCareCheckFragment : Fragment(), ProductClickListener {
         return binding.root
     }
 
-    override fun onProductClick(product: Product, isSelected: Boolean) {
-        appleCareCheckViewModel.handleAppleCareProduct(product, isSelected)
+    override fun onProductClick(displayedProduct: DisplayedProduct, isSelected: Boolean) {
+       // appleCareCheckViewModel.handleAppleCareProduct(product, isSelected)
     }
 
     private fun createProductsAdapter(): ProductsAdapter {
