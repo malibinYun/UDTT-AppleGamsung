@@ -1,6 +1,7 @@
 package com.udtt.applegamsung.data.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.udtt.applegamsung.data.entity.SelectedProduct
@@ -12,6 +13,8 @@ interface SelectedProductsDao {
     fun getSelectedProducts(): List<SelectedProduct>
 
     @Insert
-    fun insertSelectedProduct(selectedProduct: SelectedProduct)
+    fun insertSelectedProducts(selectedProducts: List<SelectedProduct>)
 
+    @Delete
+    fun deleteSelectedProduct(selectedProduct: SelectedProduct)
 }

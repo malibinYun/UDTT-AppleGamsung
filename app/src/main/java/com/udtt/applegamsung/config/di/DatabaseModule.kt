@@ -3,12 +3,10 @@ package com.udtt.applegamsung.config.di
 import androidx.room.Room
 import com.google.firebase.firestore.FirebaseFirestore
 import com.udtt.applegamsung.data.AppDatabase
-import com.udtt.applegamsung.data.repository.CategoriesRepository
-import com.udtt.applegamsung.data.repository.UserIdentifyRepository
-import com.udtt.applegamsung.data.repository.ProductsRepository
-import com.udtt.applegamsung.data.repository.TestResultsRepository
+import com.udtt.applegamsung.data.repository.*
 import com.udtt.applegamsung.data.source.local.CategoriesLocalDataSource
 import com.udtt.applegamsung.data.source.local.ProductsLocalDataSource
+import com.udtt.applegamsung.data.source.local.SelectedProductsLocalDataSource
 import com.udtt.applegamsung.data.source.local.TestResultsLocalDataSource
 import com.udtt.applegamsung.data.source.remote.CategoriesRemoteDataSource
 import com.udtt.applegamsung.data.source.remote.ProductsRemoteDataSource
@@ -31,6 +29,7 @@ val localDataSourceModule = module {
     single { CategoriesLocalDataSource(get(), get<AppDatabase>().categoriesDao()) }
     single { ProductsLocalDataSource(get(), get<AppDatabase>().productsDao()) }
     single { TestResultsLocalDataSource(get(), get<AppDatabase>().testResultsDao()) }
+    single { SelectedProductsLocalDataSource(get(), get<AppDatabase>().selectedProductsDao()) }
 }
 
 val firestoreModule = module {
@@ -61,6 +60,11 @@ val repositoryModule = module {
         TestResultsRepository(
             get<TestResultsRemoteDataSource>(),
             get<TestResultsLocalDataSource>()
+        )
+    }
+    single {
+        SelectedProductsRepository(
+            get<SelectedProductsLocalDataSource>()
         )
     }
 }
