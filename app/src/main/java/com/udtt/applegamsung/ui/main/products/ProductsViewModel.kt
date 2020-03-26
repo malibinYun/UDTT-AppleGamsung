@@ -27,14 +27,25 @@ class ProductsViewModel(
     }
 
     fun handleSelectedProduct(displayedProduct: DisplayedProduct) {
-        val currentDisplayedProducts = getCurrentDisplayedProducts()
-        val position = currentDisplayedProducts.indexOf(displayedProduct)
-        val newOne = createHandledDisplayedProduct(displayedProduct)
-        currentDisplayedProducts[position] = newOne
-        _displayedProducts.value = currentDisplayedProducts
+        _displayedProducts.value = createHandledDisplayedProducts(displayedProduct)
     }
 
-    private fun createHandledDisplayedProduct(old: DisplayedProduct): DisplayedProduct {
+    private fun createHandledDisplayedProducts(displayedProduct: DisplayedProduct): List<DisplayedProduct> {
+        var position = findPositionOf(displayedProduct)
+        val toggledDisplayedProduct = createSelectToggledDisplayedProduct(displayedProduct)
+        if (position != NOT_FOUND) {
+            return getCurrentDisplayedProducts().apply { set(position, toggledDisplayedProduct) }
+        }
+        position = findPositionOf(toggledDisplayedProduct)
+        return getCurrentDisplayedProducts().apply { set(position, displayedProduct) }
+    }
+
+    private fun findPositionOf(item: DisplayedProduct): Int {
+        val currentDisplayedProducts = getCurrentDisplayedProducts()
+        return currentDisplayedProducts.indexOf(item)
+    }
+
+    private fun createSelectToggledDisplayedProduct(old: DisplayedProduct): DisplayedProduct {
         val isSelected = !old.isSelected
         return DisplayedProduct(old.product, isSelected, old.isInAppleBox)
     }
@@ -42,5 +53,9 @@ class ProductsViewModel(
     private fun getCurrentDisplayedProducts(): MutableList<DisplayedProduct> {
         return _displayedProducts.value?.toMutableList()
             ?: throw IllegalStateException("displayedProducts는 null일 수 없음.")
+    }
+
+    companion object {
+        private const val NOT_FOUND = -1
     }
 }

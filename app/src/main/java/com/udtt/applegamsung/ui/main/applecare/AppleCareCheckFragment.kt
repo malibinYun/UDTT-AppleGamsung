@@ -42,7 +42,7 @@ class AppleCareCheckFragment : Fragment(), ProductClickListener {
             ViewModelProvider(this, viewModelFactory)[AppleCareCheckViewModel::class.java]
 
         mainViewModel.selectedProducts.observe(this, Observer { products ->
-            //productsAdapter.submitList(products.map { DisplayedProduct(it) }.toMutableList())
+            productsAdapter.submitList(products.map { DisplayedProduct(it) })
             appleCareCheckViewModel.initSelectedProducts(products)
         })
 
