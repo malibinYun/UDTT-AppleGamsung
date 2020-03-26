@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.udtt.applegamsung.data.entity.DisplayedProduct
 import com.udtt.applegamsung.databinding.FragmentCheckApplecareBinding
 import com.udtt.applegamsung.ui.main.MainViewModel
+import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAGMENT_PRODUCTS
 import com.udtt.applegamsung.ui.main.products.ProductClickListener
 import com.udtt.applegamsung.ui.main.products.ProductsAdapter
 import org.koin.android.ext.android.inject
@@ -37,6 +38,8 @@ class AppleCareCheckFragment : Fragment(), ProductClickListener {
         val mainViewModel =
             ViewModelProvider(activity!!, viewModelFactory)[MainViewModel::class.java]
 
+        initView(binding, mainViewModel)
+
         appleCareCheckViewModel =
             ViewModelProvider(this, viewModelFactory)[AppleCareCheckViewModel::class.java]
 
@@ -54,6 +57,10 @@ class AppleCareCheckFragment : Fragment(), ProductClickListener {
 
     override fun onProductClick(displayedProduct: DisplayedProduct) {
         // appleCareCheckViewModel.handleAppleCareProduct(product, isSelected)
+    }
+
+    private fun initView(binding: FragmentCheckApplecareBinding, mainViewModel: MainViewModel) {
+        binding.btnBack.setOnClickListener { mainViewModel.movePageTo(FRAGMENT_PRODUCTS) }
     }
 
     private fun createProductsAdapter(): ProductsAdapter {

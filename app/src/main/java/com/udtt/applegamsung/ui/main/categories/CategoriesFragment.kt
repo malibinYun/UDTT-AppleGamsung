@@ -9,6 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.udtt.applegamsung.databinding.FragmentCategoriesBinding
 import com.udtt.applegamsung.ui.main.MainViewModel
+import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAGMENT_NICKNAME
+import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAGMENT_PRODUCTS
 import org.koin.android.ext.android.inject
 
 class CategoriesFragment : Fragment() {
@@ -30,9 +32,14 @@ class CategoriesFragment : Fragment() {
         val categoriesAdapter = createCategoriesAdapter(mainViewModel)
         binding.categories.adapter = categoriesAdapter
 
+        initView(binding, mainViewModel)
         subscribeCategories(categoriesViewModel, categoriesAdapter)
 
         return binding.root
+    }
+
+    private fun initView(binding: FragmentCategoriesBinding, mainViewModel: MainViewModel) {
+        binding.btnBack.setOnClickListener { mainViewModel.movePageTo(FRAGMENT_NICKNAME) }
     }
 
     private fun createCategoriesAdapter(mainViewModel: MainViewModel): CategoriesAdapter {

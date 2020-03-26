@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.udtt.applegamsung.data.entity.Product
+import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAGMENT_NICKNAME
 import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAGMENT_PRODUCTS
 
 /**
@@ -13,7 +14,7 @@ import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAG
 
 class MainViewModel : ViewModel() {
 
-    private val _currentPage = MutableLiveData<Int>()
+    private val _currentPage = MutableLiveData<Int>().apply { value = FRAGMENT_NICKNAME }
     val currentPage: LiveData<Int>
         get() = _currentPage
 
