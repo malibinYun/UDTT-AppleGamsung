@@ -46,8 +46,13 @@ class ProductsFragment : Fragment(), ProductClickListener {
         return binding.root
     }
 
-    override fun onProductClick(displayedProduct: DisplayedProduct, isSelected: Boolean) {
-        //mainViewModel.handleSelectedProduct(displayedProduct, isSelected)
+    override fun onProductClick(displayedProduct: DisplayedProduct) {
+        if (displayedProduct.isInAppleBox) {
+            // do something
+            return
+        }
+        mainViewModel.handleSelectedProduct(displayedProduct.product)
+        productsViewModel.handleSelectedProduct(displayedProduct)
     }
 
     private fun initView(binding: FragmentProductsBinding, productsAdapter: ProductsAdapter) {
@@ -60,7 +65,10 @@ class ProductsFragment : Fragment(), ProductClickListener {
     }
 
     private fun createProductsAdapter(): ProductsAdapter {
-        return ProductsAdapter().apply { setItemClickListener(this@ProductsFragment) }
+        return ProductsAdapter().apply {
+            setLifeCycleOwner(this@ProductsFragment)
+            setItemClickListener(this@ProductsFragment)
+        }
     }
 
     private fun subscribeSelectedCategoryId() {
@@ -70,8 +78,8 @@ class ProductsFragment : Fragment(), ProductClickListener {
     }
 
     private fun subscribeProducts(productsAdapter: ProductsAdapter) {
-        productsViewModel.displayedProducts.observe(this, Observer { products ->
-            productsAdapter.submitList(products)
+        productsViewModel.displayedProducts.observe(this, Observer { displayedProducts ->
+            productsAdapter.submitList(displayedProducts)
         })
     }
 

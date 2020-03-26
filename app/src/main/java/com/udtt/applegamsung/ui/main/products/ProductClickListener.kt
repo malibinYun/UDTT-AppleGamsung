@@ -9,6 +9,6 @@ import com.udtt.applegamsung.data.entity.DisplayedProduct
 
 interface ProductClickListener {
 
-    fun onProductClick(displayedProduct: DisplayedProduct, isSelected: Boolean)
+    fun onProductClick(displayedProduct: DisplayedProduct)
 
 }

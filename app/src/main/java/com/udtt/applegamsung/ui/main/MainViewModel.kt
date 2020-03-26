@@ -39,20 +39,26 @@ class MainViewModel : ViewModel() {
         _selectedProducts.value = emptyList()
     }
 
-    fun handleSelectedProduct(product: Product, isSelected: Boolean) {
-        val handledProducts = createSelectHandledProducts(product, isSelected)
+    fun handleSelectedProduct(product: Product) {
+        val handledProducts = createSelectHandledProducts(product)
         _selectedProducts.value = handledProducts.sortedBy { it.name }
     }
 
-    private fun createSelectHandledProducts(product: Product, isSelected: Boolean): List<Product> {
-        val selectedProducts = _selectedProducts.value?.toMutableList()
-            ?: throw IllegalStateException("List<Product> 가 null일 수 없음")
-        return if (isSelected) selectedProducts.apply { add(product) }
-        else selectedProducts.apply { remove(product) }
+    private fun createSelectHandledProducts(product: Product): List<Product> {
+        val currentSelectedProduct = getCurrentSelectedProducts()
+        val position = currentSelectedProduct.indexOf(product)
+
+        return if (position == NOT_FOUND) currentSelectedProduct.apply { add(product) }
+        else currentSelectedProduct.apply { remove(product) }
     }
 
-    fun handleSavedSelectedProducts(savedSelectedProducts: List<SelectedProduct>) {
+    private fun getCurrentSelectedProducts(): MutableList<Product> {
+        return _selectedProducts.value?.toMutableList()
+            ?: throw IllegalStateException("List<Product> 가 null일 수 없음")
+    }
 
+    companion object {
+        private const val NOT_FOUND = -1
     }
 
 }

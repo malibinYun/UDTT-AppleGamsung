@@ -7,3 +7,8 @@ import androidx.databinding.BindingAdapter
 fun bindActivated(view: View, state: Boolean) {
     view.isActivated = state
 }
+
+@BindingAdapter("selected")
+fun bindSelected(view: View, state: Boolean) {
+    view.isSelected = state
+}

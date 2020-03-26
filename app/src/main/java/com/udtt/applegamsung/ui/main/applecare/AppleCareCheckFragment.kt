@@ -42,7 +42,7 @@ class AppleCareCheckFragment : Fragment(), ProductClickListener {
             ViewModelProvider(this, viewModelFactory)[AppleCareCheckViewModel::class.java]
 
         mainViewModel.selectedProducts.observe(this, Observer { products ->
-            //productsAdapter.initItemsWith(products)
+            //productsAdapter.submitList(products.map { DisplayedProduct(it) }.toMutableList())
             appleCareCheckViewModel.initSelectedProducts(products)
         })
 
@@ -53,8 +53,8 @@ class AppleCareCheckFragment : Fragment(), ProductClickListener {
         return binding.root
     }
 
-    override fun onProductClick(displayedProduct: DisplayedProduct, isSelected: Boolean) {
-       // appleCareCheckViewModel.handleAppleCareProduct(product, isSelected)
+    override fun onProductClick(displayedProduct: DisplayedProduct) {
+        // appleCareCheckViewModel.handleAppleCareProduct(product, isSelected)
     }
 
     private fun createProductsAdapter(): ProductsAdapter {

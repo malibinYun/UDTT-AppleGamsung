@@ -28,4 +28,5 @@ data class Product(
 
     val categoryType: Category.Type
         get() = Category.Type.findByIndex(categoryIndex)
+    
 }

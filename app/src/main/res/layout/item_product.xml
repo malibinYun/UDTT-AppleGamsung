@@ -19,7 +19,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:background="@drawable/selector_round_rectangle_white_gray"
-        android:onClick="@{itemClickListener}">
+        android:onClick="@{itemClickListener}"
+        app:selected="@{displayedProduct.selected}">
 
         <TextView
             android:id="@+id/product_name"
