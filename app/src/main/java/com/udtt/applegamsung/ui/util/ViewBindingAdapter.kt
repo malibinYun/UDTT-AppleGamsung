@@ -1,4 +1,4 @@
-package com.udtt.applegamsung.ui
+package com.udtt.applegamsung.ui.util
 
 import android.view.View
 import androidx.databinding.BindingAdapter

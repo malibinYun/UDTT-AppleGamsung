@@ -13,11 +13,11 @@ import com.udtt.applegamsung.databinding.FragmentProductsBinding
 import com.udtt.applegamsung.ui.main.MainViewModel
 import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAGMENT_APPLECARE
 import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAGMENT_CATEGORIES
+import com.udtt.applegamsung.ui.util.BaseFragment
 import org.koin.android.ext.android.inject
 
-class ProductsFragment : Fragment(), ProductClickListener {
+class ProductsFragment : BaseFragment(), ProductClickListener {
 
-    private val viewModelFactory: ViewModelProvider.Factory by inject()
     private lateinit var mainViewModel: MainViewModel
     private lateinit var productsViewModel: ProductsViewModel
 
@@ -62,6 +62,7 @@ class ProductsFragment : Fragment(), ProductClickListener {
             mainViewModel.movePageTo(FRAGMENT_CATEGORIES)
         }
         binding.btnNext.setOnClickListener { mainViewModel.movePageTo(FRAGMENT_APPLECARE) }
+        initAdmob(binding.banner)
     }
 
     private fun createProductsAdapter(): ProductsAdapter {

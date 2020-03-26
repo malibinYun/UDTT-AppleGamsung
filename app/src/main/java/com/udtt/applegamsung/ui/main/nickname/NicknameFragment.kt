@@ -10,11 +10,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.udtt.applegamsung.databinding.FragmentNicknameBinding
 import com.udtt.applegamsung.ui.main.MainViewModel
 import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAGMENT_CATEGORIES
+import com.udtt.applegamsung.ui.util.BaseFragment
 import org.koin.android.ext.android.inject
 
-class NicknameFragment : Fragment() {
+class NicknameFragment : BaseFragment() {
 
-    private val viewModelFactory: ViewModelProvider.Factory by inject()
     private lateinit var mainViewModel: MainViewModel
     private lateinit var nicknameViewModel: NicknameViewModel
 
@@ -45,6 +45,8 @@ class NicknameFragment : Fragment() {
             nicknameViewModel.saveNickname()
         }
         binding.btnBack.setOnClickListener { activity?.finish() }
+
+        initAdmob(binding.banner)
     }
 
     companion object {

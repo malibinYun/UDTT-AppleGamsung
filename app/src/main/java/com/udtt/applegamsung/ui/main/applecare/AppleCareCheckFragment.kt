@@ -13,6 +13,7 @@ import com.udtt.applegamsung.ui.main.MainViewModel
 import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAGMENT_PRODUCTS
 import com.udtt.applegamsung.ui.main.products.ProductClickListener
 import com.udtt.applegamsung.ui.main.products.ProductsAdapter
+import com.udtt.applegamsung.ui.util.BaseFragment
 import org.koin.android.ext.android.inject
 
 /**
@@ -20,9 +21,8 @@ import org.koin.android.ext.android.inject
  * on 3월 24, 2020
  */
 
-class AppleCareCheckFragment : Fragment(), ProductClickListener {
+class AppleCareCheckFragment : BaseFragment(), ProductClickListener {
 
-    private val viewModelFactory: ViewModelProvider.Factory by inject()
     private lateinit var appleCareCheckViewModel: AppleCareCheckViewModel
 
     override fun onCreateView(
@@ -61,6 +61,7 @@ class AppleCareCheckFragment : Fragment(), ProductClickListener {
 
     private fun initView(binding: FragmentCheckApplecareBinding, mainViewModel: MainViewModel) {
         binding.btnBack.setOnClickListener { mainViewModel.movePageTo(FRAGMENT_PRODUCTS) }
+        initAdmob(binding.banner)
     }
 
     private fun createProductsAdapter(): ProductsAdapter {

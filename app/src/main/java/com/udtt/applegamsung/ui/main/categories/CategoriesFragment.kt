@@ -11,11 +11,10 @@ import com.udtt.applegamsung.databinding.FragmentCategoriesBinding
 import com.udtt.applegamsung.ui.main.MainViewModel
 import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAGMENT_NICKNAME
 import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAGMENT_PRODUCTS
+import com.udtt.applegamsung.ui.util.BaseFragment
 import org.koin.android.ext.android.inject
 
-class CategoriesFragment : Fragment() {
-
-    private val viewModelFactory: ViewModelProvider.Factory by inject()
+class CategoriesFragment : BaseFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +39,7 @@ class CategoriesFragment : Fragment() {
 
     private fun initView(binding: FragmentCategoriesBinding, mainViewModel: MainViewModel) {
         binding.btnBack.setOnClickListener { mainViewModel.movePageTo(FRAGMENT_NICKNAME) }
+        initAdmob(binding.banner)
     }
 
     private fun createCategoriesAdapter(mainViewModel: MainViewModel): CategoriesAdapter {
