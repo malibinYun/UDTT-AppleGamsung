@@ -7,13 +7,13 @@ import androidx.room.PrimaryKey
 import java.util.*
 
 @Entity
-data class SelectedProduct(
+data class AppleBoxItem(
     @Embedded
     val product: Product,
 
     var hasAppleCare: Boolean = false,
 
     @PrimaryKey
-    @ColumnInfo(name = "selected_product_id")
+    @ColumnInfo(name = "apple_box_id")
     val id: String = UUID.randomUUID().toString()
 )

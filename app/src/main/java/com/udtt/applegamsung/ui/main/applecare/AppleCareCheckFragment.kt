@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.udtt.applegamsung.data.entity.DisplayedProduct
-import com.udtt.applegamsung.data.entity.Product
 import com.udtt.applegamsung.databinding.FragmentCheckApplecareBinding
 import com.udtt.applegamsung.ui.main.MainViewModel
 import com.udtt.applegamsung.ui.main.products.ProductClickListener
@@ -46,7 +45,7 @@ class AppleCareCheckFragment : Fragment(), ProductClickListener {
             appleCareCheckViewModel.initSelectedProducts(products)
         })
 
-        appleCareCheckViewModel.savedSelectedProducts.observe(this, Observer {
+        appleCareCheckViewModel.savedAppleBoxItems.observe(this, Observer {
 
         })
 

@@ -3,10 +3,9 @@ package com.udtt.applegamsung.ui.main.applecare
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.udtt.applegamsung.data.entity.Product
-import com.udtt.applegamsung.data.entity.SelectedProduct
-import com.udtt.applegamsung.data.repository.SelectedProductsRepository
+import com.udtt.applegamsung.data.entity.AppleBoxItem
+import com.udtt.applegamsung.data.repository.AppleBoxItemsRepository
 import com.udtt.applegamsung.util.BaseViewModel
-import com.udtt.applegamsung.util.log
 
 /**
  * Created By Yun Hyeok
@@ -14,35 +13,35 @@ import com.udtt.applegamsung.util.log
  */
 
 class AppleCareCheckViewModel(
-    private val selectedProductsRepository: SelectedProductsRepository
+    private val appleBoxItemsRepository: AppleBoxItemsRepository
 ) : BaseViewModel() {
 
-    private val selectedProducts = mutableListOf<SelectedProduct>()
+    private val appleBoxItems = mutableListOf<AppleBoxItem>()
 
-    private val _savedSelectedProducts = MutableLiveData<List<SelectedProduct>>()
-    val savedSelectedProducts: LiveData<List<SelectedProduct>>
-        get() = _savedSelectedProducts
+    private val _savedAppleBoxItems = MutableLiveData<List<AppleBoxItem>>()
+    val savedAppleBoxItems: LiveData<List<AppleBoxItem>>
+        get() = _savedAppleBoxItems
 
     fun initSelectedProducts(products: List<Product>) {
-        val selectedProducts = products.map { product -> SelectedProduct(product) }
-        this.selectedProducts.clear()
-        this.selectedProducts.addAll(selectedProducts)
+        val selectedProducts = products.map { product -> AppleBoxItem(product) }
+        this.appleBoxItems.clear()
+        this.appleBoxItems.addAll(selectedProducts)
     }
 
     fun handleAppleCareProduct(product: Product, isSelected: Boolean) {
-        val selectedProduct = selectedProducts.find { it.product == product }
+        val selectedProduct = appleBoxItems.find { it.product == product }
             ?: throw IllegalArgumentException("존재하지 않는 product")
         selectedProduct.hasAppleCare = isSelected
     }
 
     fun saveSelectedProducts() {
-        val currentSelectedProducts = ArrayList(selectedProducts)
-        selectedProductsRepository.saveSelectedProducts(currentSelectedProducts)
-        _savedSelectedProducts.value = currentSelectedProducts
+        val currentSelectedProducts = ArrayList(appleBoxItems)
+        appleBoxItemsRepository.saveAppleBoxItems(currentSelectedProducts)
+        _savedAppleBoxItems.value = currentSelectedProducts
         clearSelectedProducts()
     }
 
     private fun clearSelectedProducts() {
-        selectedProducts.clear()
+        appleBoxItems.clear()
     }
 }
