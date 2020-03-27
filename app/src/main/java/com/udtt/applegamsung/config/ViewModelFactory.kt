@@ -8,7 +8,6 @@ import com.udtt.applegamsung.data.repository.ProductsRepository
 import com.udtt.applegamsung.data.repository.AppleBoxItemsRepository
 import com.udtt.applegamsung.ui.intro.IntroViewModel
 import com.udtt.applegamsung.ui.main.MainViewModel
-import com.udtt.applegamsung.ui.main.applecare.AppleCareCheckViewModel
 import com.udtt.applegamsung.ui.main.categories.CategoriesViewModel
 import com.udtt.applegamsung.ui.main.nickname.NicknameViewModel
 import com.udtt.applegamsung.ui.main.products.ProductsViewModel
@@ -35,9 +34,6 @@ class ViewModelFactory(
             ProductsViewModel::class.java ->
                 modelClass.getConstructor(PRODUCTS_REPO).newInstance(productsRepository)
 
-            AppleCareCheckViewModel::class.java ->
-                modelClass.getConstructor(SELECTED_PRODUCTS_REPO)
-                    .newInstance(appleBoxItemsRepository)
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         } as T
@@ -47,6 +43,6 @@ class ViewModelFactory(
         private val DEVICE_ID_REPO = UserIdentifyRepository::class.java
         private val CATEGORIES_REPO = CategoriesRepository::class.java
         private val PRODUCTS_REPO = ProductsRepository::class.java
-        private val SELECTED_PRODUCTS_REPO = AppleBoxItemsRepository::class.java
+        private val APPLE_BOX_REPO = AppleBoxItemsRepository::class.java
     }
 }

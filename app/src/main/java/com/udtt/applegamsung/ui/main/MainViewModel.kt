@@ -42,18 +42,21 @@ class MainViewModel : ViewModel() {
         movePageTo(FRAGMENT_PRODUCTS)
     }
 
-    fun clearSelectedProducts() {
-        _selectedProducts.value = emptyList()
+    fun handleHasAppleCare(product: Product) {
+        _selectedProducts.value = createAppleCareHandledProducts(product)
     }
 
-    fun handleHasAppleCare(product: Product) {
+    private fun createAppleCareHandledProducts(product: Product): List<SelectedProduct> {
         val currentSelectedProducts = getCurrentSelectedProducts()
-        val selectedProduct = currentSelectedProducts.find { it.product.id == product.id }
+        val selectedProduct = findSelectedProductById(product.id)
             ?: throw IllegalStateException("선택된 제품이 애플케어 선택리스트에 없을 수 없음.")
         val position = currentSelectedProducts.indexOf(selectedProduct)
-        currentSelectedProducts[position] =
-            SelectedProduct(selectedProduct.product, !selectedProduct.hasAppleCare)
-        _selectedProducts.value = currentSelectedProducts
+        val appleCareToggledProduct = createAppleCareToggledProduct(selectedProduct)
+        return currentSelectedProducts.apply { set(position, appleCareToggledProduct) }
+    }
+
+    private fun createAppleCareToggledProduct(selectedProduct: SelectedProduct): SelectedProduct {
+        return SelectedProduct(selectedProduct.product, !selectedProduct.hasAppleCare)
     }
 
     fun handleSelectedProduct(product: Product) {
@@ -63,7 +66,7 @@ class MainViewModel : ViewModel() {
 
     private fun createSelectHandledProducts(product: Product): List<SelectedProduct> {
         val currentSelectedProducts = getCurrentSelectedProducts()
-        val selectedProduct = currentSelectedProducts.find { it.product.id == product.id }
+        val selectedProduct = findSelectedProductById(product.id)
 
         return if (selectedProduct == null) currentSelectedProducts.apply { add(product.toSelectedProduct()) }
         else currentSelectedProducts.apply { remove(selectedProduct) }
@@ -72,5 +75,9 @@ class MainViewModel : ViewModel() {
     private fun getCurrentSelectedProducts(): MutableList<SelectedProduct> {
         return _selectedProducts.value?.toMutableList()
             ?: throw IllegalStateException("List<Product> 가 null일 수 없음")
+    }
+
+    private fun findSelectedProductById(productId: String): SelectedProduct? {
+        return getCurrentSelectedProducts().find { it.product.id == productId }
     }
 }

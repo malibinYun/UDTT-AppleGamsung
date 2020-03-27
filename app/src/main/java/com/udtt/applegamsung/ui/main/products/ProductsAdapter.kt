@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.udtt.applegamsung.data.entity.DisplayedProduct
+import com.udtt.applegamsung.data.entity.Product
 import com.udtt.applegamsung.databinding.ItemProductBinding
-import com.udtt.applegamsung.util.log
 
 class ProductsAdapter : ListAdapter<DisplayedProduct, ProductsAdapter.ViewHolder>(DiffCallBack()) {
 
@@ -35,10 +35,8 @@ class ProductsAdapter : ListAdapter<DisplayedProduct, ProductsAdapter.ViewHolder
         itemClickListener = listener
     }
 
-    private fun createItemClickListener(
-        displayedProduct: DisplayedProduct
-    ) = View.OnClickListener {
-        itemClickListener?.onProductClick(displayedProduct)
+    private fun createItemClickListener(product: Product) = View.OnClickListener {
+        itemClickListener?.onProductClick(product)
     }
 
     inner class ViewHolder(
@@ -48,7 +46,7 @@ class ProductsAdapter : ListAdapter<DisplayedProduct, ProductsAdapter.ViewHolder
         fun bind(displayedProduct: DisplayedProduct) {
             binding.lifecycleOwner = lifeCycleOwner
             binding.displayedProduct = displayedProduct
-            binding.itemClickListener = createItemClickListener(displayedProduct)
+            binding.itemClickListener = createItemClickListener(displayedProduct.product)
         }
     }
 

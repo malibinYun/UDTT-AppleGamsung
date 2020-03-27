@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.udtt.applegamsung.data.entity.DisplayedProduct
+import com.udtt.applegamsung.data.entity.Product
 import com.udtt.applegamsung.databinding.FragmentCheckApplecareBinding
 import com.udtt.applegamsung.ui.main.MainViewModel
 import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAGMENT_PRODUCTS
@@ -36,31 +36,32 @@ class AppleCareCheckFragment : BaseFragment(), ProductClickListener {
         savedInstanceState: Bundle?
     ): View? {
         val productsAdapter = createProductsAdapter()
-        val binding = FragmentCheckApplecareBinding.inflate(inflater).apply {
-            rvProducts.adapter = productsAdapter
-            lifecycleOwner = this@AppleCareCheckFragment
-        }
+        val binding = FragmentCheckApplecareBinding.inflate(inflater)
+        initView(binding, productsAdapter)
 
-        initView(binding, mainViewModel)
-
-        mainViewModel.selectedProducts.observe(this, Observer { products ->
-            productsAdapter.submitList(products.map { it.toDisplayedProduct() })
-        })
-
+        subscribeSelectedProducts(productsAdapter)
         return binding.root
     }
 
-    override fun onProductClick(displayedProduct: DisplayedProduct) {
-        mainViewModel.handleHasAppleCare(displayedProduct.product)
+    override fun onProductClick(product: Product) {
+        mainViewModel.handleHasAppleCare(product)
     }
 
-    private fun initView(binding: FragmentCheckApplecareBinding, mainViewModel: MainViewModel) {
+    private fun initView(binding: FragmentCheckApplecareBinding, productsAdapter: ProductsAdapter) {
+        binding.lifecycleOwner = this
+        binding.rvProducts.adapter = productsAdapter
         binding.btnBack.setOnClickListener { mainViewModel.movePageTo(FRAGMENT_PRODUCTS) }
         initAdmob(binding.banner)
     }
 
     private fun createProductsAdapter(): ProductsAdapter {
         return ProductsAdapter().apply { setItemClickListener(this@AppleCareCheckFragment) }
+    }
+
+    private fun subscribeSelectedProducts(productsAdapter: ProductsAdapter) {
+        mainViewModel.selectedProducts.observe(this, Observer { products ->
+            productsAdapter.submitList(products.map { it.toDisplayedProduct() })
+        })
     }
 
     companion object {

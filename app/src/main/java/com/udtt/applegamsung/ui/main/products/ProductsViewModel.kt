@@ -3,6 +3,7 @@ package com.udtt.applegamsung.ui.main.products
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.udtt.applegamsung.data.entity.DisplayedProduct
+import com.udtt.applegamsung.data.entity.Product
 import com.udtt.applegamsung.data.repository.ProductsRepository
 import com.udtt.applegamsung.util.BaseViewModel
 
@@ -26,28 +27,16 @@ class ProductsViewModel(
         }
     }
 
-    fun handleSelectedProduct(displayedProduct: DisplayedProduct) {
-        _displayedProducts.value = createHandledDisplayedProducts(displayedProduct)
+    fun handleSelectedProduct(product: Product) {
+        _displayedProducts.value = createHandledDisplayedProducts(product)
     }
 
-    private fun createHandledDisplayedProducts(displayedProduct: DisplayedProduct): List<DisplayedProduct> {
-        var position = findPositionOf(displayedProduct)
-        val toggledDisplayedProduct = createSelectToggledDisplayedProduct(displayedProduct)
-        if (position != NOT_FOUND) {
-            return getCurrentDisplayedProducts().apply { set(position, toggledDisplayedProduct) }
-        }
-        position = findPositionOf(toggledDisplayedProduct)
-        return getCurrentDisplayedProducts().apply { set(position, displayedProduct) }
-    }
-
-    private fun findPositionOf(item: DisplayedProduct): Int {
-        val currentDisplayedProducts = getCurrentDisplayedProducts()
-        return currentDisplayedProducts.indexOf(item)
-    }
-
-    private fun createSelectToggledDisplayedProduct(old: DisplayedProduct): DisplayedProduct {
-        val isSelected = !old.isSelected
-        return DisplayedProduct(old.product, isSelected, old.isInAppleBox)
+    private fun createHandledDisplayedProducts(product: Product): List<DisplayedProduct> {
+        val currentDisplayedProduct = getCurrentDisplayedProducts()
+        val selectedProduct = findDisplayedProductById(product.id)
+        val position = findPositionOf(selectedProduct)
+        val toggledDisplayedProduct = createSelectToggledProduct(selectedProduct)
+        return currentDisplayedProduct.apply { set(position, toggledDisplayedProduct) }
     }
 
     private fun getCurrentDisplayedProducts(): MutableList<DisplayedProduct> {
@@ -55,7 +44,18 @@ class ProductsViewModel(
             ?: throw IllegalStateException("displayedProducts는 null일 수 없음.")
     }
 
-    companion object {
-        private const val NOT_FOUND = -1
+    private fun findDisplayedProductById(productId: String): DisplayedProduct {
+        return getCurrentDisplayedProducts().find { it.product.id == productId }
+            ?: throw IllegalStateException("제품이 리스트에 없을 수 없음")
+    }
+
+    private fun findPositionOf(item: DisplayedProduct): Int {
+        val currentDisplayedProducts = getCurrentDisplayedProducts()
+        return currentDisplayedProducts.indexOf(item)
+    }
+
+    private fun createSelectToggledProduct(old: DisplayedProduct): DisplayedProduct {
+        val isSelected = !old.isSelected
+        return DisplayedProduct(old.product, isSelected, old.isInAppleBox)
     }
 }
