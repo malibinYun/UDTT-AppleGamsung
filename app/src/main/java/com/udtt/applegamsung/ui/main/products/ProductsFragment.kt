@@ -52,6 +52,7 @@ class ProductsFragment : BaseFragment(), ProductClickListener {
     private fun initView(binding: FragmentProductsBinding, productsAdapter: ProductsAdapter) {
         binding.lifecycleOwner = this
         binding.mainViewModel = mainViewModel
+        binding.productsViewModel = productsViewModel
         binding.rvProducts.adapter = productsAdapter
         binding.btnBack.setOnClickListener { mainViewModel.movePageTo(FRAGMENT_CATEGORIES) }
         binding.btnNext.setOnClickListener { mainViewModel.movePageTo(FRAGMENT_APPLECARE) }

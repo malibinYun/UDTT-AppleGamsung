@@ -21,6 +21,7 @@ class ProductsViewModel(
 
     fun loadProductsOf(categoryId: String) {
         _isLoading.value = true
+        _displayedProducts.value = emptyList()
         productsRepository.getProducts(categoryId) { products ->
             _displayedProducts.value = products.map { DisplayedProduct(it) }
             _isLoading.value = false
