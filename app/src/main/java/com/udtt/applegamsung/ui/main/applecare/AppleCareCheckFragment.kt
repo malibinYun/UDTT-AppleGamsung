@@ -51,6 +51,7 @@ class AppleCareCheckFragment : BaseFragment(), ProductClickListener {
         binding.lifecycleOwner = this
         binding.rvProducts.adapter = productsAdapter
         binding.btnBack.setOnClickListener { mainViewModel.movePageTo(FRAGMENT_PRODUCTS) }
+        binding.btnDone.setOnClickListener { mainViewModel.boxSelectedProducts() }
         initAdmob(binding.banner)
     }
 

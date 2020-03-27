@@ -3,8 +3,11 @@ package com.udtt.applegamsung.ui.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.udtt.applegamsung.data.entity.AppleBoxItem
 import com.udtt.applegamsung.data.entity.Product
 import com.udtt.applegamsung.data.entity.SelectedProduct
+import com.udtt.applegamsung.data.repository.AppleBoxItemsRepository
+import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAGMENT_CATEGORIES
 import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAGMENT_NICKNAME
 import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAGMENT_PRODUCTS
 
@@ -13,7 +16,9 @@ import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAG
  * on 3월 24, 2020
  */
 
-class MainViewModel : ViewModel() {
+class MainViewModel(
+    private val appleBoxItemsRepository: AppleBoxItemsRepository
+) : ViewModel() {
 
     private val _currentPage = MutableLiveData<Int>()
     val currentPage: LiveData<Int>
@@ -26,6 +31,10 @@ class MainViewModel : ViewModel() {
     private val _selectedProducts = MutableLiveData<List<SelectedProduct>>()
     val selectedProducts: LiveData<List<SelectedProduct>>
         get() = _selectedProducts
+
+    private val _savedProducts = MutableLiveData<List<AppleBoxItem>>()
+    val savedProducts: LiveData<List<AppleBoxItem>>
+        get() = _savedProducts
 
     init {
         _currentPage.value = FRAGMENT_NICKNAME
@@ -80,4 +89,12 @@ class MainViewModel : ViewModel() {
     private fun findSelectedProductById(productId: String): SelectedProduct? {
         return getCurrentSelectedProducts().find { it.product.id == productId }
     }
+
+    fun boxSelectedProducts() {
+        val selectedProducts = getCurrentSelectedProducts().map { it.toAppleBoxItem() }
+        appleBoxItemsRepository.saveAppleBoxItems(selectedProducts)
+        _savedProducts.value = selectedProducts
+        movePageTo(FRAGMENT_CATEGORIES)
+    }
+
 }

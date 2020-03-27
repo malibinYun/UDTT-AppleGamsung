@@ -21,8 +21,9 @@ class ViewModelFactory(
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return when (modelClass) {
+
             MainViewModel::class.java ->
-                modelClass.getConstructor().newInstance()
+                modelClass.getConstructor(APPLE_BOX_REPO).newInstance(appleBoxItemsRepository)
 
             IntroViewModel::class.java,
             NicknameViewModel::class.java ->
@@ -33,7 +34,6 @@ class ViewModelFactory(
 
             ProductsViewModel::class.java ->
                 modelClass.getConstructor(PRODUCTS_REPO).newInstance(productsRepository)
-
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         } as T
