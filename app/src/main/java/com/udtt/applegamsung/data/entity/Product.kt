@@ -28,5 +28,8 @@ data class Product(
 
     val categoryType: Category.Type
         get() = Category.Type.findByIndex(categoryIndex)
-    
+
+    fun toSelectedProduct(): SelectedProduct {
+        return SelectedProduct(this)
+    }
 }

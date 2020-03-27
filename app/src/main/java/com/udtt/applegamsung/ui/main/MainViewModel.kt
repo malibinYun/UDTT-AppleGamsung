@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.udtt.applegamsung.data.entity.Product
+import com.udtt.applegamsung.data.entity.SelectedProduct
 import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAGMENT_NICKNAME
 import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAGMENT_PRODUCTS
 
@@ -14,7 +15,7 @@ import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAG
 
 class MainViewModel : ViewModel() {
 
-    private val _currentPage = MutableLiveData<Int>().apply { value = FRAGMENT_NICKNAME }
+    private val _currentPage = MutableLiveData<Int>()
     val currentPage: LiveData<Int>
         get() = _currentPage
 
@@ -22,15 +23,21 @@ class MainViewModel : ViewModel() {
     val selectedCategoryId: LiveData<String>
         get() = _selectedCategoryId
 
-    private val _selectedProducts = MutableLiveData<List<Product>>().apply { value = emptyList() }
-    val selectedProducts: LiveData<List<Product>>
+    private val _selectedProducts = MutableLiveData<List<SelectedProduct>>()
+    val selectedProducts: LiveData<List<SelectedProduct>>
         get() = _selectedProducts
+
+    init {
+        _currentPage.value = FRAGMENT_NICKNAME
+        _selectedProducts.value = emptyList()
+    }
 
     fun movePageTo(pageNum: Int) {
         _currentPage.value = pageNum
     }
 
     fun selectCategory(categoryId: String) {
+        _selectedProducts.value = emptyList()
         _selectedCategoryId.value = categoryId
         movePageTo(FRAGMENT_PRODUCTS)
     }
@@ -39,26 +46,31 @@ class MainViewModel : ViewModel() {
         _selectedProducts.value = emptyList()
     }
 
+    fun handleHasAppleCare(product: Product) {
+        val currentSelectedProducts = getCurrentSelectedProducts()
+        val selectedProduct = currentSelectedProducts.find { it.product.id == product.id }
+            ?: throw IllegalStateException("선택된 제품이 애플케어 선택리스트에 없을 수 없음.")
+        val position = currentSelectedProducts.indexOf(selectedProduct)
+        currentSelectedProducts[position] =
+            SelectedProduct(selectedProduct.product, !selectedProduct.hasAppleCare)
+        _selectedProducts.value = currentSelectedProducts
+    }
+
     fun handleSelectedProduct(product: Product) {
         val handledProducts = createSelectHandledProducts(product)
-        _selectedProducts.value = handledProducts.sortedBy { it.name }
+        _selectedProducts.value = handledProducts.sortedBy { it.product.name }
     }
 
-    private fun createSelectHandledProducts(product: Product): List<Product> {
-        val currentSelectedProduct = getCurrentSelectedProducts()
-        val position = currentSelectedProduct.indexOf(product)
+    private fun createSelectHandledProducts(product: Product): List<SelectedProduct> {
+        val currentSelectedProducts = getCurrentSelectedProducts()
+        val selectedProduct = currentSelectedProducts.find { it.product.id == product.id }
 
-        return if (position == NOT_FOUND) currentSelectedProduct.apply { add(product) }
-        else currentSelectedProduct.apply { remove(product) }
+        return if (selectedProduct == null) currentSelectedProducts.apply { add(product.toSelectedProduct()) }
+        else currentSelectedProducts.apply { remove(selectedProduct) }
     }
 
-    private fun getCurrentSelectedProducts(): MutableList<Product> {
+    private fun getCurrentSelectedProducts(): MutableList<SelectedProduct> {
         return _selectedProducts.value?.toMutableList()
             ?: throw IllegalStateException("List<Product> 가 null일 수 없음")
     }
-
-    companion object {
-        private const val NOT_FOUND = -1
-    }
-
 }
