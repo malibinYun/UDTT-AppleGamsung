@@ -8,6 +8,8 @@ interface AppleBoxItemsDataSource {
 
     fun saveAppleBoxItems(appleBoxItems: List<AppleBoxItem>)
 
-    fun removeAppleBoxItems(itemToRemove: AppleBoxItem)
+    fun removeAppleBoxItem(itemToRemove: AppleBoxItem)
+
+    fun removeAppleBoxItems(itemsToRemove: List<AppleBoxItem>)
 
 }

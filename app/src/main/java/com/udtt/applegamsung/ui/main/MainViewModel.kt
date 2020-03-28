@@ -98,4 +98,8 @@ class MainViewModel(
         movePageTo(FRAGMENT_CATEGORIES)
     }
 
+    fun undoSavedProducts(appleBoxItems: List<AppleBoxItem>) {
+        appleBoxItemsRepository.removeAppleBoxItems(appleBoxItems)
+    }
+
 }

@@ -23,9 +23,15 @@ class AppleBoxItemsLocalDataSource(
         }
     }
 
-    override fun removeAppleBoxItems(itemToRemove: AppleBoxItem) {
+    override fun removeAppleBoxItem(itemToRemove: AppleBoxItem) {
         asyncExecutor.ioThread.execute {
             appleBoxItemsDao.deleteAppleBoxItem(itemToRemove)
+        }
+    }
+
+    override fun removeAppleBoxItems(itemsToRemove: List<AppleBoxItem>) {
+        asyncExecutor.ioThread.execute {
+            appleBoxItemsDao.deleteAppleBoxItems(itemsToRemove)
         }
     }
 }

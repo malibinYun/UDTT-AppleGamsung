@@ -18,4 +18,7 @@ interface AppleBoxItemsDao {
     @Delete
     fun deleteAppleBoxItem(appleBoxItem: AppleBoxItem)
 
+    @Delete
+    fun deleteAppleBoxItems(appleBoxItems: List<AppleBoxItem>)
+
 }

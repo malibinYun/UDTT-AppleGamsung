@@ -8,16 +8,19 @@ class AppleBoxItemsRepository(
 ) : AppleBoxItemsDataSource {
 
     override fun getAppleBoxItems(callback: (appleBoxItems: List<AppleBoxItem>) -> Unit) {
-        appleBoxItemsLocalDataSource.getAppleBoxItems {
-            callback(it)
-        }
+        appleBoxItemsLocalDataSource.getAppleBoxItems { callback(it) }
     }
 
     override fun saveAppleBoxItems(appleBoxItems: List<AppleBoxItem>) {
         appleBoxItemsLocalDataSource.saveAppleBoxItems(appleBoxItems)
     }
 
-    override fun removeAppleBoxItems(itemToRemove: AppleBoxItem) {
-        appleBoxItemsLocalDataSource.removeAppleBoxItems(itemToRemove)
+    override fun removeAppleBoxItem(itemToRemove: AppleBoxItem) {
+        appleBoxItemsLocalDataSource.removeAppleBoxItem(itemToRemove)
     }
+
+    override fun removeAppleBoxItems(itemsToRemove: List<AppleBoxItem>) {
+        appleBoxItemsLocalDataSource.removeAppleBoxItems(itemsToRemove)
+    }
+
 }
