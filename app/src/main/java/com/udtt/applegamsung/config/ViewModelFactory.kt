@@ -6,6 +6,7 @@ import com.udtt.applegamsung.data.repository.CategoriesRepository
 import com.udtt.applegamsung.data.repository.UserIdentifyRepository
 import com.udtt.applegamsung.data.repository.ProductsRepository
 import com.udtt.applegamsung.data.repository.AppleBoxItemsRepository
+import com.udtt.applegamsung.ui.applebox.AppleBoxViewModel
 import com.udtt.applegamsung.ui.intro.IntroViewModel
 import com.udtt.applegamsung.ui.main.MainViewModel
 import com.udtt.applegamsung.ui.main.categories.CategoriesViewModel
@@ -22,7 +23,8 @@ class ViewModelFactory(
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return when (modelClass) {
 
-            MainViewModel::class.java ->
+            MainViewModel::class.java,
+            AppleBoxViewModel::class.java ->
                 modelClass.getConstructor(APPLE_BOX_REPO).newInstance(appleBoxItemsRepository)
 
             IntroViewModel::class.java,

@@ -1,5 +1,6 @@
 package com.udtt.applegamsung.ui.main.categories
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.udtt.applegamsung.databinding.FragmentCategoriesBinding
+import com.udtt.applegamsung.ui.applebox.AppleBoxActivity
 import com.udtt.applegamsung.ui.main.MainViewModel
 import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAGMENT_NICKNAME
 import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAGMENT_PRODUCTS
@@ -39,6 +41,7 @@ class CategoriesFragment : BaseFragment() {
 
     private fun initView(binding: FragmentCategoriesBinding, mainViewModel: MainViewModel) {
         binding.btnBack.setOnClickListener { mainViewModel.movePageTo(FRAGMENT_NICKNAME) }
+        binding.btnAppleBox.setOnClickListener { deployAppleBoxActivity() }
         initAdmob(binding.banner)
     }
 
@@ -50,6 +53,11 @@ class CategoriesFragment : BaseFragment() {
         viewModel.categories.observe(this, Observer {
             adapter.initCategories(it)
         })
+    }
+
+    private fun deployAppleBoxActivity() {
+        val intent = Intent(activity, AppleBoxActivity::class.java)
+        startActivity(intent)
     }
 
     companion object {
