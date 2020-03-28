@@ -41,10 +41,6 @@ class ProductsFragment : BaseFragment(), ProductClickListener {
     }
 
     override fun onProductClick(product: Product) {
-//        if (displayedProduct.isInAppleBox) {
-//            // do something
-//            return
-//        }
         mainViewModel.handleSelectedProduct(product)
         productsViewModel.handleSelectedProduct(product)
     }

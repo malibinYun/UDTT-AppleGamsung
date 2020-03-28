@@ -53,7 +53,8 @@ val repositoryModule = module {
     single {
         ProductsRepository(
             get<ProductsRemoteDataSource>(),
-            get<ProductsLocalDataSource>()
+            get<ProductsLocalDataSource>(),
+            get<AppleBoxItemsLocalDataSource>()
         )
     }
     single {

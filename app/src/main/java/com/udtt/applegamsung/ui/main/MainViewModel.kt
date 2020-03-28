@@ -68,6 +68,7 @@ class MainViewModel(
         return SelectedProduct(selectedProduct.product, !selectedProduct.hasAppleCare)
     }
 
+    // 다시 item click을 displayed머시기를 넘기는걸로 하자. 여기서 사과박스에 있었는지를 막을 코드를 작성할 수 가없다.
     fun handleSelectedProduct(product: Product) {
         val handledProducts = createSelectHandledProducts(product)
         _selectedProducts.value = handledProducts.sortedBy { it.product.name }
