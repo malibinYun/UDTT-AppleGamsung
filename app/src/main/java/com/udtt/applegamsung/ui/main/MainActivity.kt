@@ -18,19 +18,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         val binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        initView(binding)
 
         mainViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
-
-        initView(binding)
-        subscribeCurrentPage(mainViewModel, binding)
+        subscribeCurrentPage(binding)
     }
 
     override fun onBackPressed() {
-        val currentPage = mainViewModel.currentPage.value
-            ?: throw IllegalStateException("currentPage는 null일 수 없음")
+        val currentPage = getCurrentPage()
         if (currentPage == FRAGMENT_NICKNAME) {
             super.onBackPressed()
             return
@@ -39,16 +35,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initView(binding: ActivityMainBinding) {
+        setContentView(binding.root)
         binding.vpMain.adapter = MainViewPagerAdapter(this)
         binding.vpMain.offscreenPageLimit = FRAGMENT_COUNTS
-
-        (binding.vpMain.getChildAt(0) as RecyclerView)
-            .overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+        binding.vpMain.isUserInputEnabled = false
     }
 
-    private fun subscribeCurrentPage(mainViewModel: MainViewModel, binding: ActivityMainBinding) {
+    private fun subscribeCurrentPage(binding: ActivityMainBinding) {
         mainViewModel.currentPage.observe(this, Observer {
             binding.vpMain.currentItem = it
         })
+    }
+
+    private fun getCurrentPage(): Int {
+        return mainViewModel.currentPage.value
+            ?: throw IllegalStateException("currentPage는 null일 수 없음")
     }
 }
