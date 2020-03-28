@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.udtt.applegamsung.data.entity.Product
+import com.udtt.applegamsung.R
+import com.udtt.applegamsung.data.entity.DisplayedProduct
 import com.udtt.applegamsung.databinding.FragmentProductsBinding
 import com.udtt.applegamsung.ui.main.MainViewModel
 import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAGMENT_APPLECARE
@@ -40,9 +42,13 @@ class ProductsFragment : BaseFragment(), ProductClickListener {
         return binding.root
     }
 
-    override fun onProductClick(product: Product) {
-        mainViewModel.handleSelectedProduct(product)
-        productsViewModel.handleSelectedProduct(product)
+    override fun onProductClick(displayedProduct: DisplayedProduct) {
+        if (displayedProduct.isInAppleBox) {
+            showProductAlreadyInAppleBox()
+            return
+        }
+        mainViewModel.handleSelectedProduct(displayedProduct.product)
+        productsViewModel.handleSelectedProduct(displayedProduct.product)
     }
 
     private fun initView(binding: FragmentProductsBinding, productsAdapter: ProductsAdapter) {
@@ -72,6 +78,10 @@ class ProductsFragment : BaseFragment(), ProductClickListener {
         productsViewModel.displayedProducts.observe(this, Observer { displayedProducts ->
             productsAdapter.submitList(displayedProducts)
         })
+    }
+
+    private fun showProductAlreadyInAppleBox() {
+        Toast.makeText(activity, R.string.product_already_in_apple_box, Toast.LENGTH_SHORT).show()
     }
 
     companion object {

@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.udtt.applegamsung.data.entity.Product
+import com.udtt.applegamsung.data.entity.DisplayedProduct
 import com.udtt.applegamsung.databinding.FragmentCheckApplecareBinding
 import com.udtt.applegamsung.ui.main.MainViewModel
 import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAGMENT_PRODUCTS
@@ -43,8 +43,8 @@ class AppleCareCheckFragment : BaseFragment(), ProductClickListener {
         return binding.root
     }
 
-    override fun onProductClick(product: Product) {
-        mainViewModel.handleHasAppleCare(product)
+    override fun onProductClick(displayedProduct: DisplayedProduct) {
+        mainViewModel.handleHasAppleCare(displayedProduct.product)
     }
 
     private fun initView(binding: FragmentCheckApplecareBinding, productsAdapter: ProductsAdapter) {

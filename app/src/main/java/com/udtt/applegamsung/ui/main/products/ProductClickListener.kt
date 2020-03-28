@@ -1,6 +1,6 @@
 package com.udtt.applegamsung.ui.main.products
 
-import com.udtt.applegamsung.data.entity.Product
+import com.udtt.applegamsung.data.entity.DisplayedProduct
 
 /**
  * Created By Yun Hyeok
@@ -9,6 +9,6 @@ import com.udtt.applegamsung.data.entity.Product
 
 interface ProductClickListener {
 
-    fun onProductClick(product: Product)
+    fun onProductClick(displayedProduct: DisplayedProduct)
 
 }

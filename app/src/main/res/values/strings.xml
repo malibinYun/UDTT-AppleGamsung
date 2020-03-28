@@ -11,4 +11,5 @@
     <string name="nickname_can_use">사용 가능한 닉네임이예요</string>
     <string name="nickname_must_less_than_15">15자 이하로 작성해주세요.</string>
     <string name="blank"> </string>
+    <string name="product_already_in_apple_box">이미 사과상자에 담겼습니다!</string>
 </resources>

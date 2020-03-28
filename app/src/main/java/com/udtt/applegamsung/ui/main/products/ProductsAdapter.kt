@@ -35,8 +35,8 @@ class ProductsAdapter : ListAdapter<DisplayedProduct, ProductsAdapter.ViewHolder
         itemClickListener = listener
     }
 
-    private fun createItemClickListener(product: Product) = View.OnClickListener {
-        itemClickListener?.onProductClick(product)
+    private fun createItemClickListener(displayedProduct: DisplayedProduct) = View.OnClickListener {
+        itemClickListener?.onProductClick(displayedProduct)
     }
 
     inner class ViewHolder(
@@ -46,7 +46,7 @@ class ProductsAdapter : ListAdapter<DisplayedProduct, ProductsAdapter.ViewHolder
         fun bind(displayedProduct: DisplayedProduct) {
             binding.lifecycleOwner = lifeCycleOwner
             binding.displayedProduct = displayedProduct
-            binding.itemClickListener = createItemClickListener(displayedProduct.product)
+            binding.itemClickListener = createItemClickListener(displayedProduct)
         }
     }
 
