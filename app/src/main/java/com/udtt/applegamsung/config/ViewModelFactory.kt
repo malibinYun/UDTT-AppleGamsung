@@ -23,13 +23,12 @@ class ViewModelFactory(
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return when (modelClass) {
 
-            MainViewModel::class.java,
-            AppleBoxViewModel::class.java ->
+            MainViewModel::class.java ->
                 modelClass.getConstructor(APPLE_BOX_REPO).newInstance(appleBoxItemsRepository)
 
             IntroViewModel::class.java,
             NicknameViewModel::class.java ->
-                modelClass.getConstructor(DEVICE_ID_REPO).newInstance(userIdentifyRepository)
+                modelClass.getConstructor(USER_ID_REPO).newInstance(userIdentifyRepository)
 
             CategoriesViewModel::class.java ->
                 modelClass.getConstructor(CATEGORIES_REPO).newInstance(categoriesRepository)
@@ -37,12 +36,16 @@ class ViewModelFactory(
             ProductsViewModel::class.java ->
                 modelClass.getConstructor(PRODUCTS_REPO).newInstance(productsRepository)
 
+            AppleBoxViewModel::class.java ->
+                modelClass.getConstructor(USER_ID_REPO, APPLE_BOX_REPO)
+                    .newInstance(userIdentifyRepository, appleBoxItemsRepository)
+
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         } as T
     }
 
     companion object {
-        private val DEVICE_ID_REPO = UserIdentifyRepository::class.java
+        private val USER_ID_REPO = UserIdentifyRepository::class.java
         private val CATEGORIES_REPO = CategoriesRepository::class.java
         private val PRODUCTS_REPO = ProductsRepository::class.java
         private val APPLE_BOX_REPO = AppleBoxItemsRepository::class.java

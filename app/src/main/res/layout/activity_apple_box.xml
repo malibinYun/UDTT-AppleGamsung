@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="appleBoxViewModel"
+            type="com.udtt.applegamsung.ui.applebox.AppleBoxViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -58,7 +65,7 @@
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
+                    android:text="@{appleBoxViewModel.userNickName}"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView3"
                     app:layout_constraintHorizontal_chainStyle="packed"
@@ -70,6 +77,7 @@
                     android:id="@+id/textView11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
                     android:text="@string/apple_box_of"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView3"

@@ -22,6 +22,7 @@ class AppleBoxActivity : AppCompatActivity() {
 
         val adapter = AppleBoxAdapter()
         binding.lifecycleOwner = this
+        binding.appleBoxViewModel = appleBoxViewModel
         binding.rvAppleBoxItems.adapter = adapter
 
         appleBoxViewModel.appleBoxItems.observe(this, Observer {
