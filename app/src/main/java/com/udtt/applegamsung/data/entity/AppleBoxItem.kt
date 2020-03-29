@@ -16,4 +16,10 @@ data class AppleBoxItem(
     @PrimaryKey
     @ColumnInfo(name = "apple_box_id")
     val id: String = UUID.randomUUID().toString()
-)
+) {
+    fun getScore(): Double {
+        val score = product.score.toDouble()
+        return if (hasAppleCare) score * 1.2
+        else score
+    }
+}
