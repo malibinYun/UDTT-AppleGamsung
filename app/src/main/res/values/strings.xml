@@ -15,4 +15,5 @@
     <string name="n_products_are_contained">%d개의 제품을 사과상자에 담았다링</string>
     <string name="undo">취소하기</string>
     <string name="undo_done">취소되었습니다.</string>
+    <string name="apple_box_of">님의 사과상자</string>
 </resources>
