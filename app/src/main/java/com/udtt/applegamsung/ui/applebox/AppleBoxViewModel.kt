@@ -29,4 +29,16 @@ class AppleBoxViewModel(
             _isLoading.value = false
         }
     }
+
+    fun deleteAppleBoxItem(item: AppleBoxItem) {
+        val currentAppleBoxItems = getCurrentAppleBoxItems()
+        currentAppleBoxItems.remove(item)
+        _appleBoxItems.value = currentAppleBoxItems
+        appleBoxItemsRepository.removeAppleBoxItem(item)
+    }
+
+    private fun getCurrentAppleBoxItems(): MutableList<AppleBoxItem> {
+        return _appleBoxItems.value?.toMutableList()
+            ?: throw IllegalStateException("appleBoxItems는 null일 수 없음")
+    }
 }

@@ -6,19 +6,20 @@
     <data>
 
         <variable
-            name="position"
-            type="Integer" />
-
-        <variable
             name="appleBoxItem"
             type="com.udtt.applegamsung.data.entity.AppleBoxItem" />
+
+        <variable
+            name="itemClickListener"
+            type="com.udtt.applegamsung.ui.applebox.AppleBoxItemClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/round_border_rectangle_gray_white_4dp">
+        android:background="@drawable/round_border_rectangle_gray_white_4dp"
+        android:onClick="@{() -> itemClickListener.onAppleBoxItemClick(appleBoxItem)}">
 
         <TextView
             android:id="@+id/product_name"
@@ -29,20 +30,8 @@
             android:text="@{appleBoxItem.product.name}"
             android:textColor="@android:color/black"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/number"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:text='@{String.format("%02d", position)}'
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textView9"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/product_name" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView9"
