@@ -9,7 +9,7 @@ import com.udtt.applegamsung.data.entity.AppleBoxItem
 @Dao
 interface AppleBoxItemsDao {
 
-    @Query("SELECT * FROM appleboxitem")
+    @Query("SELECT * FROM appleboxitem ORDER BY categoryIndex, name")
     fun getAppleBoxItems(): List<AppleBoxItem>
 
     @Insert
