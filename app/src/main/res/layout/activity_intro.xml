@@ -9,6 +9,14 @@
         android:background="#AA000000"
         tools:context=".ui.intro.IntroActivity">
 
+        <View
+            android:id="@+id/zone_status_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
@@ -22,7 +30,7 @@
             android:textSize="32sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/zone_status_bar" />
 
         <TextView
             android:layout_width="wrap_content"

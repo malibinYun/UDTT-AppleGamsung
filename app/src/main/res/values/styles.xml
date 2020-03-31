@@ -10,6 +10,9 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
 
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">#F9F9F9</item>
+
     </style>
 
 </resources>
