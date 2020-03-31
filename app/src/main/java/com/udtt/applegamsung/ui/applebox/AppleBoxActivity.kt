@@ -1,7 +1,6 @@
 package com.udtt.applegamsung.ui.applebox
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
@@ -12,9 +11,10 @@ import com.udtt.applegamsung.R
 import com.udtt.applegamsung.data.entity.AppleBoxItem
 import com.udtt.applegamsung.databinding.ActivityAppleBoxBinding
 import com.udtt.applegamsung.ui.applepower.ApplePowerActivity
+import com.udtt.applegamsung.ui.util.BaseActivity
 import org.koin.android.ext.android.inject
 
-class AppleBoxActivity : AppCompatActivity(), AppleBoxItemClickListener {
+class AppleBoxActivity : BaseActivity(), AppleBoxItemClickListener {
 
     private val viewModelFactory: ViewModelProvider.Factory by inject()
     private lateinit var appleBoxViewModel: AppleBoxViewModel
@@ -23,6 +23,7 @@ class AppleBoxActivity : AppCompatActivity(), AppleBoxItemClickListener {
         super.onCreate(savedInstanceState)
         val binding = ActivityAppleBoxBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initView(binding)
 
         appleBoxViewModel = ViewModelProvider(this, viewModelFactory)[AppleBoxViewModel::class.java]
 
@@ -65,5 +66,9 @@ class AppleBoxActivity : AppCompatActivity(), AppleBoxItemClickListener {
 
     override fun onAppleBoxItemClick(item: AppleBoxItem) {
         appleBoxViewModel.deleteAppleBoxItem(item)
+    }
+
+    private fun initView(binding: ActivityAppleBoxBinding) {
+        initAdmob(binding.banner)
     }
 }

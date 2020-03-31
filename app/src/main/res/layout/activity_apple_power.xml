@@ -33,5 +33,15 @@
             app:layout_constraintEnd_toEndOf="@+id/score"
             app:layout_constraintStart_toStartOf="@+id/score"
             app:layout_constraintTop_toBottomOf="@+id/score" />
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/banner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:adSize="BANNER"
+            app:adUnitId="@string/admobBannerTestId"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

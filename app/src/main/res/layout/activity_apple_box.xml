@@ -83,12 +83,22 @@
                 app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
 
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/banner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:adSize="BANNER"
+                app:adUnitId="@string/admobBannerTestId"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/btn_my_apple_power"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:background="@color/blue"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/banner"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
