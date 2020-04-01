@@ -3,6 +3,7 @@ package com.udtt.applegamsung.data.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import com.udtt.applegamsung.data.entity.ApplePower
 import com.udtt.applegamsung.data.entity.TestResult
 
 /**
@@ -18,5 +19,11 @@ interface TestResultsDao {
 
     @Insert
     fun insertTestResult(testResult: TestResult)
+
+    @Query("SELECT * FROM applepower WHERE maxPower >= :totalScore ORDER BY maxPower LIMIT(1)")
+    fun getApplePower(totalScore: Int): ApplePower?
+
+    @Insert
+    fun insertApplePower(applePowers: List<ApplePower>)
 
 }

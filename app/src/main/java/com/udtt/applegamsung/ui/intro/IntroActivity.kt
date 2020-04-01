@@ -9,9 +9,13 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.ads.AdRequest
+import com.google.firebase.firestore.FirebaseFirestore
+import com.udtt.applegamsung.data.entity.ApplePower
+import com.udtt.applegamsung.data.util.CATEGORIES_PATH
 import com.udtt.applegamsung.databinding.ActivityIntroBinding
 import com.udtt.applegamsung.ui.main.MainActivity
 import com.udtt.applegamsung.ui.util.BaseActivity
+import com.udtt.applegamsung.util.log
 import org.koin.android.ext.android.inject
 
 class IntroActivity : BaseActivity() {
@@ -27,6 +31,18 @@ class IntroActivity : BaseActivity() {
 
         val viewModel = ViewModelProvider(this, viewModelFactory)[IntroViewModel::class.java]
         viewModel.checkDeviceId()
+
+
+
+//        FirebaseFirestore.getInstance()
+//            .collection("ApplePower")
+//            .whereGreaterThanOrEqualTo("maxPower", 0)
+//            .orderBy("maxPower")
+//            .limit(1)
+//            .get()
+//            .addOnSuccessListener {
+//                it.toObjects(ApplePower::class.java).forEach { log(it.toString()) }
+//            }
     }
 
     private fun initView(binding: ActivityIntroBinding) {

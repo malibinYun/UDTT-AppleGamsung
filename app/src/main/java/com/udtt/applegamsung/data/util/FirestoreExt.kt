@@ -4,6 +4,7 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
+import com.udtt.applegamsung.data.entity.ApplePower
 import com.udtt.applegamsung.data.entity.Category
 import com.udtt.applegamsung.data.entity.Product
 
@@ -24,20 +25,40 @@ fun FirebaseFirestore.getCategoryDocumentById(categoryId: String): DocumentRefer
     return this.collection(CATEGORIES_PATH).document(categoryId)
 }
 
+fun FirebaseFirestore.getApplePowerCollection(applePower: Int): Task<QuerySnapshot> {
+    return this.collection(APPLE_POWER_PATH)
+        .whereGreaterThanOrEqualTo(MAX_POWER, applePower)
+        .orderBy(MAX_POWER)
+        .limit(1)
+        .get()
+}
+
 fun QuerySnapshot.toCategories(): List<Category> {
     return this.documents.map {
-        val category = it.toObject(Category::class.java) ?: throw RuntimeException("객체를 변환할 수 없음")
+        val category = it.toObject(Category::class.java) ?: throw CANNOT_CONVERT_EXCEPTION
         category.apply { id = it.id }
     }
 }
 
 fun QuerySnapshot.toProductsOf(categoryId: String): List<Product> {
     return this.documents.map {
-        val product = it.toObject(Product::class.java) ?: throw RuntimeException("객체를 변환할 수 없음")
+        val product = it.toObject(Product::class.java) ?: throw CANNOT_CONVERT_EXCEPTION
         product.apply { this.categoryId = categoryId }
+    }
+}
+
+fun QuerySnapshot.toApplePowers(): List<ApplePower> {
+    return this.documents.map {
+        val applePower = it.toObject(ApplePower::class.java) ?: throw CANNOT_CONVERT_EXCEPTION
+        applePower.apply { this.id = it.id }
     }
 }
 
 const val CATEGORIES_PATH = "categories"
 const val PRODUCTS_PATH = "products"
 const val TEST_RESULTS_PATH = "testResults"
+const val APPLE_POWER_PATH = "ApplePower"
+
+private const val MAX_POWER = "maxPower"
+
+private val CANNOT_CONVERT_EXCEPTION = IllegalStateException("객체를 변환할 수 없음")

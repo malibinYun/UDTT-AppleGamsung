@@ -7,15 +7,12 @@ import com.udtt.applegamsung.data.dao.CategoriesDao
 import com.udtt.applegamsung.data.dao.ProductsDao
 import com.udtt.applegamsung.data.dao.AppleBoxItemsDao
 import com.udtt.applegamsung.data.dao.TestResultsDao
-import com.udtt.applegamsung.data.entity.Category
-import com.udtt.applegamsung.data.entity.Product
-import com.udtt.applegamsung.data.entity.AppleBoxItem
-import com.udtt.applegamsung.data.entity.TestResult
+import com.udtt.applegamsung.data.entity.*
 import com.udtt.applegamsung.data.util.DateTypeConverter
 
 @TypeConverters(DateTypeConverter::class)
 @Database(
-    entities = [Category::class, Product::class, TestResult::class, AppleBoxItem::class],
+    entities = [Category::class, Product::class, TestResult::class, AppleBoxItem::class, ApplePower::class],
     version = 1
 )
 

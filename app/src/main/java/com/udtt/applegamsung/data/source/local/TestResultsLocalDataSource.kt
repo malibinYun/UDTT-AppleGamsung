@@ -1,6 +1,7 @@
 package com.udtt.applegamsung.data.source.local
 
 import com.udtt.applegamsung.data.dao.TestResultsDao
+import com.udtt.applegamsung.data.entity.ApplePower
 import com.udtt.applegamsung.data.entity.TestResult
 import com.udtt.applegamsung.data.source.TestResultsDataSource
 import com.udtt.applegamsung.util.AsyncExecutor
@@ -27,4 +28,13 @@ class TestResultsLocalDataSource(
             testResultsDao.insertTestResult(testResult)
         }
     }
+
+    override fun getApplePower(callback: (applePower: ApplePower?) -> Unit) {
+
+    }
+
+    override fun saveApplePowers(applePowers: List<ApplePower>) {
+
+    }
+
 }
