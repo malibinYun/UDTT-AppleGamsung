@@ -8,6 +8,7 @@ import java.util.UUID
 data class ApplePower(
     val name: String = "",
     val description: String = "",
+    val minPower: Int = 0,
     val maxPower: Int = 0,
 
     @PrimaryKey

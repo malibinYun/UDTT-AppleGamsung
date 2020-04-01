@@ -3,8 +3,10 @@ package com.udtt.applegamsung.ui.applepower
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.udtt.applegamsung.data.repository.TestResultsRepository
 import com.udtt.applegamsung.databinding.ActivityApplePowerBinding
 import com.udtt.applegamsung.ui.util.BaseActivity
+import com.udtt.applegamsung.util.log
 import org.koin.android.ext.android.inject
 
 class ApplePowerActivity : BaseActivity() {
@@ -23,6 +25,12 @@ class ApplePowerActivity : BaseActivity() {
 
         binding.applePowerViewModel = applePowerViewModel
         binding.lifecycleOwner = this
+
+
+//        val testResultsRepository: TestResultsRepository by inject()
+//        testResultsRepository.getApplePower(200) {
+//            log(it.toString())
+//        }
     }
 
     private fun initView(binding: ActivityApplePowerBinding) {

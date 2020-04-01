@@ -29,12 +29,24 @@ class TestResultsLocalDataSource(
         }
     }
 
-    override fun getApplePower(callback: (applePower: ApplePower?) -> Unit) {
+    override fun getApplePowers(callback: (applePowers: List<ApplePower>) -> Unit) {
+        asyncExecutor.ioThread.execute {
+            val applePowers = testResultsDao.getApplePowers()
+            asyncExecutor.mainThread.execute { callback(applePowers) }
+        }
+    }
 
+    override fun getApplePower(totalScore: Int, callback: (applePower: ApplePower?) -> Unit) {
+        asyncExecutor.ioThread.execute {
+            val applePower = testResultsDao.getApplePower(totalScore)
+            asyncExecutor.mainThread.execute { callback(applePower) }
+        }
     }
 
     override fun saveApplePowers(applePowers: List<ApplePower>) {
-
+        asyncExecutor.ioThread.execute {
+            testResultsDao.insertApplePower(applePowers)
+        }
     }
 
 }

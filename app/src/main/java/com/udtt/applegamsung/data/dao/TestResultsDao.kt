@@ -20,7 +20,10 @@ interface TestResultsDao {
     @Insert
     fun insertTestResult(testResult: TestResult)
 
-    @Query("SELECT * FROM applepower WHERE maxPower >= :totalScore ORDER BY maxPower LIMIT(1)")
+    @Query("SELECT * FROM applepower")
+    fun getApplePowers(): List<ApplePower>
+
+    @Query("SELECT * FROM applepower WHERE maxPower >= :totalScore AND minPower <= :totalScore ORDER BY maxPower LIMIT(1)")
     fun getApplePower(totalScore: Int): ApplePower?
 
     @Insert

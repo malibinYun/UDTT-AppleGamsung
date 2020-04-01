@@ -29,10 +29,14 @@ class TestResultsRemoteDataSource(
         testResults.add(testResult)
     }
 
-    override fun getApplePower(callback: (applePower: ApplePower?) -> Unit) {
+    override fun getApplePowers(callback: (applePowers: List<ApplePower>) -> Unit) {
         fireStore.getCollection(APPLE_POWER_PATH)
-            .addOnSuccessListener { it.toApplePowers() }
+            .addOnSuccessListener { callback(it.toApplePowers()) }
             .addOnFailureListener { log(it.showStackTrace()) }
+    }
+
+    override fun getApplePower(totalScore: Int, callback: (applePower: ApplePower?) -> Unit) {
+        // No Needed
     }
 
     override fun saveApplePowers(applePowers: List<ApplePower>) {
