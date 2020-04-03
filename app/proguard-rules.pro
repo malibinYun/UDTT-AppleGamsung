@@ -19,3 +19,25 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keepnames class android.arch.lifecycle.ViewModel -keepclassmembers public class * extends android.arch.lifecycle.ViewModel { public <init>(...); }
+-keepclassmembers class * { public <init>(...); }
+
+# Room
+-keep class * extends androidx.room.RoomDatabase
+-dontwarn androidx.room.paging.**
+
+# FireStore
+-dontwarn okio.**
+-dontwarn retrofit2.Call
+-dontnote retrofit2.Platform$IOS$MainThreadExecutor
+-keep class android.support.v7.widget.RecyclerView { *; }
+
+-keep class com.udtt.applegamsung.data.entity.** { *; }
+
+# Glide
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
