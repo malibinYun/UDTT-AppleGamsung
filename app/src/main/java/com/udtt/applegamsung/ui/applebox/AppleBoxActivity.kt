@@ -64,6 +64,12 @@ class AppleBoxActivity : BaseActivity(), AppleBoxItemClickListener {
 //            }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        // TODO: 애니메이션 중일때 안누리는 로직 작성해야함
+    }
+
     override fun onAppleBoxItemClick(item: AppleBoxItem) {
         appleBoxViewModel.deleteAppleBoxItem(item)
     }
