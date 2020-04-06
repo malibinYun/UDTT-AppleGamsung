@@ -33,6 +33,19 @@ class ApplePowerActivity : BaseActivity() {
 //        }
 
         binding.imgApplePower.translationY = 200f
+
+        binding.chipMacPro.isSelected = true
+        binding.chipMacMini.isSelected = true
+        binding.chipImacPro.isSelected = true
+        binding.chipImac.isSelected = true
+        binding.chipMacbookAir.isSelected = true
+        binding.chipMacbookPro.isSelected = true
+        binding.chipMacbook.isSelected = true
+        binding.chipIphone.isSelected = true
+        binding.chipAppleWatch.isSelected = true
+        binding.chipIpad.isSelected = true
+        binding.chipAirpods.isSelected = true
+        binding.chipIpod.isSelected = true
     }
 
     private fun initView(binding: ActivityApplePowerBinding) {

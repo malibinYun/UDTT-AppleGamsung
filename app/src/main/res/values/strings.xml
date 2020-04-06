@@ -31,4 +31,5 @@
     <string name="ipad">iPad</string>
     <string name="airpods">AirPods</string>
     <string name="ipod">iPod</string>
+    <string name="retry">갬성지수 재측정하기</string>
 </resources>
