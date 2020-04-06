@@ -31,6 +31,8 @@ class ApplePowerActivity : BaseActivity() {
 //        testResultsRepository.getApplePower(200) {
 //            log(it.toString())
 //        }
+
+        binding.imgApplePower.translationY = 200f
     }
 
     private fun initView(binding: ActivityApplePowerBinding) {

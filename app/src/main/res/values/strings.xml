@@ -16,4 +16,19 @@
     <string name="undo">취소하기</string>
     <string name="undo_done">취소되었습니다.</string>
     <string name="apple_box_of">님의 사과상자</string>
+    <string name="go_home">홈으로</string>
+    <string name="apple_power_with_score">%s(%d점)</string>
+    <string name="having_n_apple_products">총 %d개 애플 제품 보유중</string>
+    <string name="mac_pro">Mac Pro</string>
+    <string name="mac_mini">Mac mini</string>
+    <string name="imac_pro">iMac Pro</string>
+    <string name="imac">iMac</string>
+    <string name="macbook_air">MacBook Air</string>
+    <string name="macbook_pro">MacBook Pro</string>
+    <string name="macbook">MacBook</string>
+    <string name="iphone">iPhone</string>
+    <string name="apple_watch">Apple Watch</string>
+    <string name="ipad">iPad</string>
+    <string name="airpods">AirPods</string>
+    <string name="ipod">iPod</string>
 </resources>

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="applePowerViewModel"
             type="com.udtt.applegamsung.ui.applepower.ApplePowerViewModel" />
@@ -14,25 +15,402 @@
         android:layout_height="match_parent"
         tools:context=".ui.applepower.ApplePowerActivity">
 
-        <TextView
-            android:id="@+id/score"
+        <ImageView
+            android:id="@+id/btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text='@{String.valueOf(applePowerViewModel.score)}'
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="24dp"
+            android:paddingStart="8dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/icn_back" />
+
+        <ImageView
+            android:id="@+id/img_apple_power"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:translationZ="4dp"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+            app:srcCompat="@drawable/ic_launcher_background" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/round_rectangle_white_4dp"
+            android:elevation="2dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="68dp"
+                android:text="@string/apple_power_with_score"
+                android:textColor="@color/green"
+                android:textSize="21sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="이거슨 닉네임"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/having_n_apple_products"
+                android:textColor="@android:color/black"
+                android:textSize="14dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chip_mac_pro"
+                android:layout_width="0dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/selector_round_rectangle_green_white"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/chip_mac_mini"
+                app:layout_constraintTop_toBottomOf="@+id/textView13">
+
+                <TextView
+                    android:id="@+id/textView141"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mac_pro"
+                    android:textColor="@color/selector_color_white_grayea"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chip_mac_mini"
+                android:layout_width="0dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:background="@drawable/selector_round_rectangle_green_white"
+                app:layout_constraintBottom_toBottomOf="@+id/chip_mac_pro"
+                app:layout_constraintLeft_toRightOf="@id/chip_mac_pro"
+                app:layout_constraintRight_toLeftOf="@id/chip_imac_pro"
+                app:layout_constraintTop_toTopOf="@+id/chip_mac_pro">
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mac_mini"
+                    android:textColor="@color/selector_color_white_grayea"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chip_imac_pro"
+                android:layout_width="0dp"
+                android:layout_height="24dp"
+                android:layout_marginRight="24dp"
+                android:background="@drawable/selector_round_rectangle_green_white"
+                app:layout_constraintBottom_toBottomOf="@+id/chip_mac_mini"
+                app:layout_constraintLeft_toRightOf="@id/chip_mac_mini"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/chip_mac_mini">
+
+                <TextView
+                    android:id="@+id/textView142"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/imac_pro"
+                    android:textColor="@color/selector_color_white_grayea"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chip_imac"
+                android:layout_width="0dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/selector_round_rectangle_green_white"
+                app:layout_constraintLeft_toLeftOf="@id/chip_mac_pro"
+                app:layout_constraintRight_toLeftOf="@id/chip_macbook_air"
+                app:layout_constraintTop_toBottomOf="@+id/chip_mac_pro">
+
+                <TextView
+                    android:id="@+id/textView143"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/imac"
+                    android:textColor="@color/selector_color_white_grayea"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chip_macbook_air"
+                android:layout_width="0dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:background="@drawable/selector_round_rectangle_green_white"
+                app:layout_constraintBottom_toBottomOf="@+id/chip_imac"
+                app:layout_constraintLeft_toRightOf="@id/chip_imac"
+                app:layout_constraintRight_toLeftOf="@id/chip_macbook_pro"
+                app:layout_constraintTop_toTopOf="@+id/chip_imac">
+
+                <TextView
+                    android:id="@+id/textView144"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/macbook_air"
+                    android:textColor="@color/selector_color_white_grayea"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chip_macbook_pro"
+                android:layout_width="0dp"
+                android:layout_height="24dp"
+                android:background="@drawable/selector_round_rectangle_green_white"
+                app:layout_constraintBottom_toBottomOf="@+id/chip_macbook_air"
+                app:layout_constraintLeft_toRightOf="@id/chip_macbook_air"
+                app:layout_constraintRight_toRightOf="@id/chip_imac_pro"
+                app:layout_constraintTop_toTopOf="@+id/chip_macbook_air">
+
+                <TextView
+                    android:id="@+id/textView145"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/macbook_pro"
+                    android:textColor="@color/selector_color_white_grayea"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chip_macbook"
+                android:layout_width="0dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/selector_round_rectangle_green_white"
+                app:layout_constraintLeft_toLeftOf="@id/chip_imac"
+                app:layout_constraintRight_toLeftOf="@id/chip_iphone"
+                app:layout_constraintTop_toBottomOf="@+id/chip_imac">
+
+                <TextView
+                    android:id="@+id/textView146"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/macbook"
+                    android:textColor="@color/selector_color_white_grayea"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chip_iphone"
+                android:layout_width="0dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:background="@drawable/selector_round_rectangle_green_white"
+                app:layout_constraintBottom_toBottomOf="@+id/chip_macbook"
+                app:layout_constraintLeft_toRightOf="@id/chip_macbook"
+                app:layout_constraintRight_toLeftOf="@id/chip_apple_watch"
+                app:layout_constraintTop_toTopOf="@+id/chip_macbook">
+
+                <TextView
+                    android:id="@+id/textView147"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/iphone"
+                    android:textColor="@color/selector_color_white_grayea"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chip_apple_watch"
+                android:layout_width="0dp"
+                android:layout_height="24dp"
+                android:background="@drawable/selector_round_rectangle_green_white"
+                app:layout_constraintBottom_toBottomOf="@+id/chip_iphone"
+                app:layout_constraintLeft_toRightOf="@id/chip_iphone"
+                app:layout_constraintRight_toRightOf="@id/chip_macbook_pro"
+                app:layout_constraintTop_toTopOf="@+id/chip_iphone">
+
+                <TextView
+                    android:id="@+id/textView148"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/apple_watch"
+                    android:textColor="@color/selector_color_white_grayea"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chip_ipad"
+                android:layout_width="0dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/selector_round_rectangle_green_white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="@id/chip_macbook"
+                app:layout_constraintRight_toLeftOf="@id/chip_airpods"
+                app:layout_constraintTop_toBottomOf="@id/chip_macbook">
+
+                <TextView
+                    android:id="@+id/textView149"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ipad"
+                    android:textColor="@color/selector_color_white_grayea"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chip_airpods"
+                android:layout_width="0dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:background="@drawable/selector_round_rectangle_green_white"
+                app:layout_constraintBottom_toBottomOf="@id/chip_ipad"
+                app:layout_constraintLeft_toRightOf="@id/chip_ipad"
+                app:layout_constraintRight_toLeftOf="@id/chip_ipod"
+                app:layout_constraintTop_toTopOf="@id/chip_ipad">
+
+                <TextView
+                    android:id="@+id/textView150"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/airpods"
+                    android:textColor="@color/selector_color_white_grayea"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chip_ipod"
+                android:layout_width="0dp"
+                android:layout_height="24dp"
+                android:background="@drawable/selector_round_rectangle_green_white"
+                app:layout_constraintBottom_toBottomOf="@id/chip_airpods"
+                app:layout_constraintLeft_toRightOf="@id/chip_airpods"
+                app:layout_constraintRight_toRightOf="@id/chip_apple_watch"
+                app:layout_constraintTop_toTopOf="@id/chip_airpods">
+
+                <TextView
+                    android:id="@+id/textView151"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ipod"
+                    android:textColor="@color/selector_color_white_grayea"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/quantity"
+            android:id="@+id/textView15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text='@{String.valueOf(applePowerViewModel.appleBoxItems.size())}'
-            app:layout_constraintEnd_toEndOf="@+id/score"
-            app:layout_constraintStart_toStartOf="@+id/score"
-            app:layout_constraintTop_toBottomOf="@+id/score" />
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="10dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btn_go_home"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/blue"
+            app:layout_constraintBottom_toTopOf="@+id/banner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/go_home"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.gms.ads.AdView
             android:id="@+id/banner"
@@ -43,5 +421,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
