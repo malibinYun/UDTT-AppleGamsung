@@ -128,7 +128,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:enabled="@{!appleBoxViewModel.appleBoxItems.empty}"
-                android:background="@drawable/selector_round_rectangle_gray99_blue"
+                android:background="@drawable/selector_color_gray99_blue"
                 app:layout_constraintBottom_toTopOf="@+id/banner"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">

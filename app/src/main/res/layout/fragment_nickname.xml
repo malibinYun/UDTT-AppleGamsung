@@ -87,7 +87,7 @@
             android:id="@+id/btn_next"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:background="@drawable/selector_round_rectangle_gray_blue"
+            android:background="@drawable/selector_color_gray_blue"
             android:enabled="@{nicknameViewModel.nickname.length() &lt;= 15 &amp;&amp; nicknameViewModel.nickname.length() != 0}"
             app:layout_constraintBottom_toTopOf="@+id/banner"
             app:layout_constraintEnd_toEndOf="parent"
