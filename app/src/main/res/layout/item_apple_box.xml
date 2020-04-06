@@ -18,18 +18,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/round_border_rectangle_gray_white_4dp"
-        android:onClick="@{() -> itemClickListener.onAppleBoxItemClick(appleBoxItem)}">
+        android:background="@drawable/round_border_rectangle_gray_white_4dp">
 
         <TextView
             android:id="@+id/product_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/sf_pro_display_semibold"
+            android:lineSpacingExtra="0dp"
             android:text="@{appleBoxItem.product.name}"
             android:textColor="@android:color/black"
-            android:textStyle="bold"
+            android:textSize="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,11 +38,11 @@
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/sf_pro_display_medium"
             android:text="@string/apple_care"
             android:textColor="@color/grayAD"
-            android:textSize="12sp"
+            android:textSize="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/product_name"
             app:layout_constraintTop_toBottomOf="@+id/product_name" />
@@ -51,9 +52,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
+            android:fontFamily="@font/notosans_medium"
             android:text="@{appleBoxItem.hasAppleCare ? @string/do_have : @string/do_not_have}"
             android:textColor="@color/selector_color_gray_blue"
-            android:textSize="12sp"
+            android:textSize="12dp"
             app:activated="@{appleBoxItem.hasAppleCare}"
             app:layout_constraintBottom_toBottomOf="@+id/textView9"
             app:layout_constraintStart_toEndOf="@+id/textView9"
@@ -64,6 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
+            android:onClick="@{() -> itemClickListener.onAppleBoxItemClick(appleBoxItem)}"
             android:padding="4dp"
             app:layout_constraintBottom_toBottomOf="@+id/textView9"
             app:layout_constraintEnd_toEndOf="parent"

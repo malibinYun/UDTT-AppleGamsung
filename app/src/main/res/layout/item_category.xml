@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -16,8 +17,7 @@
             type="com.udtt.applegamsung.ui.main.MainViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="184dp"
         android:layout_margin="4dp"
@@ -30,10 +30,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
+            android:fontFamily="@font/sf_pro_display_semibold"
             android:text="@{category.name}"
             android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            android:textSize="17dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
