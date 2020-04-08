@@ -27,7 +27,9 @@ class ProductsFragment : BaseFragment(), ProductClickListener {
         mainViewModel = ViewModelProvider(activity!!, viewModelFactory)[MainViewModel::class.java]
         productsViewModel = ViewModelProvider(this, viewModelFactory)[ProductsViewModel::class.java]
     }
-
+    
+    // 어캐하면 화면넘어갓을때 리스트를 비울수 잇을까...를 생각하고잇어슴
+    // 일단은 백프레스가 아닌 버튼을 눌럿을 땐 비우게끔 만듦
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -56,7 +58,7 @@ class ProductsFragment : BaseFragment(), ProductClickListener {
         binding.mainViewModel = mainViewModel
         binding.productsViewModel = productsViewModel
         binding.rvProducts.adapter = productsAdapter
-        binding.btnBack.setOnClickListener { mainViewModel.movePageTo(FRAGMENT_CATEGORIES) }
+        binding.btnBack.setOnClickListener { mainViewModel.movePageTo(FRAGMENT_CATEGORIES); productsViewModel.clearProducts() }
         binding.btnNext.setOnClickListener { mainViewModel.movePageTo(FRAGMENT_APPLECARE) }
         initAdmob(binding.banner)
     }

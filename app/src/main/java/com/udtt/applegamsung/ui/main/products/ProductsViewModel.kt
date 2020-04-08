@@ -16,16 +16,13 @@ class ProductsViewModel(
         get() = _displayedProducts
 
     init {
-        _displayedProducts.value = emptyList()
+        clearProducts()
     }
 
     fun loadProductsOf(categoryId: String) {
         _isLoading.value = true
-        _displayedProducts.value = emptyList()
-//        productsRepository.getProducts(categoryId) { products ->
-//            _displayedProducts.value = products.map { DisplayedProduct(it) }
-//            _isLoading.value = false
-//        }
+        clearProducts()
+
         productsRepository.getDisplayedProducts(categoryId) { products ->
             _displayedProducts.value = products
             _isLoading.value = false
@@ -34,6 +31,10 @@ class ProductsViewModel(
 
     fun handleSelectedProduct(product: Product) {
         _displayedProducts.value = createHandledDisplayedProducts(product)
+    }
+
+    fun clearProducts() {
+        _displayedProducts.value = emptyList()
     }
 
     private fun createHandledDisplayedProducts(product: Product): List<DisplayedProduct> {
