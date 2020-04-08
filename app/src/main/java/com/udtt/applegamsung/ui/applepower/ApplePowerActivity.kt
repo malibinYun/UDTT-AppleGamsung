@@ -1,12 +1,12 @@
 package com.udtt.applegamsung.ui.applepower
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import com.udtt.applegamsung.data.repository.TestResultsRepository
+import com.udtt.applegamsung.ui.util.SimpleDialog
+import com.udtt.applegamsung.R
 import com.udtt.applegamsung.databinding.ActivityApplePowerBinding
 import com.udtt.applegamsung.ui.util.BaseActivity
-import com.udtt.applegamsung.util.log
 import org.koin.android.ext.android.inject
 
 class ApplePowerActivity : BaseActivity() {
@@ -33,9 +33,24 @@ class ApplePowerActivity : BaseActivity() {
             binding.imgApplePower.translationY = (applePowerImageHeight / 2).toFloat()
             true
         }
+
+
     }
 
     private fun initView(binding: ActivityApplePowerBinding) {
         initAdmob(binding.banner)
+        binding.btnRetry.setOnClickListener { showDeleteAlertDialog() }
+    }
+
+    private fun showDeleteAlertDialog() {
+        SimpleDialog(this)
+            .apply { message = getString(R.string.test_result_will_be_deleted) }
+            .setOkClickListener(getString(R.string.its_ok)) { deleteTestResultAndAppleBox() }
+            .setCancelClickListener(getString(R.string.its_not_ok)) {}
+            .show()
+    }
+
+    private fun deleteTestResultAndAppleBox() {
+        Toast.makeText(this, "잇힝", Toast.LENGTH_SHORT).show()
     }
 }

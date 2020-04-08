@@ -33,4 +33,9 @@
     <string name="ipod">iPod</string>
     <string name="retry">갬성지수 재측정하기</string>
     <string name="enter_letters_below_15">15자 이내로 작성해주세요 :)</string>
+    <string name="test_result_will_be_deleted">이전 평가 결과는 지워져요.\n괜찮아요?</string>
+    <string name="its_ok">괜찮아요</string>
+    <string name="its_not_ok">안괜찮아요</string>
+    <string name="yes">예</string>
+    <string name="no">아니오</string>
 </resources>

@@ -14,4 +14,6 @@
     <color name="grayAD">#ADADAD</color>
     <color name="grayD9">#D9D9D9</color>
     <color name="grayEA">#EAEAEA</color>
+
+    <color name="transparent">#00000000</color>
 </resources>
