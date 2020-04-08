@@ -16,20 +16,6 @@
         tools:context=".ui.applepower.ApplePowerActivity">
 
         <ImageView
-            android:id="@+id/btn_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="24dp"
-            android:paddingStart="8dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="8dp"
-            android:paddingBottom="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/icn_back" />
-
-        <ImageView
             android:id="@+id/img_apple_power"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
