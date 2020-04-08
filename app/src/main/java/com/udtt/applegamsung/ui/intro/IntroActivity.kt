@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.ads.AdRequest
 import com.google.firebase.firestore.FirebaseFirestore
 import com.udtt.applegamsung.data.entity.ApplePower
+import com.udtt.applegamsung.data.entity.TestResult
 import com.udtt.applegamsung.data.util.CATEGORIES_PATH
 import com.udtt.applegamsung.databinding.ActivityIntroBinding
 import com.udtt.applegamsung.ui.main.MainActivity
@@ -31,6 +32,13 @@ class IntroActivity : BaseActivity() {
 
         val viewModel = ViewModelProvider(this, viewModelFactory)[IntroViewModel::class.java]
         viewModel.checkDeviceId()
+
+
+//        FirebaseFirestore.getInstance()
+//            .collection("testResults")
+//            .add(TestResult("mymy", "mome", 100))
+
+
     }
 
     private fun initView(binding: ActivityIntroBinding) {

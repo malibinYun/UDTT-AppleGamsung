@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="com.udtt.applegamsung.data.entity.Category.Type" />
+
         <variable
             name="applePowerViewModel"
             type="com.udtt.applegamsung.ui.applepower.ApplePowerViewModel" />
@@ -20,7 +22,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:translationZ="4dp"
-            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
             app:layout_constraintStart_toStartOf="@+id/constraintLayout"
@@ -45,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="68dp"
                 android:fontFamily="@font/notosans_bold"
-                android:text="@string/apple_power_with_score"
+                android:text="@{String.format(@string/apple_power_with_score,applePowerViewModel.applePower.name,applePowerViewModel.score)}"
                 android:textColor="@color/green"
                 android:textSize="23dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -58,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
                 android:fontFamily="@font/notosans_medium"
-                android:text="이거슨 닉네임"
+                android:text="@{applePowerViewModel.userNickName}"
                 android:textSize="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/notosans_medium"
-                android:text="@string/having_n_apple_products"
+                android:text="@{@string/having_n_apple_products(applePowerViewModel.havingProducts.size())}"
                 android:textColor="@android:color/black"
                 android:textSize="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -86,7 +87,8 @@
                 android:background="@drawable/selector_round_rectangle_green_white"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/chip_mac_mini"
-                app:layout_constraintTop_toBottomOf="@+id/textView13">
+                app:layout_constraintTop_toBottomOf="@+id/textView13"
+                app:selected="@{applePowerViewModel.havingProducts.contains(@string/mac_pro)}">
 
                 <TextView
                     android:id="@+id/textView141"
@@ -115,7 +117,8 @@
                 app:layout_constraintBottom_toBottomOf="@+id/chip_mac_pro"
                 app:layout_constraintLeft_toRightOf="@id/chip_mac_pro"
                 app:layout_constraintRight_toLeftOf="@id/chip_imac_pro"
-                app:layout_constraintTop_toTopOf="@+id/chip_mac_pro">
+                app:layout_constraintTop_toTopOf="@+id/chip_mac_pro"
+                app:selected="@{applePowerViewModel.havingProducts.contains(@string/mac_mini)}">
 
                 <TextView
                     android:id="@+id/textView14"
@@ -143,7 +146,8 @@
                 app:layout_constraintBottom_toBottomOf="@+id/chip_mac_mini"
                 app:layout_constraintLeft_toRightOf="@id/chip_mac_mini"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/chip_mac_mini">
+                app:layout_constraintTop_toTopOf="@+id/chip_mac_mini"
+                app:selected="@{applePowerViewModel.havingProducts.contains(@string/imac_pro)}">
 
                 <TextView
                     android:id="@+id/textView142"
@@ -171,7 +175,8 @@
                 android:background="@drawable/selector_round_rectangle_green_white"
                 app:layout_constraintLeft_toLeftOf="@id/chip_mac_pro"
                 app:layout_constraintRight_toLeftOf="@id/chip_macbook_air"
-                app:layout_constraintTop_toBottomOf="@+id/chip_mac_pro">
+                app:layout_constraintTop_toBottomOf="@+id/chip_mac_pro"
+                app:selected="@{applePowerViewModel.havingProducts.contains(@string/imac)}">
 
                 <TextView
                     android:id="@+id/textView143"
@@ -200,7 +205,8 @@
                 app:layout_constraintBottom_toBottomOf="@+id/chip_imac"
                 app:layout_constraintLeft_toRightOf="@id/chip_imac"
                 app:layout_constraintRight_toLeftOf="@id/chip_macbook_pro"
-                app:layout_constraintTop_toTopOf="@+id/chip_imac">
+                app:layout_constraintTop_toTopOf="@+id/chip_imac"
+                app:selected="@{applePowerViewModel.havingProducts.contains(@string/macbook_air)}">
 
                 <TextView
                     android:id="@+id/textView144"
@@ -227,7 +233,8 @@
                 app:layout_constraintBottom_toBottomOf="@+id/chip_macbook_air"
                 app:layout_constraintLeft_toRightOf="@id/chip_macbook_air"
                 app:layout_constraintRight_toRightOf="@id/chip_imac_pro"
-                app:layout_constraintTop_toTopOf="@+id/chip_macbook_air">
+                app:layout_constraintTop_toTopOf="@+id/chip_macbook_air"
+                app:selected="@{applePowerViewModel.havingProducts.contains(@string/macbook_pro)}">
 
                 <TextView
                     android:id="@+id/textView145"
@@ -254,7 +261,8 @@
                 android:background="@drawable/selector_round_rectangle_green_white"
                 app:layout_constraintLeft_toLeftOf="@id/chip_imac"
                 app:layout_constraintRight_toLeftOf="@id/chip_iphone"
-                app:layout_constraintTop_toBottomOf="@+id/chip_imac">
+                app:layout_constraintTop_toBottomOf="@+id/chip_imac"
+                app:selected="@{applePowerViewModel.havingProducts.contains(@string/macbook)}">
 
                 <TextView
                     android:id="@+id/textView146"
@@ -283,7 +291,8 @@
                 app:layout_constraintBottom_toBottomOf="@+id/chip_macbook"
                 app:layout_constraintLeft_toRightOf="@id/chip_macbook"
                 app:layout_constraintRight_toLeftOf="@id/chip_apple_watch"
-                app:layout_constraintTop_toTopOf="@+id/chip_macbook">
+                app:layout_constraintTop_toTopOf="@+id/chip_macbook"
+                app:selected="@{applePowerViewModel.havingCategories.contains(Type.IPHONE)}">
 
                 <TextView
                     android:id="@+id/textView147"
@@ -310,7 +319,8 @@
                 app:layout_constraintBottom_toBottomOf="@+id/chip_iphone"
                 app:layout_constraintLeft_toRightOf="@id/chip_iphone"
                 app:layout_constraintRight_toRightOf="@id/chip_macbook_pro"
-                app:layout_constraintTop_toTopOf="@+id/chip_iphone">
+                app:layout_constraintTop_toTopOf="@+id/chip_iphone"
+                app:selected="@{applePowerViewModel.havingCategories.contains(Type.APPLEWATCH)}">
 
                 <TextView
                     android:id="@+id/textView148"
@@ -339,7 +349,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="@id/chip_macbook"
                 app:layout_constraintRight_toLeftOf="@id/chip_airpods"
-                app:layout_constraintTop_toBottomOf="@id/chip_macbook">
+                app:layout_constraintTop_toBottomOf="@id/chip_macbook"
+                app:selected="@{applePowerViewModel.havingCategories.contains(Type.IPAD)}">
 
                 <TextView
                     android:id="@+id/textView149"
@@ -368,7 +379,8 @@
                 app:layout_constraintBottom_toBottomOf="@id/chip_ipad"
                 app:layout_constraintLeft_toRightOf="@id/chip_ipad"
                 app:layout_constraintRight_toLeftOf="@id/chip_ipod"
-                app:layout_constraintTop_toTopOf="@id/chip_ipad">
+                app:layout_constraintTop_toTopOf="@id/chip_ipad"
+                app:selected="@{applePowerViewModel.havingCategories.contains(Type.AIRPODS)}">
 
                 <TextView
                     android:id="@+id/textView150"
@@ -395,7 +407,8 @@
                 app:layout_constraintBottom_toBottomOf="@id/chip_airpods"
                 app:layout_constraintLeft_toRightOf="@id/chip_airpods"
                 app:layout_constraintRight_toRightOf="@id/chip_apple_watch"
-                app:layout_constraintTop_toTopOf="@id/chip_airpods">
+                app:layout_constraintTop_toTopOf="@id/chip_airpods"
+                app:selected="@{applePowerViewModel.havingCategories.contains(Type.IPOD)}">
 
                 <TextView
                     android:id="@+id/textView151"
@@ -426,7 +439,7 @@
             android:fontFamily="@font/notosans_regular"
             android:letterSpacing="-0.02"
             android:lineSpacingExtra="4dp"
-            android:text="우연히 또는 본인의 의지로 애플 제품을 하나 혹은 두 개 정도 가지게 된 당신은 일반인입니다. 하지만 일반인 중에서도 어느 날 본인도 몰랐던 사과의 힘이 문득 나타날 수 있으며, 이 경우 충분한 통장 잔액 버프가 존재하고 애플스토어의 초대를 받아 아이클라우드 계정을 등록한다면 얼마든지 앱등이가 될 수 있습니다."
+            android:text="@{applePowerViewModel.applePower.description}"
             android:textSize="14dp"
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
             app:layout_constraintStart_toStartOf="@+id/constraintLayout"

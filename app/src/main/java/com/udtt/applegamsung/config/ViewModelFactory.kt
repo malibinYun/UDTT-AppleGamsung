@@ -2,10 +2,7 @@ package com.udtt.applegamsung.config
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.udtt.applegamsung.data.repository.CategoriesRepository
-import com.udtt.applegamsung.data.repository.UserIdentifyRepository
-import com.udtt.applegamsung.data.repository.ProductsRepository
-import com.udtt.applegamsung.data.repository.AppleBoxItemsRepository
+import com.udtt.applegamsung.data.repository.*
 import com.udtt.applegamsung.ui.applebox.AppleBoxViewModel
 import com.udtt.applegamsung.ui.applepower.ApplePowerViewModel
 import com.udtt.applegamsung.ui.intro.IntroViewModel
@@ -18,14 +15,14 @@ class ViewModelFactory(
     private val userIdentifyRepository: UserIdentifyRepository,
     private val categoriesRepository: CategoriesRepository,
     private val productsRepository: ProductsRepository,
-    private val appleBoxItemsRepository: AppleBoxItemsRepository
+    private val appleBoxItemsRepository: AppleBoxItemsRepository,
+    private val testResultsRepository: TestResultsRepository
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return when (modelClass) {
 
-            MainViewModel::class.java,
-            ApplePowerViewModel::class.java ->
+            MainViewModel::class.java ->
                 modelClass.getConstructor(APPLE_BOX_REPO).newInstance(appleBoxItemsRepository)
 
             IntroViewModel::class.java,
@@ -42,6 +39,14 @@ class ViewModelFactory(
                 modelClass.getConstructor(USER_ID_REPO, APPLE_BOX_REPO)
                     .newInstance(userIdentifyRepository, appleBoxItemsRepository)
 
+            ApplePowerViewModel::class.java ->
+                modelClass.getConstructor(USER_ID_REPO, APPLE_BOX_REPO, TEST_RESULT_REPO)
+                    .newInstance(
+                        userIdentifyRepository,
+                        appleBoxItemsRepository,
+                        testResultsRepository
+                    )
+
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         } as T
     }
@@ -51,5 +56,6 @@ class ViewModelFactory(
         private val CATEGORIES_REPO = CategoriesRepository::class.java
         private val PRODUCTS_REPO = ProductsRepository::class.java
         private val APPLE_BOX_REPO = AppleBoxItemsRepository::class.java
+        private val TEST_RESULT_REPO = TestResultsRepository::class.java
     }
 }
