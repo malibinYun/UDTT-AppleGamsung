@@ -31,18 +31,6 @@ class IntroActivity : BaseActivity() {
 
         val viewModel = ViewModelProvider(this, viewModelFactory)[IntroViewModel::class.java]
         viewModel.checkDeviceId()
-
-
-
-//        FirebaseFirestore.getInstance()
-//            .collection("ApplePower")
-//            .whereGreaterThanOrEqualTo("maxPower", 0)
-//            .orderBy("maxPower")
-//            .limit(1)
-//            .get()
-//            .addOnSuccessListener {
-//                it.toObjects(ApplePower::class.java).forEach { log(it.toString()) }
-//            }
     }
 
     private fun initView(binding: ActivityIntroBinding) {
