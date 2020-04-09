@@ -23,4 +23,7 @@ class AppleBoxItemsRepository(
         appleBoxItemsLocalDataSource.removeAppleBoxItems(itemsToRemove)
     }
 
+    override fun removeAll() {
+        appleBoxItemsLocalDataSource.removeAll()
+    }
 }

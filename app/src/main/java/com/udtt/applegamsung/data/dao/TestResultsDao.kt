@@ -20,6 +20,9 @@ interface TestResultsDao {
     @Insert
     fun insertTestResult(testResult: TestResult)
 
+    @Query("DELETE FROM testresult")
+    fun deleteAllTestResults()
+
     @Query("SELECT * FROM applepower")
     fun getApplePowers(): List<ApplePower>
 

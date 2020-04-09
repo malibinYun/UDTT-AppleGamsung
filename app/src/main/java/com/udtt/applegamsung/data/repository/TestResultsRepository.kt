@@ -60,4 +60,8 @@ class TestResultsRepository(
         log("saveApplePowers Called")
         testResultsLocalDataSource.saveApplePowers(applePowers)
     }
+
+    override fun removeAllTestResults() {
+        testResultsLocalDataSource.removeAllTestResults()
+    }
 }

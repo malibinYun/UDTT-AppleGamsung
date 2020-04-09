@@ -14,6 +14,8 @@ interface TestResultsDataSource {
 
     fun saveTestResult(testResult: TestResult)
 
+    fun removeAllTestResults()
+
     fun getApplePowers(callback: (applePowers: List<ApplePower>) -> Unit)
 
     fun getApplePower(totalScore: Int, callback: (applePower: ApplePower?) -> Unit)

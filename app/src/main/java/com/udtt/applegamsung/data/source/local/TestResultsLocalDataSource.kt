@@ -49,4 +49,9 @@ class TestResultsLocalDataSource(
         }
     }
 
+    override fun removeAllTestResults() {
+        asyncExecutor.ioThread.execute {
+            testResultsDao.deleteAllTestResults()
+        }
+    }
 }

@@ -42,4 +42,8 @@ class TestResultsRemoteDataSource(
     override fun saveApplePowers(applePowers: List<ApplePower>) {
         // No Needed
     }
+
+    override fun removeAllTestResults() {
+        // No Needed
+    }
 }
