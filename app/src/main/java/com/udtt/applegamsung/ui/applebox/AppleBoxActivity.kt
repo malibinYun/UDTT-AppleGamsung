@@ -41,8 +41,7 @@ class AppleBoxActivity : BaseActivity(), AppleBoxItemClickListener {
                 override fun onAnimationRepeat(animation: Animation?) {}
 
                 override fun onAnimationEnd(animation: Animation?) {
-                    val intent = Intent(this@AppleBoxActivity, ApplePowerActivity::class.java)
-                    startActivity(intent)
+                    deployApplePowerActivity()
                 }
 
                 override fun onAnimationStart(animation: Animation?) {}
@@ -77,4 +76,10 @@ class AppleBoxActivity : BaseActivity(), AppleBoxItemClickListener {
     private fun initView(binding: ActivityAppleBoxBinding) {
         initAdmob(binding.banner)
     }
+
+    private fun deployApplePowerActivity() {
+        val intent = Intent(this@AppleBoxActivity, ApplePowerActivity::class.java)
+        startActivity(intent)
+    }
+
 }

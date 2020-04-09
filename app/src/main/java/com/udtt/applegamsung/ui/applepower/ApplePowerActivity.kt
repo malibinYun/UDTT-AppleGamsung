@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.udtt.applegamsung.ui.util.SimpleDialog
 import com.udtt.applegamsung.R
 import com.udtt.applegamsung.databinding.ActivityApplePowerBinding
+import com.udtt.applegamsung.ui.intro.IntroActivity
 import com.udtt.applegamsung.ui.main.MainActivity
 import com.udtt.applegamsung.ui.util.BaseActivity
 import org.koin.android.ext.android.inject
@@ -19,12 +20,11 @@ class ApplePowerActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding = ActivityApplePowerBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        initView(binding)
-
         applePowerViewModel =
             ViewModelProvider(this, viewModelFactory)[ApplePowerViewModel::class.java]
+
+        val binding = ActivityApplePowerBinding.inflate(layoutInflater)
+        initView(binding)
 
         val vto = binding.imgApplePower.viewTreeObserver
         vto.addOnPreDrawListener {
@@ -34,7 +34,12 @@ class ApplePowerActivity : BaseActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        backToIntroActivity()
+    }
+
     private fun initView(binding: ActivityApplePowerBinding) {
+        setContentView(binding.root)
         initAdmob(binding.banner)
         binding.lifecycleOwner = this
         binding.applePowerViewModel = applePowerViewModel
@@ -56,6 +61,12 @@ class ApplePowerActivity : BaseActivity() {
 
     private fun backToMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent)
+    }
+
+    private fun backToIntroActivity() {
+        val intent = Intent(this, IntroActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
     }
