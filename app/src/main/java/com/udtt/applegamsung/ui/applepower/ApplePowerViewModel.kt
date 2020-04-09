@@ -86,6 +86,11 @@ class ApplePowerViewModel(
         return appleBoxItems.map { it.getScore() }.sum()
     }
 
+    fun deleteTestResultAndAppleBox() {
+        appleBoxItemsRepository.removeAllAppleBoxItems()
+        testResultsRepository.removeAllTestResults()
+    }
+
     companion object {
         private const val BASE_RATIO = 0.9
         private const val ADDITIONAL_RATIO = 0.1

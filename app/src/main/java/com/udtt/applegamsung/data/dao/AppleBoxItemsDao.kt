@@ -22,6 +22,6 @@ interface AppleBoxItemsDao {
     fun deleteAppleBoxItems(appleBoxItems: List<AppleBoxItem>)
 
     @Query("DELETE FROM appleboxitem")
-    fun deleteAll()
+    fun deleteAllAppleBoxItems()
 
 }

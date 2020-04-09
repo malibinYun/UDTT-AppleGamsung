@@ -1,17 +1,20 @@
 package com.udtt.applegamsung.ui.applepower
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.udtt.applegamsung.ui.util.SimpleDialog
 import com.udtt.applegamsung.R
 import com.udtt.applegamsung.databinding.ActivityApplePowerBinding
+import com.udtt.applegamsung.ui.main.MainActivity
 import com.udtt.applegamsung.ui.util.BaseActivity
 import org.koin.android.ext.android.inject
 
 class ApplePowerActivity : BaseActivity() {
 
     private val viewModelFactory: ViewModelProvider.Factory by inject()
+    private lateinit var applePowerViewModel: ApplePowerViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,12 +23,8 @@ class ApplePowerActivity : BaseActivity() {
         setContentView(binding.root)
         initView(binding)
 
-        val applePowerViewModel =
+        applePowerViewModel =
             ViewModelProvider(this, viewModelFactory)[ApplePowerViewModel::class.java]
-
-        binding.applePowerViewModel = applePowerViewModel
-        binding.lifecycleOwner = this
-
 
         val vto = binding.imgApplePower.viewTreeObserver
         vto.addOnPreDrawListener {
@@ -33,12 +32,12 @@ class ApplePowerActivity : BaseActivity() {
             binding.imgApplePower.translationY = (applePowerImageHeight / 2).toFloat()
             true
         }
-
-
     }
 
     private fun initView(binding: ActivityApplePowerBinding) {
         initAdmob(binding.banner)
+        binding.lifecycleOwner = this
+        binding.applePowerViewModel = applePowerViewModel
         binding.btnRetry.setOnClickListener { showDeleteAlertDialog() }
     }
 
@@ -51,6 +50,13 @@ class ApplePowerActivity : BaseActivity() {
     }
 
     private fun deleteTestResultAndAppleBox() {
-        Toast.makeText(this, "잇힝", Toast.LENGTH_SHORT).show()
+        applePowerViewModel.deleteTestResultAndAppleBox()
+        backToMainActivity()
+    }
+
+    private fun backToMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent)
     }
 }

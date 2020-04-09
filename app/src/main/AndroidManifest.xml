@@ -20,7 +20,9 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/admobSdkId" />
 
-        <activity android:name=".ui.intro.IntroActivity">
+        <activity
+            android:name=".ui.intro.IntroActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,7 +32,6 @@
         <activity android:name=".ui.main.MainActivity" />
         <activity android:name=".ui.applebox.AppleBoxActivity" />
         <activity android:name=".ui.applepower.ApplePowerActivity" />
-
     </application>
 
 </manifest>

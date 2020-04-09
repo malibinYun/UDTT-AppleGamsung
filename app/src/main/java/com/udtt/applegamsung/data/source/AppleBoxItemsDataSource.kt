@@ -12,6 +12,6 @@ interface AppleBoxItemsDataSource {
 
     fun removeAppleBoxItems(itemsToRemove: List<AppleBoxItem>)
 
-    fun removeAll()
+    fun removeAllAppleBoxItems()
     
 }

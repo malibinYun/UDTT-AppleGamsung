@@ -1,14 +1,16 @@
 package com.udtt.applegamsung.ui.util
 
+import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AlertDialog
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import com.malibin.memo.ui.dialog.SimpleDialogOnClickListener
 import com.udtt.applegamsung.R
 import com.udtt.applegamsung.databinding.DialogSimpleBinding
+import com.udtt.applegamsung.util.toPx
 
-open class SimpleDialog(context: Context) : AlertDialog(context), SimpleDialogOnClickListener {
+open class SimpleDialog(context: Context) : Dialog(context), SimpleDialogOnClickListener {
 
     var message = ""
     var okText = ""
@@ -27,11 +29,8 @@ open class SimpleDialog(context: Context) : AlertDialog(context), SimpleDialogOn
             btnCancel.text = this@SimpleDialog.cancelText
         }
         setContentView(binding.root)
+        window!!.setLayout(WIDTH, WRAP_CONTENT)
         setTransparentWindowBackground()
-    }
-
-    private fun setTransparentWindowBackground() {
-        window?.setBackgroundDrawableResource(R.color.transparent)
     }
 
     override fun onCancelClick(view: View) {
@@ -42,6 +41,10 @@ open class SimpleDialog(context: Context) : AlertDialog(context), SimpleDialogOn
     override fun onOkClick(view: View) {
         okClickListener?.invoke(view)
         dismiss()
+    }
+
+    private fun setTransparentWindowBackground() {
+        window?.setBackgroundDrawableResource(R.color.transparent)
     }
 
     fun setSimpleDialogOnClickListener(listener: SimpleDialogOnClickListener) {
@@ -62,5 +65,9 @@ open class SimpleDialog(context: Context) : AlertDialog(context), SimpleDialogOn
         this.okText = okText ?: ""
         this.okClickListener = listener
         return this
+    }
+
+    companion object {
+        private val WIDTH = 330.toPx()
     }
 }
