@@ -36,6 +36,7 @@
     <string name="test_result_will_be_deleted">이전 평가 결과는 지워져요.\n괜찮아요?</string>
     <string name="its_ok">괜찮아요</string>
     <string name="its_not_ok">안괜찮아요</string>
+    <string name="i_will_calculate_apple_power">갬성지수를 계산합니다.\n총 %d개가 맞나요?</string>
     <string name="yes">예</string>
     <string name="no">아니오</string>
 </resources>

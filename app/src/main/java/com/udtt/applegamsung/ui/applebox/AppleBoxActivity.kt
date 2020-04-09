@@ -12,6 +12,7 @@ import com.udtt.applegamsung.data.entity.AppleBoxItem
 import com.udtt.applegamsung.databinding.ActivityAppleBoxBinding
 import com.udtt.applegamsung.ui.applepower.ApplePowerActivity
 import com.udtt.applegamsung.ui.util.BaseActivity
+import com.udtt.applegamsung.ui.util.SimpleDialog
 import org.koin.android.ext.android.inject
 
 class AppleBoxActivity : BaseActivity(), AppleBoxItemClickListener {
@@ -21,46 +22,16 @@ class AppleBoxActivity : BaseActivity(), AppleBoxItemClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityAppleBoxBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        initView(binding)
 
         appleBoxViewModel = ViewModelProvider(this, viewModelFactory)[AppleBoxViewModel::class.java]
 
         val adapter = AppleBoxAdapter()
         adapter.setItemClickListener(this)
 
-        binding.lifecycleOwner = this
-        binding.appleBoxViewModel = appleBoxViewModel
-        binding.rvAppleBoxItems.adapter = adapter
-        binding.btnBack.setOnClickListener { finish() }
-        binding.btnMyApplePower.setOnClickListener {
-            val fadeOutAnim = AnimationUtils.loadAnimation(this, R.anim.fade_out)
-            val fadeInAnim = AnimationUtils.loadAnimation(this, R.anim.fade_in)
-            fadeInAnim.setAnimationListener(object : Animation.AnimationListener {
-                override fun onAnimationRepeat(animation: Animation?) {}
+        val binding = ActivityAppleBoxBinding.inflate(layoutInflater)
+        initView(binding, adapter)
 
-                override fun onAnimationEnd(animation: Animation?) {
-                    deployApplePowerActivity()
-                }
-
-                override fun onAnimationStart(animation: Animation?) {}
-
-            })
-            binding.windowAppleBox.startAnimation(fadeOutAnim)
-            binding.loadingAnim.visibility = View.VISIBLE
-            binding.loadingAnim.startAnimation(fadeInAnim)
-        }
-
-        appleBoxViewModel.appleBoxItems.observe(this, Observer {
-            adapter.submitList(it)
-        })
-//        binding.windowAppleBox.animate()
-//            .alpha(0f)
-//            .setDuration(2000)
-//            .withEndAction {
-//
-//            }
+        subscribeAppleBoxItems(adapter)
     }
 
     override fun onBackPressed() {
@@ -73,8 +44,27 @@ class AppleBoxActivity : BaseActivity(), AppleBoxItemClickListener {
         appleBoxViewModel.deleteAppleBoxItem(item)
     }
 
-    private fun initView(binding: ActivityAppleBoxBinding) {
+    private fun initView(binding: ActivityAppleBoxBinding, adapter: AppleBoxAdapter) {
+        setContentView(binding.root)
         initAdmob(binding.banner)
+        binding.lifecycleOwner = this
+        binding.appleBoxViewModel = appleBoxViewModel
+        binding.rvAppleBoxItems.adapter = adapter
+        binding.btnBack.setOnClickListener { finish() }
+        binding.btnMyApplePower.setOnClickListener { deployDeleteAlertDialog(binding) }
+    }
+
+    private fun startFadeAnimation(binding: ActivityAppleBoxBinding) {
+        binding.windowAppleBox.animate()
+            .alpha(0f)
+            .setDuration(ANIM_DURATION)
+            .withEndAction { deployApplePowerActivity() }
+        binding.loadingAnim.animate()
+            .alpha(1f)
+            .setDuration(ANIM_DURATION)
+            .withEndAction {
+                binding.loadingAnim.visibility = View.VISIBLE
+            }
     }
 
     private fun deployApplePowerActivity() {
@@ -82,4 +72,22 @@ class AppleBoxActivity : BaseActivity(), AppleBoxItemClickListener {
         startActivity(intent)
     }
 
+    private fun deployDeleteAlertDialog(binding: ActivityAppleBoxBinding) {
+        val itemCount = appleBoxViewModel.appleBoxItems.value?.size
+        SimpleDialog(this)
+            .apply { message = getString(R.string.i_will_calculate_apple_power, itemCount) }
+            .setOkClickListener(getString(R.string.yes)) { startFadeAnimation(binding) }
+            .setCancelClickListener(getString(R.string.no)) {}
+            .show()
+    }
+
+    private fun subscribeAppleBoxItems(adapter: AppleBoxAdapter) {
+        appleBoxViewModel.appleBoxItems.observe(this, Observer {
+            adapter.submitList(it)
+        })
+    }
+
+    companion object {
+        const val ANIM_DURATION = 1_000L
+    }
 }

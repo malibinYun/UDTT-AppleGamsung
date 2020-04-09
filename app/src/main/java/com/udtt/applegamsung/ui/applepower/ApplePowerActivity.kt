@@ -2,7 +2,6 @@ package com.udtt.applegamsung.ui.applepower
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.udtt.applegamsung.ui.util.SimpleDialog
 import com.udtt.applegamsung.R
@@ -43,10 +42,10 @@ class ApplePowerActivity : BaseActivity() {
         initAdmob(binding.banner)
         binding.lifecycleOwner = this
         binding.applePowerViewModel = applePowerViewModel
-        binding.btnRetry.setOnClickListener { showDeleteAlertDialog() }
+        binding.btnRetry.setOnClickListener { deployDeleteAlertDialog() }
     }
 
-    private fun showDeleteAlertDialog() {
+    private fun deployDeleteAlertDialog() {
         SimpleDialog(this)
             .apply { message = getString(R.string.test_result_will_be_deleted) }
             .setOkClickListener(getString(R.string.its_ok)) { deleteTestResultAndAppleBox() }
