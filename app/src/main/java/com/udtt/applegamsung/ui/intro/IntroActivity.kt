@@ -14,6 +14,7 @@ import com.udtt.applegamsung.data.entity.ApplePower
 import com.udtt.applegamsung.data.entity.TestResult
 import com.udtt.applegamsung.data.util.CATEGORIES_PATH
 import com.udtt.applegamsung.databinding.ActivityIntroBinding
+import com.udtt.applegamsung.ui.applepower.ApplePowerActivity
 import com.udtt.applegamsung.ui.main.MainActivity
 import com.udtt.applegamsung.ui.util.BaseActivity
 import com.udtt.applegamsung.util.log
@@ -22,33 +23,42 @@ import org.koin.android.ext.android.inject
 class IntroActivity : BaseActivity() {
 
     private val viewModelFactory: ViewModelProvider.Factory by inject()
+    private lateinit var introViewModel: IntroViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val binding = ActivityIntroBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         initView(binding)
 
-        val viewModel = ViewModelProvider(this, viewModelFactory)[IntroViewModel::class.java]
-        viewModel.checkDeviceId()
+        introViewModel = ViewModelProvider(this, viewModelFactory)[IntroViewModel::class.java]
+        introViewModel.checkDeviceId()
+    }
 
-
-//        FirebaseFirestore.getInstance()
-//            .collection("testResults")
-//            .add(TestResult("mymy", "mome", 100))
-
-
+    override fun onResume() {
+        super.onResume()
+        introViewModel.loadAppleBoxIsEmpty()
     }
 
     private fun initView(binding: ActivityIntroBinding) {
+        setContentView(binding.root)
         setStatusBarTransparent()
         initAdmob(binding.banner)
-        binding.btnStart.setOnClickListener { deployMainActivity() }
+        binding.btnStart.setOnClickListener { deployActivity() }
+    }
+
+    private fun deployActivity() {
+        if (introViewModel.isBoxEmpty) deployMainActivity()
+        else deployApplePowerActivity()
     }
 
     private fun deployMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun deployApplePowerActivity() {
+        val intent = Intent(this, ApplePowerActivity::class.java)
         startActivity(intent)
     }
 
