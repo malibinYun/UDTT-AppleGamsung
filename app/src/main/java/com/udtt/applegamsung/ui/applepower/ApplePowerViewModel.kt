@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.udtt.applegamsung.data.entity.AppleBoxItem
 import com.udtt.applegamsung.data.entity.ApplePower
 import com.udtt.applegamsung.data.entity.Category
+import com.udtt.applegamsung.data.entity.TestResult
 import com.udtt.applegamsung.data.repository.AppleBoxItemsRepository
 import com.udtt.applegamsung.data.repository.TestResultsRepository
 import com.udtt.applegamsung.data.repository.UserIdentifyRepository
@@ -17,8 +18,8 @@ class ApplePowerViewModel(
     private val testResultsRepository: TestResultsRepository
 ) : BaseViewModel() {
 
-    val userNickName = userIdentifyRepository.getNickname()
-
+    val userNickName = userIdentifyRepository.getNickname() ?: throw ILLEGAL_STATE_EXCEPTION
+    private val deviceId = userIdentifyRepository.getDeviceId() ?: throw ILLEGAL_STATE_EXCEPTION
     private val appleBoxItems: MutableList<AppleBoxItem> = mutableListOf()
 
     private val _havingProducts = MutableLiveData<List<String>>()
@@ -47,11 +48,6 @@ class ApplePowerViewModel(
             _havingProducts.value = extractProductNames(it)
             _havingCategories.value = extractCategoryTypes(it)
             loadApplePower(getScore())
-
-            log("_appleBoxItems.value : $appleBoxItems")
-            log("_havingCategories.value : ${_havingCategories.value}")
-            log("getBonusRatio() : ${getBonusRatio()}")
-            log("_score.value : ${_score.value}")
         }
     }
 
@@ -91,8 +87,31 @@ class ApplePowerViewModel(
         testResultsRepository.removeAllTestResults()
     }
 
+    fun checkSavedTestResultOrSave() {
+        testResultsRepository.getTestResults {
+            if (it.isEmpty()) saveTestResult()
+        }
+    }
+
+    private fun createTestResult(): TestResult {
+        val currentScore = _score.value ?: throw ILLEGAL_STATE_EXCEPTION
+        val productList = _havingProducts.value ?: throw ILLEGAL_STATE_EXCEPTION
+        return TestResult(
+            deviceId,
+            userNickName,
+            currentScore
+        ).apply { this.productList = productList }
+    }
+
+    private fun saveTestResult() {
+        val testResult = createTestResult()
+        testResultsRepository.saveTestResult(testResult)
+    }
+
     companion object {
         private const val BASE_RATIO = 0.9
         private const val ADDITIONAL_RATIO = 0.1
+
+        private val ILLEGAL_STATE_EXCEPTION = IllegalStateException("존재할 수 없는 상태")
     }
 }

@@ -21,6 +21,7 @@ class ApplePowerActivity : BaseActivity() {
 
         applePowerViewModel =
             ViewModelProvider(this, viewModelFactory)[ApplePowerViewModel::class.java]
+        applePowerViewModel.checkSavedTestResultOrSave()
 
         val binding = ActivityApplePowerBinding.inflate(layoutInflater)
         initView(binding)
