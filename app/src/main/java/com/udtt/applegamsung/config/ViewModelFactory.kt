@@ -25,7 +25,6 @@ class ViewModelFactory(
             MainViewModel::class.java ->
                 modelClass.getConstructor(APPLE_BOX_REPO).newInstance(appleBoxItemsRepository)
 
-
             NicknameViewModel::class.java ->
                 modelClass.getConstructor(USER_ID_REPO).newInstance(userIdentifyRepository)
 
@@ -35,7 +34,10 @@ class ViewModelFactory(
             ProductsViewModel::class.java ->
                 modelClass.getConstructor(PRODUCTS_REPO).newInstance(productsRepository)
 
-            IntroViewModel::class.java,
+            IntroViewModel::class.java ->
+                modelClass.getConstructor(USER_ID_REPO, TEST_RESULT_REPO)
+                    .newInstance(userIdentifyRepository, testResultsRepository)
+
             AppleBoxViewModel::class.java ->
                 modelClass.getConstructor(USER_ID_REPO, APPLE_BOX_REPO)
                     .newInstance(userIdentifyRepository, appleBoxItemsRepository)

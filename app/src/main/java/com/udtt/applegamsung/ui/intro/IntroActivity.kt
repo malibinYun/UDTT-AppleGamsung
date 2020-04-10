@@ -6,18 +6,11 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.gms.ads.AdRequest
-import com.google.firebase.firestore.FirebaseFirestore
-import com.udtt.applegamsung.data.entity.ApplePower
-import com.udtt.applegamsung.data.entity.TestResult
-import com.udtt.applegamsung.data.util.CATEGORIES_PATH
 import com.udtt.applegamsung.databinding.ActivityIntroBinding
 import com.udtt.applegamsung.ui.applepower.ApplePowerActivity
 import com.udtt.applegamsung.ui.main.MainActivity
 import com.udtt.applegamsung.ui.util.BaseActivity
-import com.udtt.applegamsung.util.log
 import org.koin.android.ext.android.inject
 
 class IntroActivity : BaseActivity() {
@@ -37,7 +30,7 @@ class IntroActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        introViewModel.loadAppleBoxIsEmpty()
+        introViewModel.loadTestResultIsEmpty()
     }
 
     private fun initView(binding: ActivityIntroBinding) {
@@ -48,7 +41,7 @@ class IntroActivity : BaseActivity() {
     }
 
     private fun deployActivity() {
-        if (introViewModel.isBoxEmpty) deployMainActivity()
+        if (introViewModel.isTestResultEmpty) deployMainActivity()
         else deployApplePowerActivity()
     }
 

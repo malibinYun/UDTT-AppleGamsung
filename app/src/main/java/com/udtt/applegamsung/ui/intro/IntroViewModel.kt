@@ -1,6 +1,6 @@
 package com.udtt.applegamsung.ui.intro
 
-import com.udtt.applegamsung.data.repository.AppleBoxItemsRepository
+import com.udtt.applegamsung.data.repository.TestResultsRepository
 import com.udtt.applegamsung.data.repository.UserIdentifyRepository
 import com.udtt.applegamsung.util.BaseViewModel
 import com.udtt.applegamsung.util.log
@@ -13,19 +13,19 @@ import java.util.*
 
 class IntroViewModel(
     private val userIdentifyRepository: UserIdentifyRepository,
-    private val appleBoxItemsRepository: AppleBoxItemsRepository
+    private val testResultsRepository: TestResultsRepository
 ) : BaseViewModel() {
 
-    var isBoxEmpty: Boolean = true
+    var isTestResultEmpty: Boolean = true
         private set
 
     init {
-        loadAppleBoxIsEmpty()
+        loadTestResultIsEmpty()
     }
 
-    fun loadAppleBoxIsEmpty() {
-        appleBoxItemsRepository.getAppleBoxItems {
-            isBoxEmpty = it.isEmpty()
+    fun loadTestResultIsEmpty() {
+        testResultsRepository.getTestResults {
+            isTestResultEmpty = it.isEmpty()
         }
     }
 
