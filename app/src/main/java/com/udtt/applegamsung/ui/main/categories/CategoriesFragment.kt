@@ -18,12 +18,14 @@ import org.koin.android.ext.android.inject
 
 class CategoriesFragment : BaseFragment() {
 
+    private lateinit var binding: FragmentCategoriesBinding
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentCategoriesBinding.inflate(layoutInflater)
+        binding = FragmentCategoriesBinding.inflate(inflater)
 
         val mainViewModel =
             ViewModelProvider(activity!!, viewModelFactory)[MainViewModel::class.java]
@@ -31,15 +33,21 @@ class CategoriesFragment : BaseFragment() {
             ViewModelProvider(this, viewModelFactory)[CategoriesViewModel::class.java]
 
         val categoriesAdapter = createCategoriesAdapter(mainViewModel)
-        binding.categories.adapter = categoriesAdapter
 
-        initView(binding, mainViewModel)
+        initView(mainViewModel, categoriesAdapter)
         subscribeCategories(categoriesViewModel, categoriesAdapter)
 
         return binding.root
     }
 
-    private fun initView(binding: FragmentCategoriesBinding, mainViewModel: MainViewModel) {
+    override fun onPause() {
+        super.onPause()
+        binding.scroll.scrollY = TOP_OF_SCROLL
+    }
+
+
+    private fun initView(mainViewModel: MainViewModel, categoriesAdapter: CategoriesAdapter) {
+        binding.categories.adapter = categoriesAdapter
         binding.btnBack.setOnClickListener { mainViewModel.movePageTo(FRAGMENT_NICKNAME) }
         binding.btnAppleBox.setOnClickListener { deployAppleBoxActivity() }
         initAdmob(binding.banner)
@@ -61,6 +69,8 @@ class CategoriesFragment : BaseFragment() {
     }
 
     companion object {
+        private const val TOP_OF_SCROLL = 0
+
         private var INSTANCE: CategoriesFragment? = null
         fun getInstance() = INSTANCE
             ?: CategoriesFragment().apply { INSTANCE = this }
