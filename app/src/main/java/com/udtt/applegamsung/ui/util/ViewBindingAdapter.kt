@@ -2,6 +2,7 @@ package com.udtt.applegamsung.ui.util
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.databinding.BindingAdapter
 
@@ -18,4 +19,10 @@ fun bindSelected(view: View, state: Boolean) {
 @BindingAdapter("img_res")
 fun bindImageByResId(imageView: ImageView, @DrawableRes resId: Int) {
     imageView.setImageResource(resId)
+}
+
+@BindingAdapter("text_with_new_line")
+fun bindTextWithNewLine(textView: TextView, string: String) {
+    val convertedString = string.replace("\\n", "\n")
+    textView.text = convertedString
 }

@@ -31,11 +31,11 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/sf_pro_display_semibold"
-            android:text="@{category.name}"
             android:textColor="@android:color/black"
             android:textSize="17dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:text_with_new_line="@{category.name}" />
 
         <ImageView
             android:id="@+id/imageView"
