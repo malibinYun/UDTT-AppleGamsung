@@ -22,7 +22,13 @@ fun bindImageByResId(imageView: ImageView, @DrawableRes resId: Int) {
 }
 
 @BindingAdapter("text_with_new_line")
-fun bindTextWithNewLine(textView: TextView, string: String) {
-    val convertedString = string.replace("\\n", "\n")
+fun bindTextWithNewLine(textView: TextView, string: String?) {
+    val convertedString = string?.replace("\\n", "\n") ?: ""
+    textView.text = convertedString
+}
+
+@BindingAdapter("char_wrap_text")
+fun bindTextWrappedByChar(textView: TextView, string: String?) {
+    val convertedString = string?.replace(" ", "\u00A0") ?: ""
     textView.text = convertedString
 }
