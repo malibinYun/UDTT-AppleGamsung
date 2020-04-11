@@ -11,8 +11,8 @@ import com.udtt.applegamsung.ui.main.MainViewModel
 class CategoriesAdapter : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
 
     private val categories = ArrayList<Category>()
-    private var mainViewModel: MainViewModel? = null
     private var lifecycleOwner: LifecycleOwner? = null
+    private var itemClickListener: CategoryClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -34,9 +34,12 @@ class CategoriesAdapter : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
         }
     }
 
-    fun dataBindingWith(mainViewModel: MainViewModel, lifecycleOwner: LifecycleOwner) {
-        this.mainViewModel = mainViewModel
+    fun setLifeCycleOwner(lifecycleOwner: LifecycleOwner) {
         this.lifecycleOwner = lifecycleOwner
+    }
+
+    fun setItemClickListener(listener: CategoryClickListener) {
+        this.itemClickListener = listener
     }
 
     inner class ViewHolder(
@@ -45,7 +48,7 @@ class CategoriesAdapter : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
 
         fun bind(category: Category) {
             binding.category = category
-            binding.mainViewModel = mainViewModel
+            binding.itemClickListener = itemClickListener
         }
     }
 }

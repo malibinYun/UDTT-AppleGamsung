@@ -28,7 +28,8 @@ data class Category(
         APPLEWATCH(2, "AppleWatch", R.drawable.product_apple_watch),
         IPAD(3, "iPad", R.drawable.product_ipad),
         AIRPODS(4, "AirPods", R.drawable.product_airpdos),
-        IPOD(5, "iPod", R.drawable.product_ipod_touch);
+        IPOD(5, "iPod", R.drawable.product_ipod_touch),
+        NOTING_HAVING(-1, "", R.drawable.no_apple_imoji);
 
         companion object {
             fun findByIndex(index: Int): Type = values().first { it.index == index }

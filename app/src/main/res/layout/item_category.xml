@@ -10,7 +10,7 @@
 
         <variable
             name="itemClickListener"
-            type="android.view.View.OnClickListener" />
+            type="com.udtt.applegamsung.ui.main.categories.CategoryClickListener" />
 
         <variable
             name="mainViewModel"
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:background="@drawable/round_rectangle_white_4dp"
-        android:onClick="@{() -> mainViewModel.selectCategory(category.id)}">
+        android:onClick="@{() -> itemClickListener.onCategoryClick(category)}">
 
         <TextView
             android:id="@+id/category_name"
