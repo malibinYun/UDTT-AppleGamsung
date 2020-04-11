@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.udtt.applegamsung.data.entity.Category
@@ -14,9 +13,7 @@ import com.udtt.applegamsung.databinding.FragmentCategoriesBinding
 import com.udtt.applegamsung.ui.applebox.AppleBoxActivity
 import com.udtt.applegamsung.ui.main.MainViewModel
 import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAGMENT_NICKNAME
-import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAGMENT_PRODUCTS
 import com.udtt.applegamsung.ui.util.BaseFragment
-import org.koin.android.ext.android.inject
 
 class CategoriesFragment : BaseFragment(), CategoryClickListener {
 
@@ -52,7 +49,10 @@ class CategoriesFragment : BaseFragment(), CategoryClickListener {
     }
 
     override fun onCategoryClick(category: Category) {
-        mainViewModel.selectCategory(category.id)
+        mainViewModel.selectCategory(category)
+        if (category.type == Category.Type.HAVE_NOTING) {
+            deployAppleBoxActivity(true)
+        }
     }
 
     private fun initView(categoriesAdapter: CategoriesAdapter) {
@@ -75,12 +75,14 @@ class CategoriesFragment : BaseFragment(), CategoryClickListener {
         })
     }
 
-    private fun deployAppleBoxActivity() {
+    private fun deployAppleBoxActivity(haveNothing: Boolean = false) {
         val intent = Intent(activity, AppleBoxActivity::class.java)
+        intent.putExtra(EXTRA_HAVE_NOTHING, haveNothing)
         startActivity(intent)
     }
 
     companion object {
+        const val EXTRA_HAVE_NOTHING = "haveNothing"
         private const val TOP_OF_SCROLL = 0
 
         private var INSTANCE: CategoriesFragment? = null

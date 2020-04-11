@@ -11,6 +11,7 @@ import com.udtt.applegamsung.R
 import com.udtt.applegamsung.data.entity.AppleBoxItem
 import com.udtt.applegamsung.databinding.ActivityAppleBoxBinding
 import com.udtt.applegamsung.ui.applepower.ApplePowerActivity
+import com.udtt.applegamsung.ui.main.categories.CategoriesFragment
 import com.udtt.applegamsung.ui.util.BaseActivity
 import com.udtt.applegamsung.ui.util.SimpleDialog
 import org.koin.android.ext.android.inject
@@ -20,16 +21,17 @@ class AppleBoxActivity : BaseActivity(), AppleBoxItemClickListener {
     private val viewModelFactory: ViewModelProvider.Factory by inject()
     private lateinit var appleBoxViewModel: AppleBoxViewModel
 
+    private lateinit var binding: ActivityAppleBoxBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         appleBoxViewModel = ViewModelProvider(this, viewModelFactory)[AppleBoxViewModel::class.java]
+        binding = ActivityAppleBoxBinding.inflate(layoutInflater)
+        val adapter = AppleBoxAdapter().apply { setItemClickListener(this@AppleBoxActivity) }
+        initView(adapter)
 
-        val adapter = AppleBoxAdapter()
-        adapter.setItemClickListener(this)
-
-        val binding = ActivityAppleBoxBinding.inflate(layoutInflater)
-        initView(binding, adapter)
+        checkHaveNothing()
 
         subscribeAppleBoxItems(adapter)
     }
@@ -44,17 +46,17 @@ class AppleBoxActivity : BaseActivity(), AppleBoxItemClickListener {
         appleBoxViewModel.deleteAppleBoxItem(item)
     }
 
-    private fun initView(binding: ActivityAppleBoxBinding, adapter: AppleBoxAdapter) {
+    private fun initView(adapter: AppleBoxAdapter) {
         setContentView(binding.root)
         initAdmob(binding.banner)
         binding.lifecycleOwner = this
         binding.appleBoxViewModel = appleBoxViewModel
         binding.rvAppleBoxItems.adapter = adapter
         binding.btnBack.setOnClickListener { finish() }
-        binding.btnMyApplePower.setOnClickListener { deployDeleteAlertDialog(binding) }
+        binding.btnMyApplePower.setOnClickListener { deployDeleteAlertDialog() }
     }
 
-    private fun startFadeAnimation(binding: ActivityAppleBoxBinding) {
+    private fun startFadeAnimation() {
         binding.windowAppleBox.animate()
             .alpha(0f)
             .setDuration(ANIM_DURATION)
@@ -72,11 +74,18 @@ class AppleBoxActivity : BaseActivity(), AppleBoxItemClickListener {
         startActivity(intent)
     }
 
-    private fun deployDeleteAlertDialog(binding: ActivityAppleBoxBinding) {
-        val itemCount = appleBoxViewModel.appleBoxItems.value?.size
+    private fun checkHaveNothing() {
+        val haveNothing = intent.getBooleanExtra(CategoriesFragment.EXTRA_HAVE_NOTHING, false)
+        if (haveNothing) {
+            deployDeleteAlertDialog()
+        }
+    }
+
+    private fun deployDeleteAlertDialog() {
+        val itemCount = appleBoxViewModel.appleBoxItems.value?.size ?: 0
         SimpleDialog(this)
             .apply { message = getString(R.string.i_will_calculate_apple_power, itemCount) }
-            .setOkClickListener(getString(R.string.yes)) { startFadeAnimation(binding) }
+            .setOkClickListener(getString(R.string.yes)) { startFadeAnimation() }
             .setCancelClickListener(getString(R.string.no)) {}
             .show()
     }

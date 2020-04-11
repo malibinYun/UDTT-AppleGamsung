@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.udtt.applegamsung.data.entity.AppleBoxItem
+import com.udtt.applegamsung.data.entity.Category
 import com.udtt.applegamsung.data.entity.Product
 import com.udtt.applegamsung.data.entity.SelectedProduct
 import com.udtt.applegamsung.data.repository.AppleBoxItemsRepository
@@ -45,9 +46,13 @@ class MainViewModel(
         _currentPage.value = pageNum
     }
 
-    fun selectCategory(categoryId: String) {
+    fun selectCategory(category: Category) {
         _selectedProducts.value = emptyList()
-        _selectedCategoryId.value = categoryId
+        _selectedCategoryId.value = category.id
+        if (category.type == Category.Type.HAVE_NOTING) {
+            appleBoxItemsRepository.removeAllAppleBoxItems()
+            return
+        }
         movePageTo(FRAGMENT_PRODUCTS)
     }
 
