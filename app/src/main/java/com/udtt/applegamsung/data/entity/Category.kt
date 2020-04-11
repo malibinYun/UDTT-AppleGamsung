@@ -1,7 +1,9 @@
 package com.udtt.applegamsung.data.entity
 
+import androidx.annotation.DrawableRes
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.udtt.applegamsung.R
 import java.util.*
 
 /**
@@ -20,13 +22,13 @@ data class Category(
     val type: Type
         get() = Type.findByIndex(index)
 
-    enum class Type(val index: Int, val value: String) {
-        MAC(0, "Mac"),
-        IPHONE(1, "iPhone"),
-        APPLEWATCH(2, "AppleWatch"),
-        IPAD(3, "iPad"),
-        AIRPODS(4, "AirPods"),
-        IPOD(5, "iPod");
+    enum class Type(val index: Int, val value: String, @DrawableRes val imageRes: Int) {
+        MAC(0, "Mac", R.drawable.product_mac),
+        IPHONE(1, "iPhone", R.drawable.product_iphone),
+        APPLEWATCH(2, "AppleWatch", R.drawable.product_apple_watch),
+        IPAD(3, "iPad", R.drawable.product_ipad),
+        AIRPODS(4, "AirPods", R.drawable.product_airpdos),
+        IPOD(5, "iPod", R.drawable.product_ipod_touch);
 
         companion object {
             fun findByIndex(index: Int): Type = values().first { it.index == index }
