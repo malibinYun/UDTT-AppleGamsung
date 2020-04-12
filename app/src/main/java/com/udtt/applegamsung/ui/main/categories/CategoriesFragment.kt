@@ -6,8 +6,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.udtt.applegamsung.R
 import com.udtt.applegamsung.data.entity.Category
 import com.udtt.applegamsung.databinding.FragmentCategoriesBinding
 import com.udtt.applegamsung.ui.applebox.AppleBoxActivity
@@ -56,6 +58,7 @@ class CategoriesFragment : BaseFragment(), CategoryClickListener {
     }
 
     private fun initView(categoriesAdapter: CategoriesAdapter) {
+        binding.lifecycleOwner = this
         binding.categories.adapter = categoriesAdapter
         binding.btnBack.setOnClickListener { mainViewModel.movePageTo(FRAGMENT_NICKNAME) }
         binding.btnAppleBox.setOnClickListener { deployAppleBoxActivity() }

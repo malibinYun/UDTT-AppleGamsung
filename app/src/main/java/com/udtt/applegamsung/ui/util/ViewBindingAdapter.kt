@@ -1,10 +1,12 @@
 package com.udtt.applegamsung.ui.util
 
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.databinding.BindingAdapter
+import com.udtt.applegamsung.R
 
 @BindingAdapter("activated")
 fun bindActivated(view: View, state: Boolean) {
@@ -39,4 +41,11 @@ fun bindVisibilityFadeIn(view: View, isLoading: Boolean?) {
     view.animate()
         .setDuration(1_000)
         .alpha(1f)
+}
+
+@BindingAdapter("anim_purse")
+fun bindAnimationPurse(view: View, state: Boolean?) {
+    if (state != true) return
+    val anim = AnimationUtils.loadAnimation(view.context, R.anim.anim_purse)
+    view.startAnimation(anim)
 }

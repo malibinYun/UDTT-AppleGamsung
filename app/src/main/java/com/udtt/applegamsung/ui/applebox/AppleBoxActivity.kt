@@ -2,6 +2,7 @@ package com.udtt.applegamsung.ui.applebox
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.ads.AdListener
@@ -65,6 +66,15 @@ class AppleBoxActivity : BaseActivity(), AppleBoxItemClickListener {
     private fun createAdClosedListener() = object : AdListener() {
         override fun onAdClosed() {
             deployApplePowerActivity()
+        }
+
+        override fun onAdFailedToLoad(p0: Int) {
+            super.onAdFailedToLoad(p0)
+            Toast.makeText(
+                this@AppleBoxActivity,
+                "몬가... 몬가 에러가 났음... 다시 시도해주세요...",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
