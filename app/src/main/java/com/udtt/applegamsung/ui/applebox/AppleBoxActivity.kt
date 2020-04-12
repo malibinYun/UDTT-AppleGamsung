@@ -4,6 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.InterstitialAd
 import com.udtt.applegamsung.R
 import com.udtt.applegamsung.data.entity.AppleBoxItem
 import com.udtt.applegamsung.databinding.ActivityAppleBoxBinding
@@ -12,6 +16,7 @@ import com.udtt.applegamsung.ui.main.categories.CategoriesFragment
 import com.udtt.applegamsung.ui.util.BaseActivity
 import com.udtt.applegamsung.ui.util.SimpleDialog
 import com.udtt.applegamsung.util.addAnimationEndListener
+import com.udtt.applegamsung.util.log
 import org.koin.android.ext.android.inject
 
 class AppleBoxActivity : BaseActivity(), AppleBoxItemClickListener {
@@ -20,6 +25,7 @@ class AppleBoxActivity : BaseActivity(), AppleBoxItemClickListener {
     private lateinit var appleBoxViewModel: AppleBoxViewModel
 
     private lateinit var binding: ActivityAppleBoxBinding
+    private lateinit var interstitialAd: InterstitialAd
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +51,23 @@ class AppleBoxActivity : BaseActivity(), AppleBoxItemClickListener {
         appleBoxViewModel.deleteAppleBoxItem(item)
     }
 
+    override fun initAdmob(adView: AdView) {
+        super.initAdmob(adView)
+
+        val adRequest = AdRequest.Builder().build()
+        interstitialAd = InterstitialAd(this).apply {
+            adUnitId = getString(R.string.admobInterstitialTestId)
+            loadAd(adRequest)
+            adListener = createAdClosedListener()
+        }
+    }
+
+    private fun createAdClosedListener() = object : AdListener() {
+        override fun onAdClosed() {
+            deployApplePowerActivity()
+        }
+    }
+
     private fun initView(adapter: AppleBoxAdapter) {
         setContentView(binding.root)
         initAdmob(binding.banner)
@@ -64,7 +87,6 @@ class AppleBoxActivity : BaseActivity(), AppleBoxItemClickListener {
         binding.windowAppleBox.animate()
             .setDuration(ANIM_DURATION)
             .alpha(0f)
-
         binding.loadingAnim.animate()
             .setDuration(ANIM_DURATION)
             .alpha(1f)
@@ -73,9 +95,7 @@ class AppleBoxActivity : BaseActivity(), AppleBoxItemClickListener {
     private fun startLottieAnimation() {
         binding.loadingAnim.speed = 1.5f
         binding.loadingAnim.playAnimation()
-        binding.loadingAnim.addAnimationEndListener {
-            deployApplePowerActivity()
-        }
+        binding.loadingAnim.addAnimationEndListener { interstitialAd.show() }
     }
 
     private fun deployApplePowerActivity() {
