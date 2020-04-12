@@ -43,11 +43,13 @@ class ApplePowerViewModel(
     }
 
     private fun loadAppleBoxItems() {
+        _isLoading.value = true
         appleBoxItemsRepository.getAppleBoxItems {
             appleBoxItems.addAll(it)
             _havingProducts.value = extractProductNames(it)
             _havingCategories.value = extractCategoryTypes(it)
             loadApplePower(getScore())
+            _isLoading.value = false
         }
     }
 

@@ -32,3 +32,11 @@ fun bindTextWrappedByChar(textView: TextView, string: String?) {
     val convertedString = string?.replace(" ", "\u00A0") ?: ""
     textView.text = convertedString
 }
+
+@BindingAdapter("fade_in_visible")
+fun bindVisibilityFadeIn(view: View, isLoading: Boolean?) {
+    if (isLoading != false) return
+    view.animate()
+        .setDuration(1_000)
+        .alpha(1f)
+}

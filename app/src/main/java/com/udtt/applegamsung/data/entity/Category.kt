@@ -25,11 +25,11 @@ data class Category(
     enum class Type(val index: Int, val value: String, @DrawableRes val imageRes: Int) {
         MAC(0, "Mac", R.drawable.product_mac),
         IPHONE(1, "iPhone", R.drawable.product_iphone),
-        APPLEWATCH(2, "AppleWatch", R.drawable.product_apple_watch),
-        IPAD(3, "iPad", R.drawable.product_ipad),
+        IPAD(2, "iPad", R.drawable.product_ipad),
+        APPLEWATCH(3, "AppleWatch", R.drawable.product_apple_watch),
         AIRPODS(4, "AirPods", R.drawable.product_airpdos),
         IPOD(5, "iPod", R.drawable.product_ipod_touch),
-        HAVE_NOTING(-1, "", R.drawable.no_apple_imoji);
+        HAVE_NOTING(6, "", R.drawable.no_apple_imoji);
 
         companion object {
             fun findByIndex(index: Int): Type = values().first { it.index == index }

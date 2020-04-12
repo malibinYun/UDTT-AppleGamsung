@@ -20,7 +20,9 @@
             android:id="@+id/scrollView3"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:alpha="0"
             android:overScrollMode="never"
+            app:fade_in_visible="@{!applePowerViewModel.isLoading()}"
             app:layout_constraintBottom_toTopOf="@+id/btn_retry"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,10 +38,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:translationZ="4dp"
+                    app:img_res="@{applePowerViewModel.applePower.level.imageRes}"
                     app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
                     app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
-                    app:layout_constraintStart_toStartOf="@+id/constraintLayout"
-                    app:img_res="@{applePowerViewModel.applePower.level.imageRes}" />
+                    app:layout_constraintStart_toStartOf="@+id/constraintLayout" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout"
