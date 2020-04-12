@@ -57,7 +57,7 @@ class AppleBoxActivity : BaseActivity(), AppleBoxItemClickListener {
 
         val adRequest = AdRequest.Builder().build()
         interstitialAd = InterstitialAd(this).apply {
-            adUnitId = getString(R.string.admobInterstitialTestId)
+            adUnitId = getString(R.string.admobInterstitialId)
             loadAd(adRequest)
             adListener = createAdClosedListener()
         }

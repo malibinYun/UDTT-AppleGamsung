@@ -21,7 +21,7 @@ class TestResultsRepository(
 
     override fun saveTestResult(testResult: TestResult) {
         testResultsLocalDataSource.saveTestResult(testResult)
-        //testResultsRemoteDataSource.saveTestResult(testResult)
+        testResultsRemoteDataSource.saveTestResult(testResult)
     }
 
     override fun getApplePowers(callback: (applePowers: List<ApplePower>) -> Unit) {
