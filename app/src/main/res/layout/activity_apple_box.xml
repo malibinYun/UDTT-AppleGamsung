@@ -147,17 +147,16 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageView
+        <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/loading_anim"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:alpha="0"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_launcher_background" />
-
+            app:lottie_rawRes="@raw/anim_human_intelligence" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

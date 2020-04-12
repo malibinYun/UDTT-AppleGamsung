@@ -2,9 +2,6 @@ package com.udtt.applegamsung.ui.applebox
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.udtt.applegamsung.R
@@ -14,6 +11,7 @@ import com.udtt.applegamsung.ui.applepower.ApplePowerActivity
 import com.udtt.applegamsung.ui.main.categories.CategoriesFragment
 import com.udtt.applegamsung.ui.util.BaseActivity
 import com.udtt.applegamsung.ui.util.SimpleDialog
+import com.udtt.applegamsung.util.addAnimationEndListener
 import org.koin.android.ext.android.inject
 
 class AppleBoxActivity : BaseActivity(), AppleBoxItemClickListener {
@@ -37,9 +35,10 @@ class AppleBoxActivity : BaseActivity(), AppleBoxItemClickListener {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-
-        // TODO: 애니메이션 중일때 안누리는 로직 작성해야함
+        val isAnimating = binding.loadingAnim.isAnimating
+        if (!isAnimating) {
+            super.onBackPressed()
+        }
     }
 
     override fun onAppleBoxItemClick(item: AppleBoxItem) {
@@ -56,17 +55,27 @@ class AppleBoxActivity : BaseActivity(), AppleBoxItemClickListener {
         binding.btnMyApplePower.setOnClickListener { deployDeleteAlertDialog() }
     }
 
+    private fun startAnimation() {
+        startFadeAnimation()
+        startLottieAnimation()
+    }
+
     private fun startFadeAnimation() {
         binding.windowAppleBox.animate()
+            .setDuration(ANIM_DURATION)
             .alpha(0f)
-            .setDuration(ANIM_DURATION)
-            .withEndAction { deployApplePowerActivity() }
+
         binding.loadingAnim.animate()
-            .alpha(1f)
             .setDuration(ANIM_DURATION)
-            .withEndAction {
-                binding.loadingAnim.visibility = View.VISIBLE
-            }
+            .alpha(1f)
+    }
+
+    private fun startLottieAnimation() {
+        binding.loadingAnim.speed = 1.5f
+        binding.loadingAnim.playAnimation()
+        binding.loadingAnim.addAnimationEndListener {
+            deployApplePowerActivity()
+        }
     }
 
     private fun deployApplePowerActivity() {
@@ -85,7 +94,7 @@ class AppleBoxActivity : BaseActivity(), AppleBoxItemClickListener {
         val itemCount = appleBoxViewModel.appleBoxItems.value?.size ?: 0
         SimpleDialog(this)
             .apply { message = getString(R.string.i_will_calculate_apple_power, itemCount) }
-            .setOkClickListener(getString(R.string.yes)) { startFadeAnimation() }
+            .setOkClickListener(getString(R.string.yes)) { startAnimation() }
             .setCancelClickListener(getString(R.string.no)) {}
             .show()
     }
