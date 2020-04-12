@@ -39,7 +39,7 @@
                     app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
                     app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
                     app:layout_constraintStart_toStartOf="@+id/constraintLayout"
-                    app:srcCompat="@drawable/ic_launcher_background" />
+                    app:img_res="@{applePowerViewModel.applePower.level.imageRes}" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout"
