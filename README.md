@@ -6,10 +6,8 @@
 
 ⛔️본 어플리케이션은 2020년 최신 업데이트된 뇌피셜 자료를 95%의 신뢰 수준으로 반영하여 제작되었습니다⛔️
 
-<p align="left">
 <a href='https://play.google.com/store/apps/details?id=com.udtt.applegamsung&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='다운로드하기 Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png' width="240px"/></a>
 <a href="https://apps.apple.com/kr/app/%EC%95%B1%EB%93%B1%EB%A0%A5%EC%B8%A1%EC%A0%95%EA%B8%B0/id1505275100?mt=8"><img src='https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=2020-04-16&kind=iossoftware&bubble=apple_music' width="220px"/></a>
-</p>
 
 
 
@@ -29,15 +27,13 @@
 
   지인들과 재미로 만들어 본 사이드 프로젝트입니다. "재미로"라고는 썼지만 이런 작은 프로젝트를 통해 공부했던 것들을 모두 적용해보기도 하고, 다듬어 보기도 하고 새로운 것들을 공부하기 위해서 최대한 많은 것들을 담아냈습니다. 그래서 작은 프로젝트 치고 파일량도 많고 레이어도 세세히 나누어져 있습니다! 😄😄
 
-  요즈음 코로나 시국이라 OO테스트가 유행이길래 갑자기 생각난 아이디어로 시작 되었습니다. 더 많은 사람들이 발견해서 테스트해봤으면 좋겠네요! 웹으로 만들었으면 참 좋았을 텐데, 웹을 할 줄 모르는 게 참 한이 되었습니다.😔 같이 한 팀원이 [프로젝트 회고](https://www.notion.so/Story-47aecf5a462d41dd813d06846c8c98bc)도 썼습니다. 같이 보면 재밌어요!!
+  요즈음 코로나 시국이라 OO테스트가 유행이길래 갑자기 생각난 아이디어로 시작 되었습니다. 더 많은 사람들이 발견해서 테스트해봤으면 좋겠네요! 같이 한 팀원이 [프로젝트 회고](https://www.notion.so/Story-47aecf5a462d41dd813d06846c8c98bc)도 썼습니다. 같이 보면 재밌어요!!
 
   [Google Architecture Sample](https://github.com/android/architecture-samples/tree/todo-mvvm-live-kotlin) 코드를 정말 많이 참고하였습니다. 거의 모방 수준이라고 봐도 무방할 정도입니다. 그만큼 이 샘플 코드에 대해 많은 이해를 할 수 있는 기회였습니다!
 
   사용한 것들 중.. 난독화 툴인 proguard를 드디어 처음 적용해 보았습니다. 컴파일 에러시 a.a.a.a.b(26) 이런 식으로 난독화가 진행된 걸 보았을 때 성공했다는 걸 알게 되었습니다. 생각보다 별거 없더군요! (사실 그렇지 않았다고 한다.)
 
   ViewPager2를 사용해보았습니다! 아주 좋습니다... 이젠 ViewPager2 만 쓸 겁니다.. 이걸 사용하면서 한 Activity에 4개의 Fragment가 물려있었는데, ViewModel 분리에서 좀 애먹었습니다. 하나의 ViewModel로 모든 Fragment의 데이터들을 관리하기에는 코드 길이가 너무 길어져 각 Fragment별로 ViewModel을 할당하고, 각각 Fragment의 데이터를 불러오고 초기화해주는 코드는 각각의 ViewModel에 분리하였습니다. 그래도 각 Fragment에서 공유해야 하는 데이터들이 생각보다 많았기에 MainViewModel 코드를 최대한 줄였지만 여전히 하는 일도 많고 코드도 길어졌습니다 😥😥 MainViewModel도 더 분리를 하면 좋았을 거 같다 라는 생각이 문득 드네요.
-
-  테스트 코드는 없습니다 ㅠㅠ 나중에 추가하려구요... 테스트 코드까지 짤 여유는 없었습니다 😥
 
 
 
