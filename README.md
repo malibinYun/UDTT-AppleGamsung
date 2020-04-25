@@ -48,7 +48,7 @@
 
 * **Proguard Enabled** (Minify & Shrink resources)
 * **JetPack**
-* **Data Binding**
+  * **Data Binding**
   * **LiveData**
   * **Lifecycle**
   * **ViewModel**
