@@ -1,18 +1,16 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    compileSdkVersion 33
 
     defaultConfig {
         applicationId "com.udtt.applegamsung"
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 33
         versionCode 3
         versionName "1.0"
 
@@ -39,6 +37,7 @@ android {
     dataBinding {
         enabled = true
     }
+    namespace 'com.udtt.applegamsung'
 
 }
 dependencies {
@@ -68,7 +67,7 @@ dependencies {
     // Firebase / FireStore
     implementation 'com.google.firebase:firebase-analytics:17.3.0'
     implementation 'com.google.firebase:firebase-firestore-ktx:21.4.2'
-    implementation 'com.google.firebase:firebase-crashlytics:17.0.0-beta04'
+    implementation 'com.google.firebase:firebase-crashlytics:18.3.7'
 
     // Gson
     implementation 'com.google.code.gson:gson:2.8.6'
