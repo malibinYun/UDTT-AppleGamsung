@@ -22,7 +22,7 @@ fun Float.toPx(): Int = (this * Resources.getSystem().displayMetrics.density).to
 
 fun LottieAnimationView.addAnimationEndListener(listener: (animation: Animator?) -> Unit) {
     this.addAnimatorListener(object : AnimatorListenerAdapter() {
-        override fun onAnimationEnd(animation: Animator?) {
+        override fun onAnimationEnd(animation: Animator) {
             listener.invoke(animation)
         }
     })

@@ -19,7 +19,7 @@ class ViewModelFactory(
     private val testResultsRepository: TestResultsRepository
 ) : ViewModelProvider.Factory {
 
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when (modelClass) {
 
             MainViewModel::class.java ->
