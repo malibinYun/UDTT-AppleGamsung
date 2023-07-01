@@ -25,6 +25,7 @@
 .idea/gradle.xml
 .idea/jarRepositories.xml
 .idea/navEditor.xml
+.idea/kotlinc.xml
 .DS_Store
 /build
 /captures

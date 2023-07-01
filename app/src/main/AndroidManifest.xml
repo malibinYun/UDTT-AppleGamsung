@@ -22,10 +22,11 @@
 
         <meta-data
             android:name="firebase_analytics_collection_deactivated"
-            android:value="@bool/firebaseAnalyticsDeactivated"/>
+            android:value="@bool/firebaseAnalyticsDeactivated" />
 
         <activity
             android:name=".ui.intro.IntroActivity"
+            android:exported="true"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

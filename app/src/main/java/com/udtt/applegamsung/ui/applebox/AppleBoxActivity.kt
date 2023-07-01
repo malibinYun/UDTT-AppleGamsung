@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.InterstitialAd
+import com.google.android.gms.ads.FullScreenContentCallback
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.udtt.applegamsung.R
 import com.udtt.applegamsung.data.entity.AppleBoxItem
 import com.udtt.applegamsung.databinding.ActivityAppleBoxBinding
@@ -17,7 +19,6 @@ import com.udtt.applegamsung.ui.main.categories.CategoriesFragment
 import com.udtt.applegamsung.ui.util.BaseActivity
 import com.udtt.applegamsung.ui.util.SimpleDialog
 import com.udtt.applegamsung.util.addAnimationEndListener
-import com.udtt.applegamsung.util.log
 import org.koin.android.ext.android.inject
 
 class AppleBoxActivity : BaseActivity(), AppleBoxItemClickListener {
@@ -56,27 +57,37 @@ class AppleBoxActivity : BaseActivity(), AppleBoxItemClickListener {
         super.initAdmob(adView)
 
         val adRequest = AdRequest.Builder().build()
-        interstitialAd = InterstitialAd(this).apply {
-            adUnitId = getString(R.string.admobInterstitialId)
-            loadAd(adRequest)
-            adListener = createAdClosedListener()
-        }
+        InterstitialAd.load(
+            this,
+            getString(R.string.admobInterstitialId),
+            adRequest,
+            createAdClosedListener(),
+        )
     }
 
-    private fun createAdClosedListener() = object : AdListener() {
-        override fun onAdClosed() {
-            deployApplePowerActivity()
-        }
+    private fun createAdClosedListener(): InterstitialAdLoadCallback =
+        object : InterstitialAdLoadCallback() {
 
-        override fun onAdFailedToLoad(p0: Int) {
-            super.onAdFailedToLoad(p0)
-            Toast.makeText(
-                this@AppleBoxActivity,
-                "몬가... 몬가 에러가 났음... 다시 시도해주세요...",
-                Toast.LENGTH_SHORT
-            ).show()
+            override fun onAdLoaded(loadedInterstitialAd: InterstitialAd) {
+                super.onAdLoaded(loadedInterstitialAd)
+
+                loadedInterstitialAd.fullScreenContentCallback = object : FullScreenContentCallback() {
+                    override fun onAdDismissedFullScreenContent() {
+                        super.onAdDismissedFullScreenContent()
+                        deployApplePowerActivity()
+                    }
+                }
+            }
+
+            override fun onAdFailedToLoad(loadAdError: LoadAdError) {
+                super.onAdFailedToLoad(loadAdError)
+                Toast.makeText(
+                    this@AppleBoxActivity,
+                    "몬가... 몬가 에러가 났음... 다시 시도해주세요...",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
-    }
 
     private fun initView(adapter: AppleBoxAdapter) {
         setContentView(binding.root)
@@ -105,7 +116,7 @@ class AppleBoxActivity : BaseActivity(), AppleBoxItemClickListener {
     private fun startLottieAnimation() {
         binding.loadingAnim.speed = 1.5f
         binding.loadingAnim.playAnimation()
-        binding.loadingAnim.addAnimationEndListener { interstitialAd.show() }
+        binding.loadingAnim.addAnimationEndListener { interstitialAd.show(this) }
     }
 
     private fun deployApplePowerActivity() {
