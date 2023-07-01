@@ -78,7 +78,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.9.0'
 
     // AdMob
-    implementation 'com.google.android.gms:play-services-ads:19.0.1'
+    implementation 'com.google.android.gms:play-services-ads:22.1.0'
 
     // Unit Test
     testImplementation 'junit:junit:4.13.2'
