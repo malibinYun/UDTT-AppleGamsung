@@ -5,6 +5,7 @@ import com.udtt.applegamsung.data.entity.ApplePower
 import com.udtt.applegamsung.data.entity.TestResult
 import com.udtt.applegamsung.data.source.TestResultsDataSource
 import com.udtt.applegamsung.util.AsyncExecutor
+import kotlinx.coroutines.CoroutineScope
 
 /**
  * Created By Yun Hyeok
@@ -13,7 +14,9 @@ import com.udtt.applegamsung.util.AsyncExecutor
 
 class TestResultsLocalDataSource(
     private val asyncExecutor: AsyncExecutor,
-    private val testResultsDao: TestResultsDao
+    private val testResultsDao: TestResultsDao,
+    private val mainCoroutineScope: CoroutineScope,
+    private val ioCoroutineScope: CoroutineScope,
 ) : TestResultsDataSource {
 
     override fun getTestResults(callback: (testResults: List<TestResult>) -> Unit) {

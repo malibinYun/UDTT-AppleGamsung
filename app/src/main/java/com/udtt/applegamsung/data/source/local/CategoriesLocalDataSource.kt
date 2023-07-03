@@ -4,6 +4,7 @@ import com.udtt.applegamsung.data.dao.CategoriesDao
 import com.udtt.applegamsung.data.entity.Category
 import com.udtt.applegamsung.data.source.CategoriesDataSource
 import com.udtt.applegamsung.util.AsyncExecutor
+import kotlinx.coroutines.CoroutineScope
 
 /**
  * Created By Yun Hyeok
@@ -12,7 +13,9 @@ import com.udtt.applegamsung.util.AsyncExecutor
 
 class CategoriesLocalDataSource(
     private val asyncExecutor: AsyncExecutor,
-    private val categoriesDao: CategoriesDao
+    private val categoriesDao: CategoriesDao,
+    private val mainCoroutineScope: CoroutineScope,
+    private val ioCoroutineScope: CoroutineScope,
 ) : CategoriesDataSource {
 
     override fun getCategories(callback: (categories: List<Category>) -> Unit) {

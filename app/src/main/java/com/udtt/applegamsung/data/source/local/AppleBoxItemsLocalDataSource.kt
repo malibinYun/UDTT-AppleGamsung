@@ -4,10 +4,13 @@ import com.udtt.applegamsung.data.dao.AppleBoxItemsDao
 import com.udtt.applegamsung.data.entity.AppleBoxItem
 import com.udtt.applegamsung.data.source.AppleBoxItemsDataSource
 import com.udtt.applegamsung.util.AsyncExecutor
+import kotlinx.coroutines.CoroutineScope
 
 class AppleBoxItemsLocalDataSource(
     private val asyncExecutor: AsyncExecutor,
-    private val appleBoxItemsDao: AppleBoxItemsDao
+    private val appleBoxItemsDao: AppleBoxItemsDao,
+    private val mainCoroutineScope: CoroutineScope,
+    private val ioCoroutineScope: CoroutineScope,
 ) : AppleBoxItemsDataSource {
 
     override fun getAppleBoxItems(callback: (appleBoxItems: List<AppleBoxItem>) -> Unit) {
