@@ -71,6 +71,7 @@ class AppleBoxActivity : BaseActivity(), AppleBoxItemClickListener {
             override fun onAdLoaded(loadedInterstitialAd: InterstitialAd) {
                 super.onAdLoaded(loadedInterstitialAd)
 
+                interstitialAd = loadedInterstitialAd
                 loadedInterstitialAd.fullScreenContentCallback = object : FullScreenContentCallback() {
                     override fun onAdDismissedFullScreenContent() {
                         super.onAdDismissedFullScreenContent()
