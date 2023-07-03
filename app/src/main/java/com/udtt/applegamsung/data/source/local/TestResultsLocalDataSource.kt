@@ -4,8 +4,8 @@ import com.udtt.applegamsung.data.dao.TestResultsDao
 import com.udtt.applegamsung.data.entity.ApplePower
 import com.udtt.applegamsung.data.entity.TestResult
 import com.udtt.applegamsung.data.source.TestResultsDataSource
-import com.udtt.applegamsung.util.AsyncExecutor
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 /**
  * Created By Yun Hyeok
@@ -13,47 +13,46 @@ import kotlinx.coroutines.CoroutineScope
  */
 
 class TestResultsLocalDataSource(
-    private val asyncExecutor: AsyncExecutor,
     private val testResultsDao: TestResultsDao,
     private val mainCoroutineScope: CoroutineScope,
     private val ioCoroutineScope: CoroutineScope,
 ) : TestResultsDataSource {
 
     override fun getTestResults(callback: (testResults: List<TestResult>) -> Unit) {
-        asyncExecutor.ioThread.execute {
+        ioCoroutineScope.launch {
             val testResults = testResultsDao.getTestResults()
-            asyncExecutor.mainThread.execute { callback(testResults) }
+            mainCoroutineScope.launch { callback(testResults) }
         }
     }
 
     override fun saveTestResult(testResult: TestResult) {
-        asyncExecutor.ioThread.execute {
+        ioCoroutineScope.launch {
             testResultsDao.insertTestResult(testResult)
         }
     }
 
     override fun getApplePowers(callback: (applePowers: List<ApplePower>) -> Unit) {
-        asyncExecutor.ioThread.execute {
+        ioCoroutineScope.launch {
             val applePowers = testResultsDao.getApplePowers()
-            asyncExecutor.mainThread.execute { callback(applePowers) }
+            mainCoroutineScope.launch { callback(applePowers) }
         }
     }
 
     override fun getApplePower(totalScore: Int, callback: (applePower: ApplePower?) -> Unit) {
-        asyncExecutor.ioThread.execute {
+        ioCoroutineScope.launch {
             val applePower = testResultsDao.getApplePower(totalScore)
-            asyncExecutor.mainThread.execute { callback(applePower) }
+            mainCoroutineScope.launch { callback(applePower) }
         }
     }
 
     override fun saveApplePowers(applePowers: List<ApplePower>) {
-        asyncExecutor.ioThread.execute {
+        ioCoroutineScope.launch {
             testResultsDao.insertApplePower(applePowers)
         }
     }
 
     override fun removeAllTestResults() {
-        asyncExecutor.ioThread.execute {
+        ioCoroutineScope.launch {
             testResultsDao.deleteAllTestResults()
         }
     }

@@ -10,18 +10,17 @@ import com.udtt.applegamsung.data.entity.AppleBoxItem
 interface AppleBoxItemsDao {
 
     @Query("SELECT * FROM appleboxitem ORDER BY categoryIndex, name")
-    fun getAppleBoxItems(): List<AppleBoxItem>
+    suspend fun getAppleBoxItems(): List<AppleBoxItem>
 
     @Insert
-    fun insertAppleBoxItems(appleBoxItems: List<AppleBoxItem>)
+    suspend fun insertAppleBoxItems(appleBoxItems: List<AppleBoxItem>)
 
     @Delete
-    fun deleteAppleBoxItem(appleBoxItem: AppleBoxItem)
+    suspend fun deleteAppleBoxItem(appleBoxItem: AppleBoxItem)
 
     @Delete
-    fun deleteAppleBoxItems(appleBoxItems: List<AppleBoxItem>)
+    suspend fun deleteAppleBoxItems(appleBoxItems: List<AppleBoxItem>)
 
     @Query("DELETE FROM appleboxitem")
-    fun deleteAllAppleBoxItems()
-
+    suspend fun deleteAllAppleBoxItems()
 }
