@@ -15,9 +15,8 @@ import com.udtt.applegamsung.data.entity.Category
 interface CategoriesDao {
 
     @Query("SELECT * FROM category")
-    fun getCategories(): List<Category>
+    suspend fun getCategories(): List<Category>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertCategories(categories: List<Category>)
-
+    suspend fun insertCategories(categories: List<Category>)
 }

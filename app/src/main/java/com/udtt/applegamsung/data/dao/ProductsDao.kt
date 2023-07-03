@@ -14,9 +14,8 @@ import com.udtt.applegamsung.data.entity.Product
 interface ProductsDao {
 
     @Query("SELECT * FROM product WHERE categoryId = :categoryId ORDER BY name")
-    fun getProductsByCategoryId(categoryId: String): List<Product>
+    suspend fun getProductsByCategoryId(categoryId: String): List<Product>
 
     @Insert
-    fun insertProducts(products: List<Product>)
-
+    suspend fun insertProducts(products: List<Product>)
 }

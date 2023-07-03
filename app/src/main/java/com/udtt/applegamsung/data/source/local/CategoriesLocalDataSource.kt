@@ -3,7 +3,8 @@ package com.udtt.applegamsung.data.source.local
 import com.udtt.applegamsung.data.dao.CategoriesDao
 import com.udtt.applegamsung.data.entity.Category
 import com.udtt.applegamsung.data.source.CategoriesDataSource
-import com.udtt.applegamsung.util.AsyncExecutor
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 /**
  * Created By Yun Hyeok
@@ -11,19 +12,20 @@ import com.udtt.applegamsung.util.AsyncExecutor
  */
 
 class CategoriesLocalDataSource(
-    private val asyncExecutor: AsyncExecutor,
-    private val categoriesDao: CategoriesDao
+    private val categoriesDao: CategoriesDao,
+    private val mainCoroutineScope: CoroutineScope,
+    private val ioCoroutineScope: CoroutineScope,
 ) : CategoriesDataSource {
 
     override fun getCategories(callback: (categories: List<Category>) -> Unit) {
-        asyncExecutor.ioThread.execute {
+        ioCoroutineScope.launch {
             val categories = categoriesDao.getCategories()
-            asyncExecutor.mainThread.execute { callback(categories) }
+            mainCoroutineScope.launch { callback(categories) }
         }
     }
 
     override fun saveCategories(categories: List<Category>) {
-        asyncExecutor.ioThread.execute {
+        ioCoroutineScope.launch {
             categoriesDao.insertCategories(categories)
         }
     }

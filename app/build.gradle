@@ -64,6 +64,7 @@ dependencies {
 
     // Room Database
     implementation "androidx.room:room-runtime:2.5.2"
+    implementation "androidx.room:room-ktx:2.5.2"
     kapt "androidx.room:room-compiler:2.5.2"
 
     // Koin Dependency Injection
@@ -79,6 +80,9 @@ dependencies {
 
     // AdMob
     implementation 'com.google.android.gms:play-services-ads:22.1.0'
+
+    // Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
 
     // Unit Test
     testImplementation 'junit:junit:4.13.2'

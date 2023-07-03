@@ -15,21 +15,20 @@ import com.udtt.applegamsung.data.entity.TestResult
 interface TestResultsDao {
 
     @Query("SELECT * FROM testresult")
-    fun getTestResults(): List<TestResult>
+    suspend fun getTestResults(): List<TestResult>
 
     @Insert
-    fun insertTestResult(testResult: TestResult)
+    suspend fun insertTestResult(testResult: TestResult)
 
     @Query("DELETE FROM testresult")
-    fun deleteAllTestResults()
+    suspend fun deleteAllTestResults()
 
     @Query("SELECT * FROM applepower")
-    fun getApplePowers(): List<ApplePower>
+    suspend fun getApplePowers(): List<ApplePower>
 
     @Query("SELECT * FROM applepower WHERE maxPower >= :totalScore AND minPower <= :totalScore ORDER BY maxPower LIMIT(1)")
-    fun getApplePower(totalScore: Int): ApplePower?
+    suspend fun getApplePower(totalScore: Int): ApplePower?
 
     @Insert
-    fun insertApplePower(applePowers: List<ApplePower>)
-
+    suspend fun insertApplePower(applePowers: List<ApplePower>)
 }
