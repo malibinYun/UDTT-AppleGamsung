@@ -38,7 +38,6 @@ val appDataBaseModule = module {
 val localDataSourceModule = module {
     single {
         CategoriesLocalDataSource(
-            get(),
             get<AppDatabase>().categoriesDao(),
             MainCoroutineScope,
             IoCoroutineScope,
@@ -46,7 +45,6 @@ val localDataSourceModule = module {
     }
     single {
         ProductsLocalDataSource(
-            get(),
             get<AppDatabase>().productsDao(),
             MainCoroutineScope,
             IoCoroutineScope,
@@ -54,7 +52,6 @@ val localDataSourceModule = module {
     }
     single {
         TestResultsLocalDataSource(
-            get(),
             get<AppDatabase>().testResultsDao(),
             MainCoroutineScope,
             IoCoroutineScope,
@@ -62,7 +59,6 @@ val localDataSourceModule = module {
     }
     single {
         AppleBoxItemsLocalDataSource(
-            get(),
             get<AppDatabase>().appleBoxItemsDao(),
             MainCoroutineScope,
             IoCoroutineScope,
