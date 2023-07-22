@@ -1,19 +1,14 @@
 package com.udtt.applegamsung.data.entity
 
 import androidx.annotation.DrawableRes
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.udtt.applegamsung.R
 import java.util.UUID
 
-@Entity
 data class ApplePower(
     val name: String = "",
     val description: String = "",
     val minPower: Int = 0,
     val maxPower: Int = 0,
-
-    @PrimaryKey
     var id: String = UUID.randomUUID().toString()
 ) {
     val level: Level

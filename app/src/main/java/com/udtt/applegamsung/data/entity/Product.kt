@@ -1,17 +1,13 @@
 package com.udtt.applegamsung.data.entity
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.google.firebase.firestore.IgnoreExtraProperties
-import java.util.*
+import java.util.UUID
 
 /**
  * Created By Yun Hyeok
  * on 3월 14, 2020
  */
 
-@Entity
 @IgnoreExtraProperties
 data class Product(
     val name: String = "",
@@ -19,11 +15,8 @@ data class Product(
     val categoryIndex: Int = 0,
     var categoryId: String = "",
     val imageUrl: String = "",
-
-    @PrimaryKey
     val id: String = UUID.randomUUID().toString()
 ) {
-    @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
     var imageByteArray: ByteArray? = null
 
     val categoryType: Category.Type
