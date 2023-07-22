@@ -1,22 +1,17 @@
 package com.udtt.applegamsung.data.entity
 
 import androidx.annotation.DrawableRes
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.udtt.applegamsung.R
-import java.util.*
+import java.util.UUID
 
 /**
  * Created By Yun Hyeok
  * on 3월 14, 2020
  */
 
-@Entity
 data class Category(
     val name: String = "",
     val index: Int = 0,
-
-    @PrimaryKey
     var id: String = UUID.randomUUID().toString()
 ) {
     val type: Type
