@@ -45,6 +45,10 @@ android {
         }
     }
 
+    sourceSets {
+        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+    }
+
     compileOptions {
         sourceCompatibility = 17
         targetCompatibility = 17
@@ -92,7 +96,7 @@ dependencies {
 
     // Unit Test
     testImplementation 'junit:junit:4.13.2'
-    testImplementation "android.arch.core:core-testing:1.1.1"
+    testImplementation "com.google.truth:truth:1.1.2"
     testImplementation "org.mockito:mockito-core:5.3.1"
     testImplementation 'org.mockito:mockito-inline:2.21.0'
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
@@ -100,6 +104,7 @@ dependencies {
     // Instrumented Test
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation "com.google.truth:truth:1.1.2"
     androidTestImplementation "org.koin:koin-test:2.0.1"
     androidTestImplementation "org.mockito:mockito-core:5.3.1"
     androidTestImplementation "androidx.room:room-testing:2.5.2"
