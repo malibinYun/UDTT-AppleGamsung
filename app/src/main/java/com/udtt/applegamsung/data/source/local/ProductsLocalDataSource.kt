@@ -1,7 +1,9 @@
 package com.udtt.applegamsung.data.source.local
 
-import com.udtt.applegamsung.data.dao.ProductsDao
+import com.udtt.applegamsung.data.dao.AppleProductsDao
 import com.udtt.applegamsung.data.entity.Product
+import com.udtt.applegamsung.data.local.mapper.toAppleProductEntity
+import com.udtt.applegamsung.data.local.mapper.toProduct
 import com.udtt.applegamsung.data.source.ProductsDataSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -12,21 +14,22 @@ import kotlinx.coroutines.launch
  */
 
 class ProductsLocalDataSource(
-    private val productsDao: ProductsDao,
+    private val appleProductsDao: AppleProductsDao,
     private val mainCoroutineScope: CoroutineScope,
     private val ioCoroutineScope: CoroutineScope,
 ) : ProductsDataSource {
 
     override fun getProducts(categoryId: String, callback: (products: List<Product>) -> Unit) {
         ioCoroutineScope.launch {
-            val products = productsDao.getProductsByCategoryId(categoryId)
+            val products = appleProductsDao.getProductsByCategoryId(categoryId)
+                .map { it.toProduct() }
             mainCoroutineScope.launch { callback(products) }
         }
     }
 
     override fun saveProducts(products: List<Product>) {
         ioCoroutineScope.launch {
-            productsDao.insertProducts(products)
+            appleProductsDao.insertProducts(products.map { it.toAppleProductEntity() })
         }
     }
 }
