@@ -2,7 +2,8 @@ package com.udtt.applegamsung.config.di
 
 import androidx.room.Room
 import com.google.firebase.firestore.FirebaseFirestore
-import com.udtt.applegamsung.data.AppDatabase
+import com.udtt.applegamsung.data.database.AppDatabase
+import com.udtt.applegamsung.data.database.migration.AppleProductEntityMigration
 import com.udtt.applegamsung.data.repository.AppleBoxItemsRepository
 import com.udtt.applegamsung.data.repository.CategoriesRepository
 import com.udtt.applegamsung.data.repository.ProductsRepository
@@ -31,7 +32,9 @@ val IoCoroutineScope = CoroutineScope(Dispatchers.IO)
 
 val appDataBaseModule = module {
     single {
-        Room.databaseBuilder(androidContext(), AppDatabase::class.java, "database").build()
+        Room.databaseBuilder(androidContext(), AppDatabase::class.java, "database")
+            .addMigrations(AppleProductEntityMigration())
+            .build()
     }
 }
 
