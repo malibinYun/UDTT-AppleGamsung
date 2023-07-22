@@ -10,7 +10,6 @@ import com.udtt.applegamsung.data.repository.AppleBoxItemsRepository
 import com.udtt.applegamsung.data.repository.TestResultsRepository
 import com.udtt.applegamsung.data.repository.UserIdentifyRepository
 import com.udtt.applegamsung.util.BaseViewModel
-import com.udtt.applegamsung.util.log
 
 class ApplePowerViewModel(
     userIdentifyRepository: UserIdentifyRepository,
@@ -50,6 +49,8 @@ class ApplePowerViewModel(
             _havingCategories.value = extractCategoryTypes(it)
             loadApplePower(getScore())
             _isLoading.value = false
+
+            checkSavedTestResultOrSave()
         }
     }
 
@@ -89,7 +90,7 @@ class ApplePowerViewModel(
         testResultsRepository.removeAllTestResults()
     }
 
-    fun checkSavedTestResultOrSave() {
+    private fun checkSavedTestResultOrSave() {
         testResultsRepository.getTestResults {
             if (it.isEmpty()) saveTestResult()
         }
