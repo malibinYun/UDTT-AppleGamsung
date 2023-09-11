@@ -4,10 +4,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.udtt.applegamsung.data.entity.ApplePower
 import com.udtt.applegamsung.data.entity.TestResult
 import com.udtt.applegamsung.data.source.TestResultsDataSource
-import com.udtt.applegamsung.data.util.APPLE_POWER_PATH
-import com.udtt.applegamsung.data.util.TEST_RESULTS_PATH
-import com.udtt.applegamsung.data.util.getCollection
-import com.udtt.applegamsung.data.util.toApplePowers
+import com.udtt.applegamsung.data.remote.firestore.APPLE_POWER_PATH
+import com.udtt.applegamsung.data.remote.firestore.TEST_RESULTS_PATH
+import com.udtt.applegamsung.data.remote.firestore.getCollection
+import com.udtt.applegamsung.data.remote.firestore.toApplePowers
 import com.udtt.applegamsung.util.log
 import com.udtt.applegamsung.util.showStackTrace
 

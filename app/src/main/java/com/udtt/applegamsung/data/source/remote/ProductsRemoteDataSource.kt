@@ -2,11 +2,11 @@ package com.udtt.applegamsung.data.source.remote
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.udtt.applegamsung.data.entity.Product
+import com.udtt.applegamsung.data.remote.firestore.PRODUCTS_PATH
+import com.udtt.applegamsung.data.remote.firestore.getCategoryDocumentById
+import com.udtt.applegamsung.data.remote.firestore.getCollection
+import com.udtt.applegamsung.data.remote.firestore.toProductsOf
 import com.udtt.applegamsung.data.source.ProductsDataSource
-import com.udtt.applegamsung.data.util.PRODUCTS_PATH
-import com.udtt.applegamsung.data.util.getCategoryDocumentById
-import com.udtt.applegamsung.data.util.getCollection
-import com.udtt.applegamsung.data.util.toProductsOf
 import com.udtt.applegamsung.util.log
 import com.udtt.applegamsung.util.showStackTrace
 

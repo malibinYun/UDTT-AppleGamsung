@@ -1,17 +1,24 @@
-package com.udtt.applegamsung.data.util
+package com.udtt.applegamsung.data.remote.firestore
 
 import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import com.udtt.applegamsung.data.entity.ApplePower
 import com.udtt.applegamsung.data.entity.Category
 import com.udtt.applegamsung.data.entity.Product
+import kotlinx.coroutines.tasks.await
 
 /**
  * Created By Yun Hyeok
  * on 3월 15, 2020
  */
+
+suspend fun CollectionReference.getDocumentSnapshots(): List<DocumentSnapshot> {
+    return this.get().await().documents
+}
 
 fun DocumentReference.getCollection(collectionPath: String): Task<QuerySnapshot> {
     return this.collection(collectionPath).get()
