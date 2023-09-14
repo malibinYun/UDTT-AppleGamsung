@@ -3,13 +3,11 @@ package com.udtt.applegamsung.data.source.remote
 import com.google.firebase.firestore.FirebaseFirestore
 import com.udtt.applegamsung.data.entity.ApplePower
 import com.udtt.applegamsung.data.entity.TestResult
+import com.udtt.applegamsung.data.remote.firestore.getDocumentSnapshots
 import com.udtt.applegamsung.data.source.TestResultsDataSource
-import com.udtt.applegamsung.data.remote.firestore.APPLE_POWER_PATH
-import com.udtt.applegamsung.data.remote.firestore.TEST_RESULTS_PATH
-import com.udtt.applegamsung.data.remote.firestore.getCollection
-import com.udtt.applegamsung.data.remote.firestore.toApplePowers
-import com.udtt.applegamsung.util.log
-import com.udtt.applegamsung.util.showStackTrace
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
  * Created By Yun Hyeok
@@ -17,33 +15,49 @@ import com.udtt.applegamsung.util.showStackTrace
  */
 
 class TestResultsRemoteDataSource(
-    private val fireStore: FirebaseFirestore
+    private val firestore: FirebaseFirestore
 ) : TestResultsDataSource {
 
     override fun getTestResults(callback: (testResults: List<TestResult>) -> Unit) {
-        // No Needed
+        throw UnsupportedOperationException("Do not call getTestResults() in remoteSource")
     }
 
     override fun saveTestResult(testResult: TestResult) {
-        val testResults = fireStore.collection(TEST_RESULTS_PATH)
-        testResults.add(testResult)
+        firestore.collection(PathTestResults)
+            .add(testResult)
     }
 
     override fun getApplePowers(callback: (applePowers: List<ApplePower>) -> Unit) {
-        fireStore.getCollection(APPLE_POWER_PATH)
-            .addOnSuccessListener { callback(it.toApplePowers()) }
-            .addOnFailureListener { log(it.showStackTrace()) }
+        CoroutineScope(Dispatchers.Main).launch {
+            val applePowers = firestore.collection(PathApplePower)
+                .getDocumentSnapshots()
+                .map {
+                    ApplePower(
+                        id = it.id,
+                        name = it.getString("name").orEmpty(),
+                        description = it.getString("description").orEmpty(),
+                        minPower = it.getLong("minPower")?.toInt() ?: 0,
+                        maxPower = it.getLong("maxPower")?.toInt() ?: 0,
+                    )
+                }
+            callback(applePowers)
+        }
     }
 
     override fun getApplePower(totalScore: Int, callback: (applePower: ApplePower?) -> Unit) {
-        // No Needed
+        throw UnsupportedOperationException("Do not call getApplePower() in remoteSource")
     }
 
     override fun saveApplePowers(applePowers: List<ApplePower>) {
-        // No Needed
+        throw UnsupportedOperationException("Do not call saveApplePowers() in remoteSource")
     }
 
     override fun removeAllTestResults() {
-        // No Needed
+        throw UnsupportedOperationException("Do not call removeAllTestResults() in remoteSource")
+    }
+
+    companion object {
+        private const val PathTestResults = "testResults"
+        private const val PathApplePower = "ApplePower"
     }
 }
