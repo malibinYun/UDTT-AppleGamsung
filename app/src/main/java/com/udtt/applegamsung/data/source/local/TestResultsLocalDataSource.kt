@@ -49,8 +49,8 @@ class TestResultsLocalDataSource(
     override fun getApplePower(totalScore: Int, callback: (applePower: ApplePower?) -> Unit) {
         ioCoroutineScope.launch {
             val applePower = applePowersDao.getApplePowers()
-                .first { totalScore in it.minScore..it.maxScore }
-                .toApplePower()
+                .find { totalScore in it.minScore..it.maxScore }
+                ?.toApplePower()
 
             mainCoroutineScope.launch { callback(applePower) }
         }
