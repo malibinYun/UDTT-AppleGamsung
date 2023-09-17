@@ -1,10 +1,10 @@
 package com.udtt.applegamsung.ui.intro
 
-import com.udtt.applegamsung.data.repository.TestResultsRepository
 import com.udtt.applegamsung.data.repository.UserIdentifyRepository
+import com.udtt.applegamsung.domain.repository.TestResultsRepository
 import com.udtt.applegamsung.util.BaseViewModel
 import com.udtt.applegamsung.util.log
-import java.util.*
+import java.util.UUID
 
 /**
  * Created By Yun Hyeok

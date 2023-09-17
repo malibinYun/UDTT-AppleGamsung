@@ -5,12 +5,13 @@ import com.udtt.applegamsung.data.entity.DisplayedProduct
 import com.udtt.applegamsung.data.entity.Product
 import com.udtt.applegamsung.data.source.AppleBoxItemsDataSource
 import com.udtt.applegamsung.data.source.ProductsDataSource
+import com.udtt.applegamsung.domain.repository.ProductsRepository
 
-class ProductsRepository(
+class DefaultProductsRepository(
     private val productsRemoteDataSource: ProductsDataSource,
     private val productsLocalDataSource: ProductsDataSource,
     private val appleBoxItemsLocalDataSource: AppleBoxItemsDataSource
-) : ProductsDataSource {
+) : ProductsRepository {
 
     override fun getProducts(categoryId: String, callback: (products: List<Product>) -> Unit) {
         productsLocalDataSource.getProducts(categoryId) {
@@ -34,7 +35,7 @@ class ProductsRepository(
     }
 
     // 워 이 개극혐 소스를 어케 바꿔야하지 ? 콜백헬 개극혐이넹... RxJava를 할줄 모르는게 한이다...
-    fun getDisplayedProducts(
+    override fun getDisplayedProducts(
         categoryId: String,
         callback: (products: List<DisplayedProduct>) -> Unit
     ) {

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.udtt.applegamsung.data.entity.DisplayedProduct
 import com.udtt.applegamsung.data.entity.Product
-import com.udtt.applegamsung.data.repository.ProductsRepository
+import com.udtt.applegamsung.domain.repository.ProductsRepository
 import com.udtt.applegamsung.util.BaseViewModel
 
 class ProductsViewModel(

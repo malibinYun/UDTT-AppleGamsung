@@ -3,8 +3,8 @@ package com.udtt.applegamsung.ui.applebox
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.udtt.applegamsung.data.entity.AppleBoxItem
-import com.udtt.applegamsung.data.repository.AppleBoxItemsRepository
 import com.udtt.applegamsung.data.repository.UserIdentifyRepository
+import com.udtt.applegamsung.domain.repository.AppleBoxItemsRepository
 import com.udtt.applegamsung.util.BaseViewModel
 
 class AppleBoxViewModel(

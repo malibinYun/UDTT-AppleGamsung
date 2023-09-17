@@ -2,10 +2,11 @@ package com.udtt.applegamsung.data.repository
 
 import com.udtt.applegamsung.data.entity.AppleBoxItem
 import com.udtt.applegamsung.data.source.AppleBoxItemsDataSource
+import com.udtt.applegamsung.domain.repository.AppleBoxItemsRepository
 
-class AppleBoxItemsRepository(
+class DefaultAppleBoxItemsRepository(
     private val appleBoxItemsLocalDataSource: AppleBoxItemsDataSource
-) : AppleBoxItemsDataSource {
+) : AppleBoxItemsRepository {
 
     override fun getAppleBoxItems(callback: (appleBoxItems: List<AppleBoxItem>) -> Unit) {
         appleBoxItemsLocalDataSource.getAppleBoxItems { callback(it) }
