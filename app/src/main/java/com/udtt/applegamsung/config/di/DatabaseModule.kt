@@ -4,8 +4,8 @@ import androidx.room.Room
 import com.google.firebase.firestore.FirebaseFirestore
 import com.udtt.applegamsung.data.database.AppDatabase
 import com.udtt.applegamsung.data.database.migration.AppleProductEntityMigration
-import com.udtt.applegamsung.data.repository.CategoriesRepository
 import com.udtt.applegamsung.data.repository.DefaultAppleBoxItemsRepository
+import com.udtt.applegamsung.data.repository.DefaultCategoriesRepository
 import com.udtt.applegamsung.data.repository.DefaultProductsRepository
 import com.udtt.applegamsung.data.repository.TestResultsRepository
 import com.udtt.applegamsung.data.repository.UserIdentifyRepository
@@ -17,6 +17,7 @@ import com.udtt.applegamsung.data.source.remote.CategoriesRemoteDataSource
 import com.udtt.applegamsung.data.source.remote.ProductsRemoteDataSource
 import com.udtt.applegamsung.data.source.remote.TestResultsRemoteDataSource
 import com.udtt.applegamsung.domain.repository.AppleBoxItemsRepository
+import com.udtt.applegamsung.domain.repository.CategoriesRepository
 import com.udtt.applegamsung.domain.repository.ProductsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -84,8 +85,8 @@ val remoteDataSourceModule = module {
 
 val repositoryModule = module {
     single { UserIdentifyRepository(androidContext()) }
-    single {
-        CategoriesRepository(
+    single<CategoriesRepository> {
+        DefaultCategoriesRepository(
             get<CategoriesRemoteDataSource>(),
             get<CategoriesLocalDataSource>()
         )

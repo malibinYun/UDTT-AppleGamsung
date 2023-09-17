@@ -2,6 +2,7 @@ package com.udtt.applegamsung.data.repository
 
 import com.udtt.applegamsung.data.entity.Category
 import com.udtt.applegamsung.data.source.CategoriesDataSource
+import com.udtt.applegamsung.domain.repository.CategoriesRepository
 import com.udtt.applegamsung.util.log
 
 /**
@@ -9,10 +10,10 @@ import com.udtt.applegamsung.util.log
  * on 3월 15, 2020
  */
 
-class CategoriesRepository(
+class DefaultCategoriesRepository(
     private val categoriesRemoteDataSource: CategoriesDataSource,
     private val categoriesLocalDataSource: CategoriesDataSource
-) : CategoriesDataSource {
+) : CategoriesRepository {
 
     override fun getCategories(callback: (categories: List<Category>) -> Unit) {
         categoriesLocalDataSource.getCategories {
@@ -33,5 +34,4 @@ class CategoriesRepository(
             saveCategories(it)
         }
     }
-
 }

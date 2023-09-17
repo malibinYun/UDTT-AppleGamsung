@@ -3,7 +3,7 @@ package com.udtt.applegamsung.ui.main.categories
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.udtt.applegamsung.data.entity.Category
-import com.udtt.applegamsung.data.repository.CategoriesRepository
+import com.udtt.applegamsung.domain.repository.CategoriesRepository
 import com.udtt.applegamsung.util.BaseViewModel
 
 class CategoriesViewModel(
