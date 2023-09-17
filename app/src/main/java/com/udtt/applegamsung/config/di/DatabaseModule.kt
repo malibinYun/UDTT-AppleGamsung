@@ -11,10 +11,10 @@ import com.udtt.applegamsung.data.repository.DefaultTestResultsRepository
 import com.udtt.applegamsung.data.repository.UserIdentifyRepository
 import com.udtt.applegamsung.data.source.local.AppleBoxItemsLocalDataSource
 import com.udtt.applegamsung.data.source.local.LocalCategoriesDataSource
-import com.udtt.applegamsung.data.source.local.ProductsLocalDataSource
+import com.udtt.applegamsung.data.source.local.LocalProductsDataSource
 import com.udtt.applegamsung.data.source.local.TestResultsLocalDataSource
 import com.udtt.applegamsung.data.source.remote.RemoteCategoriesDataSource
-import com.udtt.applegamsung.data.source.remote.ProductsRemoteDataSource
+import com.udtt.applegamsung.data.source.remote.RemoteProductsDataSource
 import com.udtt.applegamsung.data.source.remote.TestResultsRemoteDataSource
 import com.udtt.applegamsung.domain.repository.AppleBoxItemsRepository
 import com.udtt.applegamsung.domain.repository.CategoriesRepository
@@ -49,10 +49,8 @@ val localDataSourceModule = module {
         )
     }
     single {
-        ProductsLocalDataSource(
+        LocalProductsDataSource(
             get<AppDatabase>().getAppleProductsDao(),
-            MainCoroutineScope,
-            IoCoroutineScope,
         )
     }
     single {
@@ -78,7 +76,7 @@ val firestoreModule = module {
 
 val remoteDataSourceModule = module {
     single { RemoteCategoriesDataSource(get()) }
-    single { ProductsRemoteDataSource(get()) }
+    single { RemoteProductsDataSource(get()) }
     single { TestResultsRemoteDataSource(get()) }
 }
 
@@ -92,8 +90,8 @@ val repositoryModule = module {
     }
     single<ProductsRepository> {
         DefaultProductsRepository(
-            get<ProductsRemoteDataSource>(),
-            get<ProductsLocalDataSource>(),
+            get<RemoteProductsDataSource>(),
+            get<LocalProductsDataSource>(),
             get<AppleBoxItemsLocalDataSource>()
         )
     }

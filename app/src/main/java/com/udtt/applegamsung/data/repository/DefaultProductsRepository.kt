@@ -6,6 +6,9 @@ import com.udtt.applegamsung.data.entity.Product
 import com.udtt.applegamsung.data.source.AppleBoxItemsDataSource
 import com.udtt.applegamsung.data.source.ProductsDataSource
 import com.udtt.applegamsung.domain.repository.ProductsRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class DefaultProductsRepository(
     private val productsRemoteDataSource: ProductsDataSource,
@@ -14,23 +17,33 @@ class DefaultProductsRepository(
 ) : ProductsRepository {
 
     override fun getProducts(categoryId: String, callback: (products: List<Product>) -> Unit) {
-        productsLocalDataSource.getProducts(categoryId) {
-            if (it.isEmpty()) getProductsFromRemoteDataSource(categoryId, callback)
-            else callback(it)
+        CoroutineScope(Dispatchers.Main).launch {
+            productsLocalDataSource.getProducts(categoryId)
+                .onSuccess {
+                    if (it.isEmpty()) getProductsFromRemoteDataSource(categoryId, callback)
+                    else callback(it)
+                }
+                .onFailure { getProductsFromRemoteDataSource(categoryId, callback) }
         }
     }
 
     override fun saveProducts(products: List<Product>) {
-        productsLocalDataSource.saveProducts(products)
+        CoroutineScope(Dispatchers.IO).launch {
+            productsLocalDataSource.saveProducts(products)
+        }
     }
 
     private fun getProductsFromRemoteDataSource(
         categoryId: String,
         callback: (products: List<Product>) -> Unit
     ) {
-        productsRemoteDataSource.getProducts(categoryId) {
-            callback(it)
-            saveProducts(it)
+        CoroutineScope(Dispatchers.Main).launch {
+            productsRemoteDataSource.getProducts(categoryId)
+                .onSuccess {
+                    callback(it)
+                    saveProducts(it)
+                }
+                .onFailure { throw it }
         }
     }
 

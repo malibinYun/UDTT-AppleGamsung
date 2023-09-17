@@ -9,8 +9,7 @@ import com.udtt.applegamsung.data.entity.Product
 
 interface ProductsDataSource {
 
-    fun getProducts(categoryId: String, callback: (products: List<Product>) -> Unit)
+    suspend fun getProducts(categoryId: String): Result<List<Product>>
 
-    fun saveProducts(products: List<Product>)
-
+    suspend fun saveProducts(products: List<Product>): Result<Unit>
 }
