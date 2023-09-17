@@ -62,9 +62,13 @@ class DefaultProductsRepository(
         products: List<DisplayedProduct>,
         callback: (products: List<DisplayedProduct>) -> Unit
     ) {
-        appleBoxItemsLocalDataSource.getAppleBoxItems { items ->
-            items.forEach { item -> changeStateInAppleBox(products, item) }
-            callback(products)
+        CoroutineScope(Dispatchers.Main).launch {
+            appleBoxItemsLocalDataSource.getAppleBoxItems()
+                .onSuccess { items ->
+                    items.forEach { changeStateInAppleBox(products, it) }
+                    callback(products)
+                }
+                .onFailure { throw it }
         }
     }
 
