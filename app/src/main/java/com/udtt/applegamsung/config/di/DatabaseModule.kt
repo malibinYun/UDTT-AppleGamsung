@@ -7,7 +7,7 @@ import com.udtt.applegamsung.data.database.migration.AppleProductEntityMigration
 import com.udtt.applegamsung.data.repository.DefaultAppleBoxItemsRepository
 import com.udtt.applegamsung.data.repository.DefaultCategoriesRepository
 import com.udtt.applegamsung.data.repository.DefaultProductsRepository
-import com.udtt.applegamsung.data.repository.TestResultsRepository
+import com.udtt.applegamsung.data.repository.DefaultTestResultsRepository
 import com.udtt.applegamsung.data.repository.UserIdentifyRepository
 import com.udtt.applegamsung.data.source.local.AppleBoxItemsLocalDataSource
 import com.udtt.applegamsung.data.source.local.CategoriesLocalDataSource
@@ -19,6 +19,7 @@ import com.udtt.applegamsung.data.source.remote.TestResultsRemoteDataSource
 import com.udtt.applegamsung.domain.repository.AppleBoxItemsRepository
 import com.udtt.applegamsung.domain.repository.CategoriesRepository
 import com.udtt.applegamsung.domain.repository.ProductsRepository
+import com.udtt.applegamsung.domain.repository.TestResultsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidContext
@@ -98,8 +99,8 @@ val repositoryModule = module {
             get<AppleBoxItemsLocalDataSource>()
         )
     }
-    single {
-        TestResultsRepository(
+    single<TestResultsRepository> {
+        DefaultTestResultsRepository(
             get<TestResultsRemoteDataSource>(),
             get<TestResultsLocalDataSource>()
         )

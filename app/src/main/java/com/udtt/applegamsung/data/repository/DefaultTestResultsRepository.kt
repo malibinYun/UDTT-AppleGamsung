@@ -3,6 +3,7 @@ package com.udtt.applegamsung.data.repository
 import com.udtt.applegamsung.data.entity.ApplePower
 import com.udtt.applegamsung.data.entity.TestResult
 import com.udtt.applegamsung.data.source.TestResultsDataSource
+import com.udtt.applegamsung.domain.repository.TestResultsRepository
 import com.udtt.applegamsung.util.log
 
 /**
@@ -10,10 +11,10 @@ import com.udtt.applegamsung.util.log
  * on 3월 22, 2020
  */
 
-class TestResultsRepository(
+class DefaultTestResultsRepository(
     private val testResultsRemoteDataSource: TestResultsDataSource,
     private val testResultsLocalDataSource: TestResultsDataSource
-) : TestResultsDataSource {
+) : TestResultsRepository {
 
     override fun getTestResults(callback: (testResults: List<TestResult>) -> Unit) {
         testResultsLocalDataSource.getTestResults { callback(it) }
