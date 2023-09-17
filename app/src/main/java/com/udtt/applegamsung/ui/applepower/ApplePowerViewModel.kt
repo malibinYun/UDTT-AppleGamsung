@@ -6,9 +6,9 @@ import com.udtt.applegamsung.data.entity.AppleBoxItem
 import com.udtt.applegamsung.data.entity.ApplePower
 import com.udtt.applegamsung.data.entity.Category
 import com.udtt.applegamsung.data.entity.TestResult
-import com.udtt.applegamsung.data.repository.AppleBoxItemsRepository
 import com.udtt.applegamsung.data.repository.TestResultsRepository
 import com.udtt.applegamsung.data.repository.UserIdentifyRepository
+import com.udtt.applegamsung.domain.repository.AppleBoxItemsRepository
 import com.udtt.applegamsung.util.BaseViewModel
 
 class ApplePowerViewModel(

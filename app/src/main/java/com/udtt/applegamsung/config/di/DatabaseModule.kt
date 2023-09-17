@@ -4,8 +4,8 @@ import androidx.room.Room
 import com.google.firebase.firestore.FirebaseFirestore
 import com.udtt.applegamsung.data.database.AppDatabase
 import com.udtt.applegamsung.data.database.migration.AppleProductEntityMigration
-import com.udtt.applegamsung.data.repository.AppleBoxItemsRepository
 import com.udtt.applegamsung.data.repository.CategoriesRepository
+import com.udtt.applegamsung.data.repository.DefaultAppleBoxItemsRepository
 import com.udtt.applegamsung.data.repository.ProductsRepository
 import com.udtt.applegamsung.data.repository.TestResultsRepository
 import com.udtt.applegamsung.data.repository.UserIdentifyRepository
@@ -16,6 +16,7 @@ import com.udtt.applegamsung.data.source.local.TestResultsLocalDataSource
 import com.udtt.applegamsung.data.source.remote.CategoriesRemoteDataSource
 import com.udtt.applegamsung.data.source.remote.ProductsRemoteDataSource
 import com.udtt.applegamsung.data.source.remote.TestResultsRemoteDataSource
+import com.udtt.applegamsung.domain.repository.AppleBoxItemsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidContext
@@ -101,8 +102,8 @@ val repositoryModule = module {
             get<TestResultsLocalDataSource>()
         )
     }
-    single {
-        AppleBoxItemsRepository(
+    single<AppleBoxItemsRepository> {
+        DefaultAppleBoxItemsRepository(
             get<AppleBoxItemsLocalDataSource>()
         )
     }

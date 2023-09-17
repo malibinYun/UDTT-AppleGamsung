@@ -2,7 +2,11 @@ package com.udtt.applegamsung.config
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.udtt.applegamsung.data.repository.*
+import com.udtt.applegamsung.data.repository.CategoriesRepository
+import com.udtt.applegamsung.data.repository.ProductsRepository
+import com.udtt.applegamsung.data.repository.TestResultsRepository
+import com.udtt.applegamsung.data.repository.UserIdentifyRepository
+import com.udtt.applegamsung.domain.repository.AppleBoxItemsRepository
 import com.udtt.applegamsung.ui.applebox.AppleBoxViewModel
 import com.udtt.applegamsung.ui.applepower.ApplePowerViewModel
 import com.udtt.applegamsung.ui.intro.IntroViewModel
