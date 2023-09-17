@@ -12,3 +12,8 @@ import kotlinx.coroutines.tasks.await
 suspend fun CollectionReference.getDocumentSnapshots(): List<DocumentSnapshot> {
     return this.get().await().documents
 }
+
+suspend fun CollectionReference.getDocumentSnapshots2(): Result<List<DocumentSnapshot>> {
+    return runCatching { this.get().await() }
+        .map { it.documents }
+}
