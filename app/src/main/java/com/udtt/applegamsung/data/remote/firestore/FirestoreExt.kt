@@ -17,3 +17,7 @@ suspend fun CollectionReference.getDocumentSnapshots2(): Result<List<DocumentSna
     return runCatching { this.get().await() }
         .map { it.documents }
 }
+
+suspend fun CollectionReference.addAwait(data: Any): Result<Unit> {
+    return runCatching { this.add(data).await() }
+}
