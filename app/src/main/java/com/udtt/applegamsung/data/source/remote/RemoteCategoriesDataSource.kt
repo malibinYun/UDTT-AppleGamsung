@@ -2,7 +2,7 @@ package com.udtt.applegamsung.data.source.remote
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.udtt.applegamsung.data.entity.Category
-import com.udtt.applegamsung.data.remote.firestore.getDocumentSnapshots2
+import com.udtt.applegamsung.data.remote.firestore.getDocumentSnapshots
 import com.udtt.applegamsung.data.source.CategoriesDataSource
 
 /**
@@ -16,7 +16,7 @@ class RemoteCategoriesDataSource(
 
     override suspend fun getCategories(): Result<List<Category>> {
         return firestore.collection(PathCategory)
-            .getDocumentSnapshots2()
+            .getDocumentSnapshots()
             .map { documents ->
                 documents.map {
                     Category(

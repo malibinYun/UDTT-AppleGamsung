@@ -4,7 +4,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.udtt.applegamsung.data.entity.ApplePower
 import com.udtt.applegamsung.data.entity.TestResult
 import com.udtt.applegamsung.data.remote.firestore.addAwait
-import com.udtt.applegamsung.data.remote.firestore.getDocumentSnapshots2
+import com.udtt.applegamsung.data.remote.firestore.getDocumentSnapshots
 import com.udtt.applegamsung.data.source.TestResultsDataSource
 
 /**
@@ -29,7 +29,7 @@ class RemoteTestResultsDataSource(
 
     override suspend fun getApplePowers(): Result<List<ApplePower>> {
         return firestore.collection(PathApplePower)
-            .getDocumentSnapshots2()
+            .getDocumentSnapshots()
             .map { documents ->
                 documents.map {
                     ApplePower(
