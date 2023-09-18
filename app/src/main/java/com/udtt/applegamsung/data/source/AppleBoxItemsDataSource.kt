@@ -4,14 +4,13 @@ import com.udtt.applegamsung.data.entity.AppleBoxItem
 
 interface AppleBoxItemsDataSource {
 
-    fun getAppleBoxItems(callback: (appleBoxItems: List<AppleBoxItem>) -> Unit)
+    suspend fun getAppleBoxItems(): Result<List<AppleBoxItem>>
 
-    fun saveAppleBoxItems(appleBoxItems: List<AppleBoxItem>)
+    suspend fun saveAppleBoxItems(appleBoxItems: List<AppleBoxItem>): Result<Unit>
 
-    fun removeAppleBoxItem(itemToRemove: AppleBoxItem)
+    suspend fun removeAppleBoxItem(itemToRemove: AppleBoxItem): Result<Unit>
 
-    fun removeAppleBoxItems(itemsToRemove: List<AppleBoxItem>)
+    suspend fun removeAppleBoxItems(itemsToRemove: List<AppleBoxItem>): Result<Unit>
 
-    fun removeAllAppleBoxItems()
-    
+    suspend fun removeAllAppleBoxItems(): Result<Unit>
 }

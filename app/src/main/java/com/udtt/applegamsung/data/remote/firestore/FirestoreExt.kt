@@ -9,6 +9,11 @@ import kotlinx.coroutines.tasks.await
  * on 3월 15, 2020
  */
 
-suspend fun CollectionReference.getDocumentSnapshots(): List<DocumentSnapshot> {
-    return this.get().await().documents
+suspend fun CollectionReference.getDocumentSnapshots(): Result<List<DocumentSnapshot>> {
+    return runCatching { this.get().await() }
+        .map { it.documents }
+}
+
+suspend fun CollectionReference.addAwait(data: Any): Result<Unit> {
+    return runCatching { this.add(data).await() }
 }

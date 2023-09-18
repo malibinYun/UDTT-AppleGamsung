@@ -9,8 +9,7 @@ import com.udtt.applegamsung.data.entity.Category
 
 interface CategoriesDataSource {
 
-    fun getCategories(callback: (categories: List<Category>) -> Unit)
+    suspend fun getCategories(): Result<List<Category>>
 
-    fun saveCategories(categories: List<Category>)
-
+    suspend fun saveCategories(categories: List<Category>): Result<Unit>
 }

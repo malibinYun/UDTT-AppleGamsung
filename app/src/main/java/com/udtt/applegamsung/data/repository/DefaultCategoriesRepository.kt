@@ -3,7 +3,9 @@ package com.udtt.applegamsung.data.repository
 import com.udtt.applegamsung.data.entity.Category
 import com.udtt.applegamsung.data.source.CategoriesDataSource
 import com.udtt.applegamsung.domain.repository.CategoriesRepository
-import com.udtt.applegamsung.util.log
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
  * Created By Yun Hyeok
@@ -16,22 +18,30 @@ class DefaultCategoriesRepository(
 ) : CategoriesRepository {
 
     override fun getCategories(callback: (categories: List<Category>) -> Unit) {
-        categoriesLocalDataSource.getCategories {
-            log("categoriesLocalDataSource.getCategories Called")
-            if (it.isEmpty()) getCategoriesFromRemoteDataSource(callback)
-            else callback(it)
+        CoroutineScope(Dispatchers.Main).launch {
+            categoriesLocalDataSource.getCategories()
+                .onSuccess {
+                    if (it.isEmpty()) getCategoriesFromRemoteDataSource(callback)
+                    else callback(it)
+                }
+                .onFailure { getCategoriesFromRemoteDataSource(callback) }
         }
     }
 
     override fun saveCategories(categories: List<Category>) {
-        categoriesLocalDataSource.saveCategories(categories)
+        CoroutineScope(Dispatchers.IO).launch {
+            categoriesLocalDataSource.saveCategories(categories)
+        }
     }
 
     private fun getCategoriesFromRemoteDataSource(callback: (categories: List<Category>) -> Unit) {
-        categoriesRemoteDataSource.getCategories {
-            log("categoriesRemoteDataSource.getCategories Called")
-            callback(it)
-            saveCategories(it)
+        CoroutineScope(Dispatchers.Main).launch {
+            categoriesRemoteDataSource.getCategories()
+                .onSuccess {
+                    callback(it)
+                    saveCategories(it)
+                }
+                .onFailure { throw it }
         }
     }
 }

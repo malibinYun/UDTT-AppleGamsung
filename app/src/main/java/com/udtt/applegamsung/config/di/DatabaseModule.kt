@@ -9,19 +9,17 @@ import com.udtt.applegamsung.data.repository.DefaultCategoriesRepository
 import com.udtt.applegamsung.data.repository.DefaultProductsRepository
 import com.udtt.applegamsung.data.repository.DefaultTestResultsRepository
 import com.udtt.applegamsung.data.repository.UserIdentifyRepository
-import com.udtt.applegamsung.data.source.local.AppleBoxItemsLocalDataSource
-import com.udtt.applegamsung.data.source.local.CategoriesLocalDataSource
-import com.udtt.applegamsung.data.source.local.ProductsLocalDataSource
-import com.udtt.applegamsung.data.source.local.TestResultsLocalDataSource
-import com.udtt.applegamsung.data.source.remote.CategoriesRemoteDataSource
-import com.udtt.applegamsung.data.source.remote.ProductsRemoteDataSource
-import com.udtt.applegamsung.data.source.remote.TestResultsRemoteDataSource
+import com.udtt.applegamsung.data.source.local.LocalAppleBoxItemsDataSource
+import com.udtt.applegamsung.data.source.local.LocalCategoriesDataSource
+import com.udtt.applegamsung.data.source.local.LocalProductsDataSource
+import com.udtt.applegamsung.data.source.local.LocalTestResultsDataSource
+import com.udtt.applegamsung.data.source.remote.RemoteCategoriesDataSource
+import com.udtt.applegamsung.data.source.remote.RemoteProductsDataSource
+import com.udtt.applegamsung.data.source.remote.RemoteTestResultsDataSource
 import com.udtt.applegamsung.domain.repository.AppleBoxItemsRepository
 import com.udtt.applegamsung.domain.repository.CategoriesRepository
 import com.udtt.applegamsung.domain.repository.ProductsRepository
 import com.udtt.applegamsung.domain.repository.TestResultsRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
@@ -29,10 +27,6 @@ import org.koin.dsl.module
  * Created By Yun Hyeok
  * on 3월 15, 2020
  */
-
-val MainCoroutineScope = CoroutineScope(Dispatchers.Main)
-
-val IoCoroutineScope = CoroutineScope(Dispatchers.IO)
 
 val appDataBaseModule = module {
     single {
@@ -44,32 +38,24 @@ val appDataBaseModule = module {
 
 val localDataSourceModule = module {
     single {
-        CategoriesLocalDataSource(
+        LocalCategoriesDataSource(
             get<AppDatabase>().getAppleProductCategoriesDao(),
-            MainCoroutineScope,
-            IoCoroutineScope,
         )
     }
     single {
-        ProductsLocalDataSource(
+        LocalProductsDataSource(
             get<AppDatabase>().getAppleProductsDao(),
-            MainCoroutineScope,
-            IoCoroutineScope,
         )
     }
     single {
-        TestResultsLocalDataSource(
+        LocalTestResultsDataSource(
             get<AppDatabase>().getTestResultsDao(),
             get<AppDatabase>().getApplePowersDao(),
-            MainCoroutineScope,
-            IoCoroutineScope,
         )
     }
     single {
-        AppleBoxItemsLocalDataSource(
+        LocalAppleBoxItemsDataSource(
             get<AppDatabase>().getAppleProductsDao(),
-            MainCoroutineScope,
-            IoCoroutineScope,
         )
     }
 }
@@ -79,35 +65,35 @@ val firestoreModule = module {
 }
 
 val remoteDataSourceModule = module {
-    single { CategoriesRemoteDataSource(get()) }
-    single { ProductsRemoteDataSource(get()) }
-    single { TestResultsRemoteDataSource(get()) }
+    single { RemoteCategoriesDataSource(get()) }
+    single { RemoteProductsDataSource(get()) }
+    single { RemoteTestResultsDataSource(get()) }
 }
 
 val repositoryModule = module {
     single { UserIdentifyRepository(androidContext()) }
     single<CategoriesRepository> {
         DefaultCategoriesRepository(
-            get<CategoriesRemoteDataSource>(),
-            get<CategoriesLocalDataSource>()
+            get<RemoteCategoriesDataSource>(),
+            get<LocalCategoriesDataSource>()
         )
     }
     single<ProductsRepository> {
         DefaultProductsRepository(
-            get<ProductsRemoteDataSource>(),
-            get<ProductsLocalDataSource>(),
-            get<AppleBoxItemsLocalDataSource>()
+            get<RemoteProductsDataSource>(),
+            get<LocalProductsDataSource>(),
+            get<LocalAppleBoxItemsDataSource>()
         )
     }
     single<TestResultsRepository> {
         DefaultTestResultsRepository(
-            get<TestResultsRemoteDataSource>(),
-            get<TestResultsLocalDataSource>()
+            get<RemoteTestResultsDataSource>(),
+            get<LocalTestResultsDataSource>()
         )
     }
     single<AppleBoxItemsRepository> {
         DefaultAppleBoxItemsRepository(
-            get<AppleBoxItemsLocalDataSource>()
+            get<LocalAppleBoxItemsDataSource>()
         )
     }
 }
