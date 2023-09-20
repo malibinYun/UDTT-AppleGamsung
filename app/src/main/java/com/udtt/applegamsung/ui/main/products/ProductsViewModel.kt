@@ -2,10 +2,12 @@ package com.udtt.applegamsung.ui.main.products
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.udtt.applegamsung.data.entity.DisplayedProduct
 import com.udtt.applegamsung.data.entity.Product
 import com.udtt.applegamsung.domain.repository.ProductsRepository
 import com.udtt.applegamsung.util.BaseViewModel
+import kotlinx.coroutines.launch
 
 class ProductsViewModel(
     private val productsRepository: ProductsRepository
@@ -20,11 +22,13 @@ class ProductsViewModel(
     }
 
     fun loadProductsOf(categoryId: String) {
-        _isLoading.value = true
-        clearProducts()
+        viewModelScope.launch {
+            _isLoading.value = true
+            clearProducts()
 
-        productsRepository.getDisplayedProducts(categoryId) { products ->
-            _displayedProducts.value = products
+            productsRepository.getDisplayedProducts(categoryId)
+                .onSuccess { _displayedProducts.value = it }
+
             _isLoading.value = false
         }
     }

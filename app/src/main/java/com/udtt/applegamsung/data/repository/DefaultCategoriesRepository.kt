@@ -3,9 +3,7 @@ package com.udtt.applegamsung.data.repository
 import com.udtt.applegamsung.data.entity.Category
 import com.udtt.applegamsung.data.source.CategoriesDataSource
 import com.udtt.applegamsung.domain.repository.CategoriesRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.udtt.applegamsung.util.getOrEmpty
 
 /**
  * Created By Yun Hyeok
@@ -13,35 +11,20 @@ import kotlinx.coroutines.launch
  */
 
 class DefaultCategoriesRepository(
-    private val categoriesRemoteDataSource: CategoriesDataSource,
-    private val categoriesLocalDataSource: CategoriesDataSource
+    private val remoteCategoriesDataSource: CategoriesDataSource,
+    private val localCategoriesDataSource: CategoriesDataSource,
 ) : CategoriesRepository {
 
-    override fun getCategories(callback: (categories: List<Category>) -> Unit) {
-        CoroutineScope(Dispatchers.Main).launch {
-            categoriesLocalDataSource.getCategories()
-                .onSuccess {
-                    if (it.isEmpty()) getCategoriesFromRemoteDataSource(callback)
-                    else callback(it)
-                }
-                .onFailure { getCategoriesFromRemoteDataSource(callback) }
+    override suspend fun getCategories(): Result<List<Category>> {
+        val localCategories = localCategoriesDataSource.getCategories()
+        if (localCategories.getOrEmpty().isNotEmpty()) {
+            return localCategories
         }
+        return remoteCategoriesDataSource.getCategories()
+            .onSuccess { saveCategories(it) }
     }
 
-    override fun saveCategories(categories: List<Category>) {
-        CoroutineScope(Dispatchers.IO).launch {
-            categoriesLocalDataSource.saveCategories(categories)
-        }
-    }
-
-    private fun getCategoriesFromRemoteDataSource(callback: (categories: List<Category>) -> Unit) {
-        CoroutineScope(Dispatchers.Main).launch {
-            categoriesRemoteDataSource.getCategories()
-                .onSuccess {
-                    callback(it)
-                    saveCategories(it)
-                }
-                .onFailure { throw it }
-        }
+    override suspend fun saveCategories(categories: List<Category>): Result<Unit> {
+        return localCategoriesDataSource.saveCategories(categories)
     }
 }

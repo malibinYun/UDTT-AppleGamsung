@@ -1,9 +1,11 @@
 package com.udtt.applegamsung.ui.intro
 
+import androidx.lifecycle.viewModelScope
 import com.udtt.applegamsung.data.repository.UserIdentifyRepository
 import com.udtt.applegamsung.domain.repository.TestResultsRepository
 import com.udtt.applegamsung.util.BaseViewModel
 import com.udtt.applegamsung.util.log
+import kotlinx.coroutines.launch
 import java.util.UUID
 
 /**
@@ -13,7 +15,7 @@ import java.util.UUID
 
 class IntroViewModel(
     private val userIdentifyRepository: UserIdentifyRepository,
-    private val testResultsRepository: TestResultsRepository
+    private val testResultsRepository: TestResultsRepository,
 ) : BaseViewModel() {
 
     var isTestResultEmpty: Boolean = true
@@ -24,8 +26,9 @@ class IntroViewModel(
     }
 
     fun loadTestResultIsEmpty() {
-        testResultsRepository.getTestResults {
-            isTestResultEmpty = it.isEmpty()
+        viewModelScope.launch {
+            testResultsRepository.getTestResults()
+                .onSuccess { isTestResultEmpty = it.isEmpty() }
         }
     }
 

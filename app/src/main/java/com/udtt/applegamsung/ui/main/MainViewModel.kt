@@ -3,6 +3,7 @@ package com.udtt.applegamsung.ui.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.udtt.applegamsung.data.entity.AppleBoxItem
 import com.udtt.applegamsung.data.entity.Category
 import com.udtt.applegamsung.data.entity.Product
@@ -11,6 +12,7 @@ import com.udtt.applegamsung.domain.repository.AppleBoxItemsRepository
 import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAGMENT_CATEGORIES
 import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAGMENT_NICKNAME
 import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAGMENT_PRODUCTS
+import kotlinx.coroutines.launch
 
 /**
  * Created By Yun Hyeok
@@ -18,7 +20,7 @@ import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAG
  */
 
 class MainViewModel(
-    private val appleBoxItemsRepository: AppleBoxItemsRepository
+    private val appleBoxItemsRepository: AppleBoxItemsRepository,
 ) : ViewModel() {
 
     private val _currentPage = MutableLiveData<Int>()
@@ -50,7 +52,9 @@ class MainViewModel(
         _selectedProducts.value = emptyList()
         _selectedCategoryId.value = category.id
         if (category.type == Category.Type.HAVE_NOTING) {
-            appleBoxItemsRepository.removeAllAppleBoxItems()
+            viewModelScope.launch {
+                appleBoxItemsRepository.removeAllAppleBoxItems()
+            }
             return
         }
         movePageTo(FRAGMENT_PRODUCTS)
@@ -97,13 +101,16 @@ class MainViewModel(
 
     fun boxSelectedProducts() {
         val selectedProducts = getCurrentSelectedProducts().map { it.toAppleBoxItem() }
-        appleBoxItemsRepository.saveAppleBoxItems(selectedProducts)
+        viewModelScope.launch {
+            appleBoxItemsRepository.saveAppleBoxItems(selectedProducts)
+        }
         _savedProducts.value = selectedProducts
         movePageTo(FRAGMENT_CATEGORIES)
     }
 
     fun undoSavedProducts(appleBoxItems: List<AppleBoxItem>) {
-        appleBoxItemsRepository.removeAppleBoxItems(appleBoxItems)
+        viewModelScope.launch {
+            appleBoxItemsRepository.removeAppleBoxItems(appleBoxItems)
+        }
     }
-
 }

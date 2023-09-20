@@ -2,12 +2,14 @@ package com.udtt.applegamsung.ui.main.categories
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.udtt.applegamsung.data.entity.Category
 import com.udtt.applegamsung.domain.repository.CategoriesRepository
 import com.udtt.applegamsung.util.BaseViewModel
+import kotlinx.coroutines.launch
 
 class CategoriesViewModel(
-    private val categoriesRepository: CategoriesRepository
+    private val categoriesRepository: CategoriesRepository,
 ) : BaseViewModel() {
 
     private val _categories = MutableLiveData<List<Category>>()
@@ -19,9 +21,12 @@ class CategoriesViewModel(
     }
 
     private fun loadCategories() {
-        _isLoading.value = true
-        categoriesRepository.getCategories {
-            _categories.value = it.sortedBy { it.index }
+        viewModelScope.launch {
+            _isLoading.value = true
+
+            categoriesRepository.getCategories()
+                .onSuccess { _categories.value = it.sortedBy { category -> category.index } }
+
             _isLoading.value = false
         }
     }

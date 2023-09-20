@@ -5,12 +5,9 @@ import com.udtt.applegamsung.data.entity.Product
 
 interface ProductsRepository {
 
-    fun getProducts(categoryId: String, callback: (products: List<Product>) -> Unit)
+    suspend fun getProducts(categoryId: String): Result<List<Product>>
 
-    fun saveProducts(products: List<Product>)
+    suspend fun saveProducts(products: List<Product>): Result<Unit>
 
-    fun getDisplayedProducts(
-        categoryId: String,
-        callback: (products: List<DisplayedProduct>) -> Unit
-    )
+    suspend fun getDisplayedProducts(categoryId: String): Result<List<DisplayedProduct>>
 }

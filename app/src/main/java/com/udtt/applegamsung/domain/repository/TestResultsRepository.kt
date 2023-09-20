@@ -10,15 +10,15 @@ import com.udtt.applegamsung.data.entity.TestResult
 
 interface TestResultsRepository {
 
-    fun getTestResults(callback: (testResults: List<TestResult>) -> Unit)
+    suspend fun getTestResults(): Result<List<TestResult>>
 
-    fun saveTestResult(testResult: TestResult)
+    suspend fun saveTestResult(testResult: TestResult): Result<Unit>
 
-    fun removeAllTestResults()
+    suspend fun removeAllTestResults(): Result<Unit>
 
-    fun getApplePowers(callback: (applePowers: List<ApplePower>) -> Unit)
+    suspend fun getApplePowers(): Result<List<ApplePower>>
 
-    fun getApplePower(totalScore: Int, callback: (applePower: ApplePower?) -> Unit)
+    suspend fun getApplePower(totalScore: Int): Result<ApplePower?>
 
-    fun saveApplePowers(applePowers: List<ApplePower>)
+    suspend fun saveApplePowers(applePowers: List<ApplePower>): Result<Unit>
 }
