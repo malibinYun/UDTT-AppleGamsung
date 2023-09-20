@@ -1,7 +1,7 @@
 package com.udtt.applegamsung.data.source.remote
 
 import com.google.firebase.firestore.FirebaseFirestore
-import com.udtt.applegamsung.data.entity.Product
+import com.udtt.applegamsung.domain.model.product.Product
 import com.udtt.applegamsung.data.remote.firestore.getDocumentSnapshots
 import com.udtt.applegamsung.data.source.ProductsDataSource
 

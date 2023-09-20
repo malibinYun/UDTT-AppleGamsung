@@ -1,7 +1,7 @@
 package com.udtt.applegamsung.data.local.mapper
 
 import com.udtt.applegamsung.data.entity.AppleProductEntity
-import com.udtt.applegamsung.data.entity.Product
+import com.udtt.applegamsung.domain.model.product.Product
 
 fun AppleProductEntity.toProduct(): Product {
     return Product(

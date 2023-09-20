@@ -1,4 +1,4 @@
-package com.udtt.applegamsung.data.entity
+package com.udtt.applegamsung.domain.model.category
 
 import androidx.annotation.DrawableRes
 import com.udtt.applegamsung.R

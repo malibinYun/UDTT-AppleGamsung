@@ -1,6 +1,8 @@
-package com.udtt.applegamsung.data.entity
+package com.udtt.applegamsung.domain.model.product
 
 import com.google.firebase.firestore.IgnoreExtraProperties
+import com.udtt.applegamsung.domain.model.category.Category
+import com.udtt.applegamsung.data.entity.SelectedProduct
 import java.util.UUID
 
 /**

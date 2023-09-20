@@ -1,6 +1,6 @@
 package com.udtt.applegamsung.data.source
 
-import com.udtt.applegamsung.data.entity.Product
+import com.udtt.applegamsung.domain.model.product.Product
 
 /**
  * Created By Yun Hyeok

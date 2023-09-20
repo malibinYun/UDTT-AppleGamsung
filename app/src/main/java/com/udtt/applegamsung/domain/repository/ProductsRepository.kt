@@ -1,7 +1,7 @@
 package com.udtt.applegamsung.domain.repository
 
 import com.udtt.applegamsung.data.entity.DisplayedProduct
-import com.udtt.applegamsung.data.entity.Product
+import com.udtt.applegamsung.domain.model.product.Product
 
 interface ProductsRepository {
 

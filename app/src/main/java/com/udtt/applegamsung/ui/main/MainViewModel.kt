@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.udtt.applegamsung.data.entity.AppleBoxItem
-import com.udtt.applegamsung.data.entity.Category
-import com.udtt.applegamsung.data.entity.Product
+import com.udtt.applegamsung.domain.model.category.Category
+import com.udtt.applegamsung.domain.model.product.Product
 import com.udtt.applegamsung.data.entity.SelectedProduct
 import com.udtt.applegamsung.domain.repository.AppleBoxItemsRepository
 import com.udtt.applegamsung.ui.main.adapter.MainViewPagerAdapter.Companion.FRAGMENT_CATEGORIES

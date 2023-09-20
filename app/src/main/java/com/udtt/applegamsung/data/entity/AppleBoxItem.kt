@@ -1,5 +1,6 @@
 package com.udtt.applegamsung.data.entity
 
+import com.udtt.applegamsung.domain.model.product.Product
 import java.util.*
 
 data class AppleBoxItem(

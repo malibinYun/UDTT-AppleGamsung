@@ -1,8 +1,8 @@
 package com.udtt.applegamsung.data.source.remote
 
 import com.google.firebase.firestore.FirebaseFirestore
-import com.udtt.applegamsung.data.entity.ApplePower
-import com.udtt.applegamsung.data.entity.TestResult
+import com.udtt.applegamsung.domain.model.testresult.applepower.ApplePower
+import com.udtt.applegamsung.domain.model.testresult.TestResult
 import com.udtt.applegamsung.data.remote.firestore.addAwait
 import com.udtt.applegamsung.data.remote.firestore.getDocumentSnapshots
 import com.udtt.applegamsung.data.source.TestResultsDataSource

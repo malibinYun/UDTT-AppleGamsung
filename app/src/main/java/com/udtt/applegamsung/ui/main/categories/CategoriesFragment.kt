@@ -6,11 +6,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.udtt.applegamsung.R
-import com.udtt.applegamsung.data.entity.Category
+import com.udtt.applegamsung.domain.model.category.Category
 import com.udtt.applegamsung.databinding.FragmentCategoriesBinding
 import com.udtt.applegamsung.ui.applebox.AppleBoxActivity
 import com.udtt.applegamsung.ui.main.MainViewModel

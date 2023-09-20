@@ -2,8 +2,8 @@ package com.udtt.applegamsung.data.source.local
 
 import com.udtt.applegamsung.data.dao.ApplePowersDao
 import com.udtt.applegamsung.data.dao.TestResultsDao
-import com.udtt.applegamsung.data.entity.ApplePower
-import com.udtt.applegamsung.data.entity.TestResult
+import com.udtt.applegamsung.domain.model.testresult.applepower.ApplePower
+import com.udtt.applegamsung.domain.model.testresult.TestResult
 import com.udtt.applegamsung.data.local.mapper.toApplePower
 import com.udtt.applegamsung.data.local.mapper.toApplePowerEntity
 import com.udtt.applegamsung.data.local.mapper.toTestResult

@@ -1,4 +1,4 @@
-package com.udtt.applegamsung.data.entity
+package com.udtt.applegamsung.domain.model.testresult
 
 import com.google.firebase.firestore.IgnoreExtraProperties
 import com.google.firebase.firestore.ServerTimestamp

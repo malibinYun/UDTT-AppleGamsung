@@ -6,7 +6,7 @@
 
         <variable
             name="category"
-            type="com.udtt.applegamsung.data.entity.Category" />
+            type="com.udtt.applegamsung.domain.model.category.Category" />
 
         <variable
             name="itemClickListener"

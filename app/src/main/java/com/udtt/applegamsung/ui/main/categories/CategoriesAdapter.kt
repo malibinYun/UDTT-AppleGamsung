@@ -4,9 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
-import com.udtt.applegamsung.data.entity.Category
+import com.udtt.applegamsung.domain.model.category.Category
 import com.udtt.applegamsung.databinding.ItemCategoryBinding
-import com.udtt.applegamsung.ui.main.MainViewModel
 
 class CategoriesAdapter : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
 

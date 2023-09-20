@@ -1,6 +1,6 @@
 package com.udtt.applegamsung.data.repository
 
-import com.udtt.applegamsung.data.entity.Category
+import com.udtt.applegamsung.domain.model.category.Category
 import com.udtt.applegamsung.data.source.CategoriesDataSource
 import com.udtt.applegamsung.domain.repository.CategoriesRepository
 import com.udtt.applegamsung.util.getOrEmpty
