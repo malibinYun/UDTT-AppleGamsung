@@ -61,9 +61,11 @@ class ApplePowerViewModel(
     }
 
     private fun loadApplePower(score: Double) {
-        _score.value = score.toInt()
-        testResultsRepository.getApplePower(score.toInt()) {
-            _applePower.value = it
+        viewModelScope.launch {
+            _score.value = score.toInt()
+
+            testResultsRepository.getApplePower(score.toInt())
+                .onSuccess { _applePower.value = it }
         }
     }
 
@@ -99,8 +101,9 @@ class ApplePowerViewModel(
     }
 
     private fun checkSavedTestResultOrSave() {
-        testResultsRepository.getTestResults {
-            if (it.isEmpty()) saveTestResult()
+        viewModelScope.launch {
+            testResultsRepository.getTestResults()
+                .onSuccess { if (it.isEmpty()) saveTestResult() }
         }
     }
 
@@ -116,7 +119,9 @@ class ApplePowerViewModel(
 
     private fun saveTestResult() {
         val testResult = createTestResult()
-        testResultsRepository.saveTestResult(testResult)
+        viewModelScope.launch {
+            testResultsRepository.saveTestResult(testResult)
+        }
     }
 
     companion object {
