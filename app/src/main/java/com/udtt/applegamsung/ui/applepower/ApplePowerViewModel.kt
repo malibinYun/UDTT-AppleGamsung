@@ -2,6 +2,7 @@ package com.udtt.applegamsung.ui.applepower
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.udtt.applegamsung.data.entity.AppleBoxItem
 import com.udtt.applegamsung.data.entity.ApplePower
 import com.udtt.applegamsung.data.entity.Category
@@ -10,11 +11,12 @@ import com.udtt.applegamsung.data.repository.UserIdentifyRepository
 import com.udtt.applegamsung.domain.repository.AppleBoxItemsRepository
 import com.udtt.applegamsung.domain.repository.TestResultsRepository
 import com.udtt.applegamsung.util.BaseViewModel
+import kotlinx.coroutines.launch
 
 class ApplePowerViewModel(
     userIdentifyRepository: UserIdentifyRepository,
     private val appleBoxItemsRepository: AppleBoxItemsRepository,
-    private val testResultsRepository: TestResultsRepository
+    private val testResultsRepository: TestResultsRepository,
 ) : BaseViewModel() {
 
     val userNickName = userIdentifyRepository.getNickname() ?: throw ILLEGAL_STATE_EXCEPTION
@@ -42,15 +44,19 @@ class ApplePowerViewModel(
     }
 
     private fun loadAppleBoxItems() {
-        _isLoading.value = true
-        appleBoxItemsRepository.getAppleBoxItems {
-            appleBoxItems.addAll(it)
-            _havingProducts.value = extractProductNames(it)
-            _havingCategories.value = extractCategoryTypes(it)
-            loadApplePower(getScore())
-            _isLoading.value = false
+        viewModelScope.launch {
+            _isLoading.value = true
 
-            checkSavedTestResultOrSave()
+            appleBoxItemsRepository.getAppleBoxItems()
+                .onSuccess {
+                    appleBoxItems.addAll(it)
+                    _havingProducts.value = extractProductNames(it)
+                    _havingCategories.value = extractCategoryTypes(it)
+                    loadApplePower(getScore())
+
+                    checkSavedTestResultOrSave()
+                }
+            _isLoading.value = false
         }
     }
 
@@ -86,8 +92,10 @@ class ApplePowerViewModel(
     }
 
     fun deleteTestResultAndAppleBox() {
-        appleBoxItemsRepository.removeAllAppleBoxItems()
-        testResultsRepository.removeAllTestResults()
+        viewModelScope.launch {
+            appleBoxItemsRepository.removeAllAppleBoxItems()
+            testResultsRepository.removeAllTestResults()
+        }
     }
 
     private fun checkSavedTestResultOrSave() {
