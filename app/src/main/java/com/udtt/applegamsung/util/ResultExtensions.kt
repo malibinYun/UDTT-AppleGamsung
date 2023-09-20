@@ -1,5 +1,5 @@
 package com.udtt.applegamsung.util
 
-fun <T> Result<Collection<T>>.getOrEmpty(): Collection<T> {
+fun <T> Result<List<T>>.getOrEmpty(): List<T> {
     return this.getOrNull().orEmpty()
 }
