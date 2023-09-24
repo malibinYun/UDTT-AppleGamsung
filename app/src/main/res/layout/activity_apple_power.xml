@@ -5,7 +5,7 @@
 
     <data>
 
-        <import type="com.udtt.applegamsung.domain.model.category.Category" />
+        <import type="com.udtt.applegamsung.domain.model.category.Category.Type" />
 
         <variable
             name="applePowerViewModel"

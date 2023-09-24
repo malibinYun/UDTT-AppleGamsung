@@ -4,14 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.udtt.applegamsung.data.entity.AppleBoxItem
-import com.udtt.applegamsung.domain.model.testresult.applepower.ApplePower
+import com.udtt.applegamsung.data.repository.UserIdentifyRepository
 import com.udtt.applegamsung.domain.model.category.Category
 import com.udtt.applegamsung.domain.model.testresult.TestResult
-import com.udtt.applegamsung.data.repository.UserIdentifyRepository
+import com.udtt.applegamsung.domain.model.testresult.applepower.ApplePower
 import com.udtt.applegamsung.domain.repository.AppleBoxItemsRepository
 import com.udtt.applegamsung.domain.repository.TestResultsRepository
 import com.udtt.applegamsung.util.BaseViewModel
 import kotlinx.coroutines.launch
+import java.util.Date
+import java.util.UUID
 
 class ApplePowerViewModel(
     userIdentifyRepository: UserIdentifyRepository,
@@ -111,10 +113,13 @@ class ApplePowerViewModel(
         val currentScore = _score.value ?: throw ILLEGAL_STATE_EXCEPTION
         val productList = _havingProducts.value ?: throw ILLEGAL_STATE_EXCEPTION
         return TestResult(
-            deviceId,
-            userNickName,
-            currentScore
-        ).apply { this.productList = productList }
+            deviceId = deviceId,
+            nickname = userNickName,
+            totalScore = currentScore,
+            productList = productList,
+            timeStamp = Date(),
+            id = UUID.randomUUID().toString(),
+        )
     }
 
     private fun saveTestResult() {

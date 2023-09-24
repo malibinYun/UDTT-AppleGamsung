@@ -5,6 +5,7 @@ import com.udtt.applegamsung.domain.model.testresult.applepower.ApplePower
 import com.udtt.applegamsung.domain.model.testresult.TestResult
 import com.udtt.applegamsung.data.remote.firestore.addAwait
 import com.udtt.applegamsung.data.remote.firestore.getDocumentSnapshots
+import com.udtt.applegamsung.data.remote.mapper.toSaveResultParams
 import com.udtt.applegamsung.data.source.TestResultsDataSource
 
 /**
@@ -24,7 +25,7 @@ class RemoteTestResultsDataSource(
 
     override suspend fun saveTestResult(testResult: TestResult): Result<Unit> {
         return firestore.collection(PathTestResults)
-            .addAwait(testResult)
+            .addAwait(testResult.toSaveResultParams())
     }
 
     override suspend fun getApplePowers(): Result<List<ApplePower>> {
