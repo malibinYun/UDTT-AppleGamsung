@@ -1,7 +1,7 @@
 package com.udtt.applegamsung.data.source.local
 
 import com.udtt.applegamsung.data.dao.AppleProductsDao
-import com.udtt.applegamsung.data.entity.Product
+import com.udtt.applegamsung.domain.model.product.Product
 import com.udtt.applegamsung.data.local.mapper.toAppleProductEntity
 import com.udtt.applegamsung.data.local.mapper.toProduct
 import com.udtt.applegamsung.data.source.ProductsDataSource

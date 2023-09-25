@@ -1,7 +1,7 @@
 package com.udtt.applegamsung.data.repository
 
 import com.udtt.applegamsung.data.entity.DisplayedProduct
-import com.udtt.applegamsung.data.entity.Product
+import com.udtt.applegamsung.domain.model.product.Product
 import com.udtt.applegamsung.data.source.AppleBoxItemsDataSource
 import com.udtt.applegamsung.data.source.ProductsDataSource
 import com.udtt.applegamsung.domain.repository.ProductsRepository

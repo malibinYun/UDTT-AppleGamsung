@@ -1,6 +1,6 @@
 package com.udtt.applegamsung.domain.repository
 
-import com.udtt.applegamsung.data.entity.Category
+import com.udtt.applegamsung.domain.model.category.Category
 
 interface CategoriesRepository {
 

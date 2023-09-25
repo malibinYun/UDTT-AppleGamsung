@@ -1,7 +1,7 @@
 package com.udtt.applegamsung.data.source.local
 
 import com.udtt.applegamsung.data.dao.AppleProductCategoriesDao
-import com.udtt.applegamsung.data.entity.Category
+import com.udtt.applegamsung.domain.model.category.Category
 import com.udtt.applegamsung.data.local.mapper.toAppleProductCategoryEntity
 import com.udtt.applegamsung.data.local.mapper.toCategory
 import com.udtt.applegamsung.data.source.CategoriesDataSource

@@ -1,5 +1,7 @@
 package com.udtt.applegamsung.data.entity
 
+import com.udtt.applegamsung.domain.model.product.Product
+
 /**
  * Created By Yun Hyeok
  * on 3월 27, 2020

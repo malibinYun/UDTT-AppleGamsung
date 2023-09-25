@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.udtt.applegamsung.data.entity.DisplayedProduct
-import com.udtt.applegamsung.data.entity.Product
+import com.udtt.applegamsung.domain.model.product.Product
 import com.udtt.applegamsung.domain.repository.ProductsRepository
 import com.udtt.applegamsung.util.BaseViewModel
 import kotlinx.coroutines.launch

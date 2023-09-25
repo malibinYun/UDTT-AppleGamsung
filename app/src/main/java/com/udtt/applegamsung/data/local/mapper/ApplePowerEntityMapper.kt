@@ -1,6 +1,6 @@
 package com.udtt.applegamsung.data.local.mapper
 
-import com.udtt.applegamsung.data.entity.ApplePower
+import com.udtt.applegamsung.domain.model.testresult.applepower.ApplePower
 import com.udtt.applegamsung.data.entity.ApplePowerEntity
 
 fun ApplePowerEntity.toApplePower(): ApplePower {

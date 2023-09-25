@@ -1,7 +1,7 @@
 package com.udtt.applegamsung.data.local.mapper
 
 import com.udtt.applegamsung.data.entity.AppleProductCategoryEntity
-import com.udtt.applegamsung.data.entity.Category
+import com.udtt.applegamsung.domain.model.category.Category
 
 fun AppleProductCategoryEntity.toCategory(): Category {
     return Category(

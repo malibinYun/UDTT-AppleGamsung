@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.udtt.applegamsung.data.entity.DisplayedProduct
-import com.udtt.applegamsung.data.entity.Product
 import com.udtt.applegamsung.databinding.ItemProductBinding
 
 class ProductsAdapter : ListAdapter<DisplayedProduct, ProductsAdapter.ViewHolder>(DiffCallBack()) {

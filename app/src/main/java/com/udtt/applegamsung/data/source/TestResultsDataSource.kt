@@ -1,7 +1,7 @@
 package com.udtt.applegamsung.data.source
 
-import com.udtt.applegamsung.data.entity.ApplePower
-import com.udtt.applegamsung.data.entity.TestResult
+import com.udtt.applegamsung.domain.model.testresult.applepower.ApplePower
+import com.udtt.applegamsung.domain.model.testresult.TestResult
 
 /**
  * Created By Yun Hyeok

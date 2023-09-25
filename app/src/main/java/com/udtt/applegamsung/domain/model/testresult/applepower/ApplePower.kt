@@ -1,4 +1,4 @@
-package com.udtt.applegamsung.data.entity
+package com.udtt.applegamsung.domain.model.testresult.applepower
 
 import androidx.annotation.DrawableRes
 import com.udtt.applegamsung.R
