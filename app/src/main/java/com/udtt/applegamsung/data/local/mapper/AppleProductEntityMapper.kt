@@ -9,6 +9,7 @@ fun AppleProductEntity.toProduct(): Product {
         score = score,
         categoryIndex = sortPriority,
         categoryId = appleProductCategoryId,
+        imageUrl = "",
         id = id,
     )
 }
