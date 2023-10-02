@@ -7,6 +7,7 @@ fun AppleProductCategoryEntity.toCategory(): Category {
     return Category(
         name = name,
         index = index,
+        imageUrl = imageUrl,
         id = id,
     )
 }
@@ -15,6 +16,7 @@ fun Category.toAppleProductCategoryEntity(): AppleProductCategoryEntity {
     return AppleProductCategoryEntity(
         name = name,
         index = index,
+        imageUrl = imageUrl,
         id = id,
     )
 }

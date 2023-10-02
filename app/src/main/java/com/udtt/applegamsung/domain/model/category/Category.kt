@@ -12,7 +12,8 @@ import java.util.UUID
 data class Category(
     val name: String = "",
     val index: Int = 0,
-    var id: String = UUID.randomUUID().toString()
+    val imageUrl: String,
+    var id: String = UUID.randomUUID().toString(),
 ) {
     val type: Type
         get() = Type.findByIndex(index)

@@ -1,9 +1,9 @@
 package com.udtt.applegamsung.data.source.remote
 
 import com.google.firebase.firestore.FirebaseFirestore
-import com.udtt.applegamsung.domain.model.category.Category
 import com.udtt.applegamsung.data.remote.firestore.getDocumentSnapshots
 import com.udtt.applegamsung.data.source.CategoriesDataSource
+import com.udtt.applegamsung.domain.model.category.Category
 
 /**
  * Created By Yun Hyeok
@@ -23,6 +23,7 @@ class RemoteCategoriesDataSource(
                         id = it.id,
                         name = it.getString("name").orEmpty(),
                         index = it.getLong("index")?.toInt() ?: 0,
+                        imageUrl = it.getString("imageUrl").orEmpty(),
                     )
                 }
             }

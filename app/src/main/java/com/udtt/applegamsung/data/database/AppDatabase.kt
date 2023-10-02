@@ -23,7 +23,7 @@ import com.udtt.applegamsung.data.util.DateTypeConverter
     autoMigrations = [
         AutoMigration(from = 1, to = 2, spec = RecreateEntitiesMigration::class)
     ],
-    version = 3,
+    version = 4,
 )
 
 abstract class AppDatabase : RoomDatabase() {
