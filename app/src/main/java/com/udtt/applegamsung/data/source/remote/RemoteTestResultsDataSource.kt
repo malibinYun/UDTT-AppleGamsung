@@ -1,12 +1,12 @@
 package com.udtt.applegamsung.data.source.remote
 
 import com.google.firebase.firestore.FirebaseFirestore
-import com.udtt.applegamsung.domain.model.testresult.applepower.ApplePower
-import com.udtt.applegamsung.domain.model.testresult.TestResult
 import com.udtt.applegamsung.data.remote.firestore.addAwait
 import com.udtt.applegamsung.data.remote.firestore.getDocumentSnapshots
 import com.udtt.applegamsung.data.remote.mapper.toSaveResultParams
 import com.udtt.applegamsung.data.source.TestResultsDataSource
+import com.udtt.applegamsung.domain.model.testresult.TestResult
+import com.udtt.applegamsung.domain.model.testresult.applepower.ApplePower
 
 /**
  * Created By Yun Hyeok
@@ -39,6 +39,7 @@ class RemoteTestResultsDataSource(
                         description = it.getString("description").orEmpty(),
                         minPower = it.getLong("minPower")?.toInt() ?: 0,
                         maxPower = it.getLong("maxPower")?.toInt() ?: 0,
+                        imageUrl = it.getString("imageUrl").orEmpty(),
                     )
                 }
             }

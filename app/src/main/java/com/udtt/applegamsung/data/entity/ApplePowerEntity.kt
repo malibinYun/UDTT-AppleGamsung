@@ -9,6 +9,7 @@ data class ApplePowerEntity(
     val description: String,
     val minScore: Int,
     val maxScore: Int,
+    val imageUrl: String,
     @PrimaryKey
     val id: String,
 )

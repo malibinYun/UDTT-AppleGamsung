@@ -12,10 +12,13 @@ import java.util.UUID
 data class Category(
     val name: String = "",
     val index: Int = 0,
-    var id: String = UUID.randomUUID().toString()
+    val imageUrl: String,
+    var id: String = UUID.randomUUID().toString(),
 ) {
     val type: Type
         get() = Type.findByIndex(index)
+
+    val isHaveNothingType: Boolean = index == 6
 
     enum class Type(val index: Int, val value: String, @DrawableRes val imageRes: Int) {
         MAC(0, "Mac", R.drawable.product_mac),

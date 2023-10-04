@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class AppleProductCategoryEntity(
     val name: String,
     val index: Int,
+    val imageUrl: String,
     @PrimaryKey
     val id: String,
 )
