@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
             android:layout_marginBottom="24dp"
-            app:img_res="@{category.type.imageRes}"
+            app:imageUrl="@{category.imageUrl}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
