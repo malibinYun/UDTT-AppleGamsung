@@ -18,6 +18,8 @@ data class Category(
     val type: Type
         get() = Type.findByIndex(index)
 
+    val isHaveNothingType: Boolean = index == 6
+
     enum class Type(val index: Int, val value: String, @DrawableRes val imageRes: Int) {
         MAC(0, "Mac", R.drawable.product_mac),
         IPHONE(1, "iPhone", R.drawable.product_iphone),

@@ -51,7 +51,7 @@ class MainViewModel(
     fun selectCategory(category: Category) {
         _selectedProducts.value = emptyList()
         _selectedCategoryId.value = category.id
-        if (category.type == Category.Type.HAVE_NOTING) {
+        if (category.isHaveNothingType) {
             viewModelScope.launch {
                 appleBoxItemsRepository.removeAllAppleBoxItems()
             }

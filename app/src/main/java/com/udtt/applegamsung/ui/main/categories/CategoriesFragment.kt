@@ -50,7 +50,7 @@ class CategoriesFragment : BaseFragment(), CategoryClickListener {
 
     override fun onCategoryClick(category: Category) {
         mainViewModel.selectCategory(category)
-        if (category.type == Category.Type.HAVE_NOTING) {
+        if (category.isHaveNothingType) {
             deployAppleBoxActivity(true)
         }
     }
