@@ -36,9 +36,9 @@
                 <ImageView
                     android:id="@+id/img_apple_power"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="100dp"
                     android:translationZ="4dp"
-                    app:img_res="@{applePowerViewModel.applePower.level.imageRes}"
+                    app:imageUrl="@{applePowerViewModel.applePower.imageUrl}"
                     app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
                     app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
                     app:layout_constraintStart_toStartOf="@+id/constraintLayout" />
