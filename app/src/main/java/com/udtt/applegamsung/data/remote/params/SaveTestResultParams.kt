@@ -7,7 +7,7 @@ data class SaveTestResultParams(
     val deviceId: String,
     val nickname: String,
     val totalScore: Int,
-    @ServerTimestamp
     val productList: List<String>,
+    @ServerTimestamp
     val timeStamp: Date,
 )
