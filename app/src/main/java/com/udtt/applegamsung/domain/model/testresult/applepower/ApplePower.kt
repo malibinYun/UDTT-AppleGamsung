@@ -9,6 +9,7 @@ data class ApplePower(
     val description: String = "",
     val minPower: Int = 0,
     val maxPower: Int = 0,
+    val imageUrl: String,
     var id: String = UUID.randomUUID().toString()
 ) {
     val level: Level

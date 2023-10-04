@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 4,
-    "identityHash": "7ee997456f4271f25d4838c008dc0012",
+    "identityHash": "7706eaa1164ba27390664b5969d5fa98",
     "entities": [
       {
         "tableName": "ApplePowerEntity",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `description` TEXT NOT NULL, `minScore` INTEGER NOT NULL, `maxScore` INTEGER NOT NULL, `id` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `description` TEXT NOT NULL, `minScore` INTEGER NOT NULL, `maxScore` INTEGER NOT NULL, `imageUrl` TEXT NOT NULL, `id` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "name",
@@ -30,6 +30,12 @@
             "fieldPath": "maxScore",
             "columnName": "maxScore",
             "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "imageUrl",
+            "columnName": "imageUrl",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -192,7 +198,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7ee997456f4271f25d4838c008dc0012')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7706eaa1164ba27390664b5969d5fa98')"
     ]
   }
 }
