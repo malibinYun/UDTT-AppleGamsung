@@ -52,6 +52,6 @@ fun bindAnimationPurse(view: View, state: Boolean?) {
 }
 
 @BindingAdapter("imageUrl")
-fun bindImageUrl(imageView: ImageView, imageUrl: String) {
-    imageView.load(imageUrl)
+fun bindImageUrl(imageView: ImageView, imageUrl: String?) {
+    imageView.load(imageUrl ?: return)
 }
