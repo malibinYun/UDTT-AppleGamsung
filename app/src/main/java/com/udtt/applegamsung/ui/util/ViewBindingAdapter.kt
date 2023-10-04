@@ -6,6 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.databinding.BindingAdapter
+import coil.load
 import com.udtt.applegamsung.R
 
 @BindingAdapter("activated")
@@ -48,4 +49,9 @@ fun bindAnimationPurse(view: View, state: Boolean?) {
     if (state != true) return
     val anim = AnimationUtils.loadAnimation(view.context, R.anim.anim_purse)
     view.startAnimation(anim)
+}
+
+@BindingAdapter("imageUrl")
+fun bindImageUrl(imageView: ImageView, imageUrl: String) {
+    imageView.load(imageUrl)
 }
