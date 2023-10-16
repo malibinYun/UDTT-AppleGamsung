@@ -4,6 +4,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.udtt.applegamsung.data.remote.firestore.getDocumentSnapshots
 import com.udtt.applegamsung.data.source.CategoriesDataSource
 import com.udtt.applegamsung.domain.model.category.Category
+import com.udtt.applegamsung.util.mapList
 
 /**
  * Created By Yun Hyeok
@@ -17,15 +18,13 @@ class RemoteCategoriesDataSource(
     override suspend fun getCategories(): Result<List<Category>> {
         return firestore.collection(PathCategory)
             .getDocumentSnapshots()
-            .map { documents ->
-                documents.map {
-                    Category(
-                        id = it.id,
-                        name = it.getString("name").orEmpty(),
-                        index = it.getLong("index")?.toInt() ?: 0,
-                        imageUrl = it.getString("imageUrl").orEmpty(),
-                    )
-                }
+            .mapList {
+                Category(
+                    id = it.id,
+                    name = it.getString("name").orEmpty(),
+                    index = it.getLong("index")?.toInt() ?: 0,
+                    imageUrl = it.getString("imageUrl").orEmpty(),
+                )
             }
     }
 
