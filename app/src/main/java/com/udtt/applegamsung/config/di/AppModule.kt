@@ -25,5 +25,5 @@ val diModules = listOf(
     localDataSourceModule,
     firestoreModule,
     remoteDataSourceModule,
-    repositoryModule
+    repositoryModule,
 )
