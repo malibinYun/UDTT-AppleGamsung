@@ -8,18 +8,22 @@ import com.udtt.applegamsung.data.database.migration.AppleProductEntityMigration
 import com.udtt.applegamsung.data.repository.DefaultAppleBoxItemsRepository
 import com.udtt.applegamsung.data.repository.DefaultCategoriesRepository
 import com.udtt.applegamsung.data.repository.DefaultProductsRepository
+import com.udtt.applegamsung.data.repository.DefaultTestResultProductsRepository
 import com.udtt.applegamsung.data.repository.DefaultTestResultsRepository
 import com.udtt.applegamsung.data.repository.UserIdentifyRepository
 import com.udtt.applegamsung.data.source.local.LocalAppleBoxItemsDataSource
 import com.udtt.applegamsung.data.source.local.LocalCategoriesDataSource
 import com.udtt.applegamsung.data.source.local.LocalProductsDataSource
+import com.udtt.applegamsung.data.source.local.LocalTestResultProductsDataSource
 import com.udtt.applegamsung.data.source.local.LocalTestResultsDataSource
 import com.udtt.applegamsung.data.source.remote.RemoteCategoriesDataSource
 import com.udtt.applegamsung.data.source.remote.RemoteProductsDataSource
+import com.udtt.applegamsung.data.source.remote.RemoteTestResultProductsDataSource
 import com.udtt.applegamsung.data.source.remote.RemoteTestResultsDataSource
 import com.udtt.applegamsung.domain.repository.AppleBoxItemsRepository
 import com.udtt.applegamsung.domain.repository.CategoriesRepository
 import com.udtt.applegamsung.domain.repository.ProductsRepository
+import com.udtt.applegamsung.domain.repository.TestResultProductsRepository
 import com.udtt.applegamsung.domain.repository.TestResultsRepository
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
@@ -59,6 +63,11 @@ val localDataSourceModule = module {
             get<AppDatabase>().getAppleProductsDao(),
         )
     }
+    single {
+        LocalTestResultProductsDataSource(
+            get<AppDatabase>().getTestResultProductsDao(),
+        )
+    }
 }
 
 val firestoreModule = module {
@@ -69,6 +78,7 @@ val remoteDataSourceModule = module {
     single { RemoteCategoriesDataSource(get()) }
     single { RemoteProductsDataSource(get()) }
     single { RemoteTestResultsDataSource(get()) }
+    single { RemoteTestResultProductsDataSource(get()) }
 }
 
 val repositoryModule = module {
@@ -95,6 +105,12 @@ val repositoryModule = module {
     single<AppleBoxItemsRepository> {
         DefaultAppleBoxItemsRepository(
             get<LocalAppleBoxItemsDataSource>()
+        )
+    }
+    single<TestResultProductsRepository> {
+        DefaultTestResultProductsRepository(
+            get<LocalTestResultProductsDataSource>(),
+            get<RemoteTestResultProductsDataSource>(),
         )
     }
 }
