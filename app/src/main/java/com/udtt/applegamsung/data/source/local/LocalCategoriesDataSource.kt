@@ -1,10 +1,11 @@
 package com.udtt.applegamsung.data.source.local
 
 import com.udtt.applegamsung.data.dao.AppleProductCategoriesDao
-import com.udtt.applegamsung.domain.model.category.Category
 import com.udtt.applegamsung.data.local.mapper.toAppleProductCategoryEntity
 import com.udtt.applegamsung.data.local.mapper.toCategory
 import com.udtt.applegamsung.data.source.CategoriesDataSource
+import com.udtt.applegamsung.domain.model.category.Category
+import com.udtt.applegamsung.util.mapList
 
 /**
  * Created By Yun Hyeok
@@ -17,7 +18,7 @@ class LocalCategoriesDataSource(
 
     override suspend fun getCategories(): Result<List<Category>> {
         return runCatching { appleProductCategoriesDao.getCategories() }
-            .map { categoryEntities -> categoryEntities.map { it.toCategory() } }
+            .mapList { it.toCategory() }
     }
 
     override suspend fun saveCategories(categories: List<Category>): Result<Unit> {

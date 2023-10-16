@@ -5,6 +5,7 @@ import com.udtt.applegamsung.data.local.mapper.toTestResultProduct
 import com.udtt.applegamsung.data.local.mapper.toTestResultProductEntity
 import com.udtt.applegamsung.data.source.TestResultProductsDataSource
 import com.udtt.applegamsung.domain.model.testresult.TestResultProduct
+import com.udtt.applegamsung.util.mapList
 
 class LocalTestResultProductsDataSource(
     private val testResultProductsDao: TestResultProductsDao,
@@ -12,7 +13,7 @@ class LocalTestResultProductsDataSource(
 
     override suspend fun getAllTestResultProducts(): Result<List<TestResultProduct>> {
         return runCatching { testResultProductsDao.getAllTestResultProducts() }
-            .map { testResultProducts -> testResultProducts.map { it.toTestResultProduct() } }
+            .mapList { it.toTestResultProduct() }
     }
 
     override suspend fun saveTestResultProduct(testResultProducts: List<TestResultProduct>): Result<Unit> {

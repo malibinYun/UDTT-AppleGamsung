@@ -2,13 +2,14 @@ package com.udtt.applegamsung.data.source.local
 
 import com.udtt.applegamsung.data.dao.ApplePowersDao
 import com.udtt.applegamsung.data.dao.TestResultsDao
-import com.udtt.applegamsung.domain.model.testresult.applepower.ApplePower
-import com.udtt.applegamsung.domain.model.testresult.TestResult
 import com.udtt.applegamsung.data.local.mapper.toApplePower
 import com.udtt.applegamsung.data.local.mapper.toApplePowerEntity
 import com.udtt.applegamsung.data.local.mapper.toTestResult
 import com.udtt.applegamsung.data.local.mapper.toTestResultEntity
 import com.udtt.applegamsung.data.source.TestResultsDataSource
+import com.udtt.applegamsung.domain.model.testresult.TestResult
+import com.udtt.applegamsung.domain.model.testresult.applepower.ApplePower
+import com.udtt.applegamsung.util.mapList
 
 /**
  * Created By Yun Hyeok
@@ -22,7 +23,7 @@ class LocalTestResultsDataSource(
 
     override suspend fun getTestResults(): Result<List<TestResult>> {
         return runCatching { testResultsDao.getTestResults() }
-            .map { testResultEntities -> testResultEntities.map { it.toTestResult() } }
+            .mapList { it.toTestResult() }
     }
 
     override suspend fun saveTestResult(testResult: TestResult): Result<Unit> {
@@ -33,7 +34,7 @@ class LocalTestResultsDataSource(
 
     override suspend fun getApplePowers(): Result<List<ApplePower>> {
         return runCatching { applePowersDao.getApplePowers() }
-            .map { applePowerEntities -> applePowerEntities.map { it.toApplePower() } }
+            .mapList { it.toApplePower() }
     }
 
     override suspend fun getApplePower(totalScore: Int): Result<ApplePower?> {
