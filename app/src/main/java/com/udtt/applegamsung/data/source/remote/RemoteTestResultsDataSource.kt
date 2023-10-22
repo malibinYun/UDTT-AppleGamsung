@@ -7,6 +7,7 @@ import com.udtt.applegamsung.data.remote.mapper.toSaveResultParams
 import com.udtt.applegamsung.data.source.TestResultsDataSource
 import com.udtt.applegamsung.domain.model.testresult.TestResult
 import com.udtt.applegamsung.domain.model.testresult.applepower.ApplePower
+import com.udtt.applegamsung.util.mapList
 
 /**
  * Created By Yun Hyeok
@@ -31,17 +32,15 @@ class RemoteTestResultsDataSource(
     override suspend fun getApplePowers(): Result<List<ApplePower>> {
         return firestore.collection(PathApplePower)
             .getDocumentSnapshots()
-            .map { documents ->
-                documents.map {
-                    ApplePower(
-                        id = it.id,
-                        name = it.getString("name").orEmpty(),
-                        description = it.getString("description").orEmpty(),
-                        minPower = it.getLong("minPower")?.toInt() ?: 0,
-                        maxPower = it.getLong("maxPower")?.toInt() ?: 0,
-                        imageUrl = it.getString("imageUrl").orEmpty(),
-                    )
-                }
+            .mapList {
+                ApplePower(
+                    id = it.id,
+                    name = it.getString("name").orEmpty(),
+                    description = it.getString("description").orEmpty(),
+                    minPower = it.getLong("minPower")?.toInt() ?: 0,
+                    maxPower = it.getLong("maxPower")?.toInt() ?: 0,
+                    imageUrl = it.getString("imageUrl").orEmpty(),
+                )
             }
     }
 

@@ -5,6 +5,7 @@ import com.udtt.applegamsung.data.entity.AppleBoxItem
 import com.udtt.applegamsung.data.local.mapper.toAppleBoxItem
 import com.udtt.applegamsung.data.local.mapper.toAppleProductEntity
 import com.udtt.applegamsung.data.source.AppleBoxItemsDataSource
+import com.udtt.applegamsung.util.mapList
 
 class LocalAppleBoxItemsDataSource(
     private val appleProductsDao: AppleProductsDao,
@@ -12,9 +13,7 @@ class LocalAppleBoxItemsDataSource(
 
     override suspend fun getAppleBoxItems(): Result<List<AppleBoxItem>> {
         return runCatching { appleProductsDao.getInBoxAppleProducts() }
-            .map { appleProductEntities ->
-                appleProductEntities.map { it.toAppleBoxItem() }
-            }
+            .mapList { it.toAppleBoxItem() }
     }
 
     override suspend fun saveAppleBoxItems(appleBoxItems: List<AppleBoxItem>): Result<Unit> {

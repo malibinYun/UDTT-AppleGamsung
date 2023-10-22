@@ -4,6 +4,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.udtt.applegamsung.data.remote.firestore.getDocumentSnapshots
 import com.udtt.applegamsung.data.source.ProductsDataSource
 import com.udtt.applegamsung.domain.model.product.Product
+import com.udtt.applegamsung.util.mapList
 
 /**
  * Created By Yun Hyeok
@@ -19,17 +20,15 @@ class RemoteProductsDataSource(
             .document(categoryId)
             .collection(PathProducts)
             .getDocumentSnapshots()
-            .map { documents ->
-                documents.map {
-                    Product(
-                        id = it.id,
-                        name = it.getString("name").orEmpty(),
-                        score = it.getLong("score")?.toInt() ?: 0,
-                        categoryIndex = it.getLong("categoryIndex")?.toInt() ?: 0,
-                        categoryId = it.getString("categoryId").orEmpty(),
-                        imageUrl = ""
-                    )
-                }
+            .mapList {
+                Product(
+                    id = it.id,
+                    name = it.getString("name").orEmpty(),
+                    score = it.getLong("score")?.toInt() ?: 0,
+                    categoryIndex = it.getLong("categoryIndex")?.toInt() ?: 0,
+                    categoryId = it.getString("categoryId").orEmpty(),
+                    imageUrl = ""
+                )
             }
     }
 
