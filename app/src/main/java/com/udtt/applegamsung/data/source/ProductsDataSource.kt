@@ -1,6 +1,7 @@
 package com.udtt.applegamsung.data.source
 
 import com.udtt.applegamsung.domain.model.product.Product
+import com.udtt.applegamsung.domain.model.product.Products
 
 /**
  * Created By Yun Hyeok
@@ -9,7 +10,7 @@ import com.udtt.applegamsung.domain.model.product.Product
 
 interface ProductsDataSource {
 
-    suspend fun getProducts(categoryId: String): Result<List<Product>>
+    suspend fun getProducts(categoryId: String): Result<Products>
 
     suspend fun saveProducts(products: List<Product>): Result<Unit>
 }
