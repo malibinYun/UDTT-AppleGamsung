@@ -4,6 +4,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.udtt.applegamsung.data.remote.firestore.getDocumentSnapshots
 import com.udtt.applegamsung.data.source.ProductsDataSource
 import com.udtt.applegamsung.domain.model.product.Product
+import com.udtt.applegamsung.domain.model.product.Products
 import com.udtt.applegamsung.util.mapList
 
 /**
@@ -12,10 +13,10 @@ import com.udtt.applegamsung.util.mapList
  */
 
 class RemoteProductsDataSource(
-    private val firestore: FirebaseFirestore
+    private val firestore: FirebaseFirestore,
 ) : ProductsDataSource {
 
-    override suspend fun getProducts(categoryId: String): Result<List<Product>> {
+    override suspend fun getProducts(categoryId: String): Result<Products> {
         return firestore.collection(PathCategory)
             .document(categoryId)
             .collection(PathProducts)
@@ -27,14 +28,15 @@ class RemoteProductsDataSource(
                     score = it.getLong("score")?.toInt() ?: 0,
                     categoryIndex = it.getLong("categoryIndex")?.toInt() ?: 0,
                     categoryId = it.getString("categoryId").orEmpty(),
-                    imageUrl = ""
+                    imageUrl = "",
                 )
             }
+            .map { Products(it) }
     }
 
     override suspend fun saveProducts(products: List<Product>): Result<Unit> {
         return Result.failure(
-            UnsupportedOperationException("Do not call saveProducts() in remoteSource")
+            UnsupportedOperationException("Do not call saveProducts() in remoteSource"),
         )
     }
 
